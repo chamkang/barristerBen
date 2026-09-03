@@ -1,0 +1,19 @@
+# Enquiries captured by the PHP contact form — may contain client information,
+# so it must never reach the repository.
+storage/enquiries.log
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local tooling
+node_modules/
+.vercel
+
+# NOTE: dist/ is deliberately COMMITTED.
+# Vercel, Netlify and Cloudflare Pages cannot run PHP, so the static build has
+# to be generated locally (php build.php) and committed for them to serve it.

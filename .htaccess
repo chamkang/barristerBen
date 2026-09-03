@@ -1,0 +1,94 @@
+# =============================================================================
+# FONJU LAW FIRM — APACHE CONFIGURATION
+# Works as-is under XAMPP and on any standard Apache/cPanel host.
+# Every block is guarded, so a host missing a module will not 500.
+# =============================================================================
+
+DirectoryIndex index.php index.html
+
+# -----------------------------------------------------------------------------
+# Custom error page
+# -----------------------------------------------------------------------------
+ErrorDocument 404 /404.php
+
+# -----------------------------------------------------------------------------
+# Rewrites
+# -----------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Serve the dynamic sitemap at the conventional /sitemap.xml address.
+  RewriteRule ^sitemap\.xml$ sitemap.php [L]
+
+  # Serve the RSS feed at /feed.xml as well as /feed.php.
+  RewriteRule ^feed\.xml$ feed.php [L]
+
+  # ---------------------------------------------------------------------------
+  # OPTIONAL — force HTTPS in production. Uncomment once your SSL certificate
+  # is installed, otherwise you will lock yourself out of a plain-HTTP site.
+  # ---------------------------------------------------------------------------
+  # RewriteCond %{HTTPS} !=on
+  # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+  # ---------------------------------------------------------------------------
+  # OPTIONAL — canonical host (strip or add "www.", pick one and keep it).
+  # ---------------------------------------------------------------------------
+  # RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  # RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# Compression — significantly reduces page weight over slow connections
+# -----------------------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+  AddOutputFilterByType DEFLATE application/xml application/xhtml+xml application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json image/svg+xml
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# Browser caching for static assets
+# -----------------------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault                        "access plus 1 month"
+  ExpiresByType text/html               "access plus 0 seconds"
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  ExpiresByType application/xml         "access plus 1 hour"
+  ExpiresByType application/rss+xml     "access plus 1 hour"
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# Security headers
+# -----------------------------------------------------------------------------
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+  Header always unset X-Powered-By
+  Header unset X-Powered-By
+
+  # Enable once the site is served over HTTPS everywhere:
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# -----------------------------------------------------------------------------
+# Do not serve internal files
+# -----------------------------------------------------------------------------
+<FilesMatch "^(\.htaccess|\.htpasswd|composer\.json|composer\.lock|README\.md)$">
+  Require all denied
+</FilesMatch>
+
+# Enquiry log and includes are never web-served directly.
+RedirectMatch 404 ^/storage/
+RedirectMatch 404 ^/includes/.*\.php$
+
+Options -Indexes

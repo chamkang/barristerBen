@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fonju Law Firm — Insights</title>
+    <link>https://fonjulawfirm.com/blog</link>
+    <description>Practical legal insights on Cameroonian and OHADA business law from Fonju Law Firm, Douala.</description>
+    <language>en</language>
+    <lastBuildDate>Tue, 18 Aug 2026 00:00:00 +0200</lastBuildDate>
+    <atom:link href="https://fonjulawfirm.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Registering a Company in Cameroon: What the Process Actually Looks Like</title>
+      <link>https://fonjulawfirm.com/insights/registering-a-company-in-cameroon</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/registering-a-company-in-cameroon</guid>
+      <pubDate>Tue, 18 Aug 2026 00:00:00 +0200</pubDate>
+      <category>Corporate</category>
+      <description>The official timeline says a few days. The realistic timeline depends on decisions you make before you ever reach the registry. Here is the sequence that works.</description>
+    </item>
+    <item>
+      <title>OHADA Explained: The Legal Framework Behind Every Cameroonian Business Deal</title>
+      <link>https://fonjulawfirm.com/insights/ohada-explained-for-business</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/ohada-explained-for-business</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0200</pubDate>
+      <category>Regulatory</category>
+      <description>Seventeen countries, one commercial code and a supranational court that can overturn your national judgment. A practical orientation for foreign and local businesses.</description>
+    </item>
+    <item>
+      <title>Buying Land in Cameroon: Seven Checks Before You Pay a Deposit</title>
+      <link>https://fonjulawfirm.com/insights/buying-land-in-cameroon-checklist</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/buying-land-in-cameroon-checklist</guid>
+      <pubDate>Wed, 22 Jul 2026 00:00:00 +0200</pubDate>
+      <category>Real Estate</category>
+      <description>Land is the most disputed asset in Cameroon and the most frequently mis-sold. Almost every failure traces back to a check that was skipped before the deposit.</description>
+    </item>
+    <item>
+      <title>Dismissing an Employee in Cameroon: The Procedure That Protects the Employer</title>
+      <link>https://fonjulawfirm.com/insights/dismissing-an-employee-in-cameroon</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/dismissing-an-employee-in-cameroon</guid>
+      <pubDate>Thu, 09 Jul 2026 00:00:00 +0200</pubDate>
+      <category>Employment</category>
+      <description>Employers rarely lose dismissal cases because the reason was bad. They lose because the procedure was incomplete. The file has to be finished before anyone is told anything.</description>
+    </item>
+    <item>
+      <title>One Filing, Seventeen Countries: A Practical Guide to OAPI Trade Marks</title>
+      <link>https://fonjulawfirm.com/insights/oapi-trade-mark-guide</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/oapi-trade-mark-guide</guid>
+      <pubDate>Thu, 25 Jun 2026 00:00:00 +0200</pubDate>
+      <category>Intellectual Property</category>
+      <description>Cameroonian businesses have access to a regional registration system that is genuinely powerful and consistently underused. Here is how to use it well.</description>
+    </item>
+    <item>
+      <title>Arbitration or Court? Choosing a Dispute Resolution Clause That Works</title>
+      <link>https://fonjulawfirm.com/insights/arbitration-or-court-cameroon</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/arbitration-or-court-cameroon</guid>
+      <pubDate>Wed, 10 Jun 2026 00:00:00 +0200</pubDate>
+      <category>Dispute Resolution</category>
+      <description>The dispute resolution clause is negotiated last, in five minutes, by tired people. It then determines the entire economics of any dispute that follows.</description>
+    </item>
+    <item>
+      <title>Foreign Investment in Cameroon: Structures, Incentives and Getting Profits Out</title>
+      <link>https://fonjulawfirm.com/insights/foreign-investment-in-cameroon</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/foreign-investment-in-cameroon</guid>
+      <pubDate>Thu, 28 May 2026 00:00:00 +0200</pubDate>
+      <category>Investment</category>
+      <description>Investors ask about incentives first. They should ask about repatriation first, because that is the constraint that shapes the whole structure.</description>
+    </item>
+    <item>
+      <title>Data Protection for Cameroonian Businesses: Where to Start</title>
+      <link>https://fonjulawfirm.com/insights/data-protection-cameroon-business</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/data-protection-cameroon-business</guid>
+      <pubDate>Thu, 14 May 2026 00:00:00 +0200</pubDate>
+      <category>Technology</category>
+      <description>Enterprise customers and foreign partners now refuse to contract without adequate data terms. Compliance has quietly become a sales requirement.</description>
+    </item>
+    <item>
+      <title>iGaming in Central Africa: What Operators Should Expect from the Regulator</title>
+      <link>https://fonjulawfirm.com/insights/igaming-regulation-central-africa</link>
+      <guid isPermaLink="true">https://fonjulawfirm.com/insights/igaming-regulation-central-africa</guid>
+      <pubDate>Thu, 30 Apr 2026 00:00:00 +0200</pubDate>
+      <category>iGaming</category>
+      <description>Online gaming is growing faster than the legislation written to govern it. Operators who engage early consistently secure better terms than those who regularise later.</description>
+    </item>
+  </channel>
+</rss>

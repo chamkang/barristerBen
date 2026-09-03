@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1220"/>
+      <stop offset="0.55" stop-color="#0d1728"/>
+      <stop offset="1" stop-color="#101f36"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.82" cy="0.12" r="0.75">
+      <stop offset="0" stop-color="#c9a961" stop-opacity="0.30"/>
+      <stop offset="1" stop-color="#c9a961" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#e3cb92"/>
+      <stop offset="0.5" stop-color="#c9a961"/>
+      <stop offset="1" stop-color="#a5822f"/>
+    </linearGradient>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#c9a961"/>
+      <stop offset="1" stop-color="#c9a961" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
+    <path d="M150 0v630M350 0v630M550 0v630M750 0v630M950 0v630"/>
+  </g>
+
+  <!-- Scales mark -->
+  <svg x="860" y="150" width="260" height="260" viewBox="0 0 64 64" opacity="0.5">
+    <g stroke="#c9a961" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M32 10v44"/>
+      <path d="M16 19h32"/>
+      <path d="M21 54h22"/>
+      <path d="M16 19 8 35h16z"/>
+      <path d="M48 19 40 35h16z"/>
+    </g>
+  </svg>
+
+  <g font-family="Georgia, 'Times New Roman', serif" fill="#ffffff">
+    <text x="86" y="248" font-size="82" font-weight="700" letter-spacing="-2">Fonju Law Firm</text>
+  </g>
+
+  <rect x="86" y="286" width="150" height="3" rx="1.5" fill="url(#rule)"/>
+
+  <g font-family="Helvetica, Arial, sans-serif">
+    <text x="86" y="352" font-size="34" fill="#ffffff" fill-opacity="0.82">Corporate &amp; commercial law in Cameroon</text>
+    <text x="86" y="404" font-size="26" fill="#ffffff" fill-opacity="0.55">Douala · CEMAC · OHADA · English &amp; French</text>
+
+    <text x="86" y="536" font-size="19" fill="#c9a961" letter-spacing="4">ADVOCATES &amp; SOLICITORS · REPUBLIC OF CAMEROON</text>
+    <text x="86" y="574" font-size="19" fill="#ffffff" fill-opacity="0.45">fonjulawfirm.com</text>
+  </g>
+</svg>

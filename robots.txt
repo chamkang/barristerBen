@@ -1,0 +1,17 @@
+# =============================================================================
+# robots.txt — Fonju Law Firm
+# Update the Sitemap line if you deploy to a different domain.
+# =============================================================================
+
+User-agent: *
+Allow: /
+
+# Internal and non-content paths
+Disallow: /includes/
+Disallow: /storage/
+Disallow: /404.php
+
+# Filtered listings duplicate the main article list
+Disallow: /blog.php?category=
+
+Sitemap: https://fonjulawfirm.com/sitemap.xml
