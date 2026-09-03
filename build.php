@@ -205,6 +205,12 @@ foreach ($bldRoutes as $bldRoute) {
     $_GET     = $bldQuery;
     $_REQUEST = $bldQuery;
 
+    // is_current() compares against SCRIPT_NAME, so it has to change per page
+    // or every rendered page marks "Home" as the active nav item. BASE_PATH was
+    // already resolved from the first include and stays '' — all scripts sit at
+    // the document root, so dirname() is '/' either way.
+    $_SERVER['SCRIPT_NAME'] = '/' . $bldScript;
+
     // Each page assigns its own $page / $hero, but clear them first so a stale
     // value can never leak from the previously rendered page.
     unset($page, $hero);

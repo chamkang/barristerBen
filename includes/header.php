@@ -222,9 +222,16 @@ $jsonLd = json_encode(
     <nav class="nav" id="primaryNav" aria-label="Primary">
       <ul class="nav__list">
         <?php foreach (nav_items() as $item): ?>
+          <?php
+          $inSection = is_current($item['file']);
+          // aria-current="page" is only correct on the exact page; a practice
+          // area or article is merely inside the section, so it gets the
+          // highlight without the attribute.
+          $isExact = is_current(is_array($item['file']) ? $item['file'][0] : $item['file']);
+          ?>
           <li>
-            <a class="nav__link<?= is_current($item['file']) ? ' is-active' : '' ?>"
-               href="<?= e($item['href']) ?>"<?= is_current($item['file']) ? ' aria-current="page"' : '' ?>>
+            <a class="nav__link<?= $inSection ? ' is-active' : '' ?>"
+               href="<?= e($item['href']) ?>"<?= $isExact ? ' aria-current="page"' : '' ?>>
               <?= e($item['label']) ?>
             </a>
           </li>

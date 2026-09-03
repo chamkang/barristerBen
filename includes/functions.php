@@ -24,23 +24,30 @@ function asset(string $path): string
     return url('assets/' . ltrim($path, '/'));
 }
 
-/** True when $file matches the currently executing script. */
-function is_current(string $file): bool
+/**
+ * True when the currently executing script belongs to this nav item.
+ * $file may be a single script or a list, so that a detail page highlights
+ * its section — a practice area lights up "Practice Areas", an article
+ * lights up "Insights".
+ */
+function is_current(string|array $file): bool
 {
-    return basename($_SERVER['SCRIPT_NAME'] ?? '') === $file;
+    $current = basename($_SERVER['SCRIPT_NAME'] ?? '');
+
+    return in_array($current, (array) $file, true);
 }
 
 /** Primary navigation. */
 function nav_items(): array
 {
     return [
-        ['label' => 'Home',           'file' => 'index.php',          'href' => url('/')],
-        ['label' => 'About',          'file' => 'about.php',          'href' => url('about.php')],
-        ['label' => 'Practice Areas', 'file' => 'practice-areas.php', 'href' => url('practice-areas.php')],
-        ['label' => 'Our Team',       'file' => 'team.php',           'href' => url('team.php')],
-        ['label' => 'Insights',       'file' => 'blog.php',           'href' => url('blog.php')],
-        ['label' => 'FAQ',            'file' => 'faq.php',            'href' => url('faq.php')],
-        ['label' => 'Contact',        'file' => 'contact.php',        'href' => url('contact.php')],
+        ['label' => 'Home',           'file' => 'index.php',                                  'href' => url('/')],
+        ['label' => 'About',          'file' => 'about.php',                                  'href' => url('about.php')],
+        ['label' => 'Practice Areas', 'file' => ['practice-areas.php', 'practice-area.php'],  'href' => url('practice-areas.php')],
+        ['label' => 'Our Team',       'file' => 'team.php',                                   'href' => url('team.php')],
+        ['label' => 'Insights',       'file' => ['blog.php', 'post.php'],                     'href' => url('blog.php')],
+        ['label' => 'FAQ',            'file' => 'faq.php',                                    'href' => url('faq.php')],
+        ['label' => 'Contact',        'file' => 'contact.php',                                'href' => url('contact.php')],
     ];
 }
 
