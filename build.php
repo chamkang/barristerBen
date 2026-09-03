@@ -236,6 +236,46 @@ unset($bldRoute, $bldScript, $bldQuery, $bldTarget, $bldHtml, $bldPath);
 $bldAssets = $bldCopyTree($bldRoot . '/assets', $bldDist . '/assets');
 copy($bldRoot . '/robots.txt', $bldDist . '/robots.txt');
 
+/**
+ * vercel.json is copied INTO dist/ as well as living at the repository root.
+ *
+ * Vercel reads vercel.json from the project's root directory — which is
+ * whatever the dashboard's "Root Directory" setting points at. So the file has
+ * to exist in both places for both setups to work:
+ *
+ *   Root Directory = repository root  -> reads ./vercel.json      (outputDirectory: dist)
+ *   Root Directory = dist            -> reads ./dist/vercel.json
+ *
+ * Without the copy, the second setup silently loses `cleanUrls`, which
+ * defaults to false. Every internal link, canonical tag and sitemap entry this
+ * build emits is extensionless (/about, /practice/corporate-law), so the whole
+ * site would 404 while still deploying "successfully".
+ *
+ * The copy is served publicly at /vercel.json. That is harmless: it holds only
+ * routing and header configuration, no secrets.
+ *
+ * The build-related keys are stripped from the copy. Inside dist/,
+ * "outputDirectory": "dist" would point Vercel at dist/dist and break the
+ * deployment; with no framework and no package.json, Vercel serves the
+ * directory as static output anyway. Only the routing and header rules — the
+ * part that actually has to survive — are kept.
+ */
+$bldVercel = json_decode((string) file_get_contents($bldRoot . '/vercel.json'), true);
+
+if (is_array($bldVercel)) {
+    unset(
+        $bldVercel['framework'],
+        $bldVercel['installCommand'],
+        $bldVercel['buildCommand'],
+        $bldVercel['outputDirectory'],
+    );
+
+    file_put_contents(
+        $bldDist . '/vercel.json',
+        json_encode($bldVercel, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES) . "\n"
+    );
+}
+
 // ---------------------------------------------------------------------------
 // Pre-flight warnings — things that silently break a live deployment
 // ---------------------------------------------------------------------------

@@ -241,6 +241,31 @@ git add -A && git commit -m "Rebuild static site" && git push
 
 From then on, every `git push` redeploys automatically.
 
+#### Root Directory: leave it blank, or set it to `dist` — both work
+
+Vercel reads `vercel.json` from **the project's root directory**, which is whatever the
+dashboard's *Root Directory* setting points at. That means the file has to exist in the right
+place for whichever setup you pick, so `build.php` writes a second copy into `dist/`:
+
+| Root Directory | Config Vercel reads | Serves |
+|---|---|---|
+| *(blank — repository root)* | `./vercel.json` | `dist/`, via `outputDirectory` |
+| `dist` | `./dist/vercel.json` | that folder directly |
+
+The `dist/` copy is generated with the build keys (`framework`, `installCommand`,
+`buildCommand`, `outputDirectory`) stripped, because `"outputDirectory": "dist"` read from
+*inside* `dist/` would send Vercel looking for `dist/dist`.
+
+This matters more than it looks. [`cleanUrls` defaults to
+`false`](https://vercel.com/docs/project-configuration/vercel-json#cleanurls), and every
+internal link, canonical tag and sitemap entry the build emits is extensionless
+(`/about`, `/practice/corporate-law`). If Vercel never sees a `vercel.json` with
+`cleanUrls: true`, only the `.html` paths resolve — the deployment succeeds and the site is
+broken. Keeping both copies in sync removes that failure mode entirely.
+
+Blank is still the better default: it is the setting a fresh import already has, so nobody
+has to remember it.
+
 **Step 6 — custom domain.** In Vercel: **Project → Settings → Domains → Add**, enter
 `fonjulawfirm.com`, and set the DNS records Vercel shows you at your registrar. SSL is issued
 automatically and free. Then set `SITE_URL` to the real domain, rebuild, and push.

@@ -1,5 +1,3 @@
-
-Warning: Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\barrister-Ben\build.php:175) in C:\xampp\htdocs\barrister-Ben\sitemap.php on line 17
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
