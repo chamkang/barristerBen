@@ -67,6 +67,7 @@ $line('## About the firm');
 $line();
 $line('- [About](' . abs_url('about.php') . '): mission, approach and where the firm works');
 $line('- [Team](' . abs_url('team.php') . '): the firm\'s lawyers');
+$line('- [International clients](' . abs_url('international-clients.php') . '): for foreign companies, investors, individuals and Cameroonians abroad; English or French, handled remotely');
 $line('- [Frequently asked questions](' . abs_url('faq.php') . '): fees, consultations, company formation, land, employment, disputes and foreign investment');
 $line('- [Contact](' . abs_url('contact.php') . '): address, telephone, WhatsApp and enquiry form');
 $line();
@@ -75,6 +76,7 @@ $line('## En français');
 $line();
 $line('- [Accueil](' . abs_url_in('', 'fr') . '): le cabinet Fonju, cabinet d’avocats en droit des affaires à Douala');
 $line('- [Domaines d’expertise](' . abs_url_in('practice-areas.php', 'fr') . ')');
+$line('- [Clients internationaux](' . abs_url_in('international-clients.php', 'fr') . '): pour les entreprises étrangères, investisseurs, particuliers et Camerounais de l’étranger');
 $line('- [Questions fréquentes](' . abs_url_in('faq.php', 'fr') . ')');
 $line('- [Contact](' . abs_url_in('contact.php', 'fr') . ')');
 foreach (blog_posts('fr') as $post) {

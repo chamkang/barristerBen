@@ -5,6 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/data-practice.php';
 require_once __DIR__ . '/includes/data-blog.php';
+require_once __DIR__ . '/includes/data-testimonials.php';
 require_once __DIR__ . '/includes/data-faq.php';
 
 $page = [
@@ -261,6 +262,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
 </section>
 
 <!-- ======================================================== TESTIMONIALS -->
+<?php $quotes = testimonials(); ?>
+<?php if ($quotes !== []): ?>
 <section class="section section--bone">
   <div class="wrap">
     <div class="section-head section-head--center reveal">
@@ -268,30 +271,20 @@ $latest   = array_slice(blog_posts(), 0, 3);
       <h2>What working with us is like</h2>
       <p class="lede">
         Client identities are confidential, so these accounts are published with permission and
-        without names. <strong>Replace or extend them in <code>index.php</code> as you collect
-        further testimonials.</strong>
+        without names.
       </p>
     </div>
 
     <div class="grid grid--3">
-      <?php
-      $quotes = [
-        ['q' => 'They told us in the first meeting that our planned structure would fail at the first audit. Nobody else had said it. Rebuilding it cost a fraction of what the mistake would have.', 'n' => 'Managing Director', 'r' => 'Manufacturing group, Douala', 'a' => 'MD'],
-        ['q' => 'We needed local counsel who could talk to our lawyers in Paris without translation of every concept. Fonju did that, and the deal closed on schedule.', 'n' => 'General Counsel', 'r' => 'European investor, CEMAC entry', 'a' => 'GC'],
-        ['q' => 'The land we were about to buy had a title that looked perfect. The search showed the seller could not lawfully sell it. That check saved the whole investment.', 'n' => 'Private client', 'r' => 'Property acquisition, Littoral', 'a' => 'PC'],
-      ];
-      foreach ($quotes as $i => $q): ?>
-        <figure class="quote-card reveal" data-delay="<?= $i + 1 ?>">
+      <?php foreach ($quotes as $i => $q): ?>
+        <figure class="quote-card reveal" data-delay="<?= min($i + 1, 3) ?>">
           <?= icon('quote', 30) ?>
-          <blockquote><?= $q['q'] ?></blockquote>
-          <div class="quote-card__stars" aria-label="Five out of five">
-            <?= str_repeat(icon('star', 15), 5) ?>
-          </div>
+          <blockquote><?= e($q['quote']) ?></blockquote>
           <figcaption class="quote-card__by">
-            <span class="quote-card__avatar" aria-hidden="true"><?= $q['a'] ?></span>
+            <span class="quote-card__avatar" aria-hidden="true"><?= e($q['initials']) ?></span>
             <span>
-              <span class="quote-card__name"><?= $q['n'] ?></span><br>
-              <span class="quote-card__role"><?= $q['r'] ?></span>
+              <span class="quote-card__name"><?= e($q['name']) ?></span><?php if ($q['role'] !== ''): ?><br>
+              <span class="quote-card__role"><?= e($q['role']) ?></span><?php endif; ?>
             </span>
           </figcaption>
         </figure>
@@ -299,6 +292,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <!-- ============================================================ INSIGHTS -->
 <section class="section">

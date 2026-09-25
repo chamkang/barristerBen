@@ -7,6 +7,7 @@ declare(strict_types=1);
  * templates; a string missing here simply shows in English.
  */
 return [
+    'Clients outside Cameroon' => 'Clients hors du Cameroun',
     // Navigation
     'Home'            => 'Accueil',
     'home'            => 'accueil',

@@ -61,7 +61,9 @@ split, and so on).
 | Lawyer profiles | `includes/data-team.php` (French text in each member's `'fr'` key) |
 | Interface wording in French (menus, buttons, footer…) | `includes/lang/fr.php` |
 | Colours, typography, spacing | `assets/css/style.css` (tokens at the top) |
-| Home page sections, testimonials | `index.php` (French: `fr/index.php`) |
+| Home page sections | `index.php` (French: `fr/index.php`) |
+| Client testimonials | `content/testimonials.json`, best edited at **`/admin` → Testimonials** |
+| Page for clients outside Cameroon | `includes/data-international.php` (both languages) |
 | Summary for AI assistants | `llms.php` (served as `/llms.txt`) |
 
 Each data file is an array of plain PHP arrays with comments explaining every key. Adding a new
@@ -112,6 +114,14 @@ are `noindex` and disallowed in `robots.txt`. To lock everyone out, change `SESS
 `.github/workflows/build-site.yml` runs `php build.php` and commits the new `dist/` → Vercel
 deploys that commit. The same action also runs every morning (05:15 UTC), which is what makes
 articles with a future date appear on their day.
+
+### Testimonials
+
+At `/admin`, press **Testimonials**. Each testimonial can be written in English, French or both
+(each language's home page shows only the ones written in it), with a description of who said it
+("Managing Director" rather than a name, for confidentiality) and some context. Only entries with
+**"The client has agreed in writing"** ticked are published. Reorder with the arrows and press
+**Save**; the home page updates in about two minutes. With no testimonials, the section is hidden.
 
 ### Writing an article by hand
 
@@ -171,8 +181,8 @@ notice that disappears automatically once resolved.
 4. **Privacy policy and legal notice** — `privacy.php` and `legal-notice.php` are solid drafts, but
    must be checked against actual practice and completed with the firm's RCCM number, NIU and bar
    admission details.
-5. **Testimonials** — the three on the home page are illustrative. Replace them in `index.php`
-   with real, permission-cleared client feedback, or remove the section.
+5. **Testimonials** — add real ones at `/admin` → Testimonials, with the client's written
+   permission. The home page section stays hidden until there is at least one.
 6. **Photographs** — see section 6.
 7. **Contact form delivery** — see section 5.
 8. **`robots.txt`** — update the `Sitemap:` line to the live domain.
@@ -210,10 +220,9 @@ broken image icon. Add real images whenever they are ready:
 - **Social share card** — `assets/img/og-default.png` (1200×630) is generated from
   `assets/img/og-default.svg`. Edit the SVG and re-export if the branding changes.
 - **Home page hero photo** — a law-library photograph from Unsplash (free licence, no attribution
-  required), loaded from Unsplash's CDN. It is set in `style.css` on `.hero` (search for
-  `images.unsplash.com`). To use your own photo, put a wide JPG (about 2200 px, under 400 KB) in
-  `assets/img/` and change that URL to it; a photo of the firm's own office or library is better
-  still.
+  required), stored as `assets/img/hero-law-library.jpg` (2200 px, desktop) and
+  `hero-law-library-1100.jpg` (phones). To use a photograph of the firm's own office or library,
+  replace both files and keep the names; nothing else changes.
 
 ### The logo (the Key F)
 

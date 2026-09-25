@@ -96,6 +96,19 @@ textarea { resize: vertical; }
 .badge--linked { background: #e7f2ea; color: var(--ok); }
 .row__actions { display: flex; gap: .5rem; align-items: center; }
 
+.list-head__actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+
+/* Testimonials */
+.note { margin: 0 0 1.25rem; padding: .85rem 1rem; border-left: 3px solid var(--gold); border-radius: 0 8px 8px 0; background: var(--paper); font-size: .9rem; max-width: 80ch; }
+.t-list { display: grid; gap: 1rem; }
+.t-item { padding: 1.1rem 1.25rem .4rem; }
+.t-item__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: .8rem; }
+.t-item__title { margin: 0; font-family: var(--font-serif); font-size: 1.15rem; font-weight: 600; }
+.t-item__tools { display: flex; gap: .4rem; flex-wrap: wrap; }
+.t-item .check { margin: 0 0 1rem; }
+.badge--hidden { background: #f3e4c4; color: #7a5a1c; }
+.badge--live { background: #e7f2ea; color: var(--ok); }
+
 /* Editor */
 .editor-head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.1rem; flex-wrap: wrap; }
 .editor-head__actions { display: flex; gap: .6rem; align-items: center; }

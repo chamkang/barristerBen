@@ -63,6 +63,7 @@ require_once $bldRoot . '/includes/data-team.php';
 $bldRoutes = [
     ['index.php',          [], 'index.html', 'en'],
     ['about.php',          [], 'about.html', 'en'],
+    ['international-clients.php', [], 'international-clients.html', 'en'],
     ['practice-areas.php', [], 'practice-areas.html', 'en'],
     ['team.php',           [], 'team.html', 'en'],
     ['blog.php',           [], 'blog.html', 'en'],
@@ -77,6 +78,7 @@ $bldRoutes = [
 
     ['fr/index.php',          [], 'fr/index.html', 'fr'],
     ['fr/about.php',          [], 'fr/about.html', 'fr'],
+    ['fr/international-clients.php', [], 'fr/international-clients.html', 'fr'],
     ['fr/practice-areas.php', [], 'fr/practice-areas.html', 'fr'],
     ['fr/team.php',           [], 'fr/team.html', 'fr'],
     ['fr/blog.php',           [], 'fr/blog.html', 'fr'],

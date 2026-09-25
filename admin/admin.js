@@ -6,7 +6,7 @@
   'use strict';
 
   var $ = function (id) { return document.getElementById(id); };
-  var state = { lang: 'en', articles: { en: [], fr: [] }, current: null, dirty: false, slugTouched: false };
+  var state = { lang: 'en', articles: { en: [], fr: [] }, current: null, dirty: false, slugTouched: false, testimonials: [], testimonialsSha: '' };
 
   var CATEGORIES = {
     en: ['Corporate', 'Dispute Resolution', 'Employment', 'Intellectual Property', 'Investment', 'Real Estate', 'Regulatory', 'Technology', 'iGaming'],
@@ -39,7 +39,7 @@
 
   // ------------------------------------------------------------------ UI helpers
   function show(view) {
-    ['Login', 'Setup', 'List', 'Editor'].forEach(function (v) { $('view' + v).hidden = v.toLowerCase() !== view; });
+    ['Login', 'Setup', 'List', 'Editor', 'Testimonials'].forEach(function (v) { $('view' + v).hidden = v.toLowerCase() !== view; });
     $('barRight').hidden = view === 'login' || view === 'setup';
     window.scrollTo(0, 0);
   }
@@ -355,7 +355,7 @@
     return !state.dirty || window.confirm('You have unsaved changes. Leave without saving?');
   }
   window.addEventListener('beforeunload', function (event) {
-    if (state.dirty && !$('viewEditor').hidden) { event.preventDefault(); event.returnValue = ''; }
+    if (state.dirty && (!$('viewEditor').hidden || !$('viewTestimonials').hidden)) { event.preventDefault(); event.returnValue = ''; }
   });
 
   $('backToList').addEventListener('click', function () {
@@ -415,6 +415,125 @@
     api('/api/articles?lang=' + c.lang + '&slug=' + encodeURIComponent(c.slug) + '&sha=' + encodeURIComponent(c.sha), { method: 'DELETE' })
       .then(function () { state.dirty = false; toast('Article deleted.'); openList(); })
       .catch(function (error) { toast(error.message, true); });
+  });
+
+  // ------------------------------------------------------------------ testimonials
+  var T_FIELDS = ['quote_en', 'quote_fr', 'name', 'role_en', 'role_fr'];
+
+  function openTestimonials() {
+    if (!confirmLeave()) return;
+    state.dirty = false;
+    show('testimonials');
+    $('testimonialList').innerHTML = '<p class="muted list__empty">Loading testimonials…</p>';
+    api('/api/testimonials').then(function (data) {
+      state.testimonials = data.testimonials || [];
+      state.testimonialsSha = data.sha || '';
+      renderTestimonials();
+    }).catch(function (error) {
+      $('testimonialList').innerHTML = '<p class="error">' + esc(error.message) + '</p>';
+    });
+  }
+
+  function tField(i, key, label, multiline, placeholder) {
+    var id = 't' + i + '_' + key;
+    var value = state.testimonials[i][key] || '';
+    var control = multiline
+      ? '<textarea id="' + id + '" rows="5" maxlength="600" data-i="' + i + '" data-key="' + key + '" placeholder="' + esc(placeholder) + '">' + esc(value) + '</textarea>'
+      : '<input type="text" id="' + id + '" maxlength="100" data-i="' + i + '" data-key="' + key + '" value="' + esc(value) + '" placeholder="' + esc(placeholder) + '">';
+    return '<label class="field"><span class="field__label">' + label + '</span>' + control + '</label>';
+  }
+
+  function renderTestimonials() {
+    var list = state.testimonials;
+    if (!list.length) {
+      $('testimonialList').innerHTML = '<div class="card"><p class="muted list__empty">No testimonials yet, so the home page does not show the section. Press “Add testimonial” when a client has agreed to one.</p></div>';
+      return;
+    }
+    $('testimonialList').innerHTML = list.map(function (t, i) {
+      var live = t.permission && (t.quote_en || t.quote_fr);
+      var langs = [t.quote_en ? 'EN' : '', t.quote_fr ? 'FR' : ''].filter(Boolean).join(' + ');
+      return '<div class="card t-item">'
+        + '<div class="t-item__head"><h2 class="t-item__title">Testimonial ' + (i + 1) + ' '
+        + (live ? '<span class="badge badge--live">On the site' + (langs ? ' · ' + langs : '') + '</span>' : '<span class="badge badge--hidden">Not shown</span>')
+        + '</h2><div class="t-item__tools">'
+        + (i > 0 ? '<button class="btn btn--ghost btn--sm" type="button" data-move="' + i + '" data-dir="-1">↑ Up</button>' : '')
+        + (i < list.length - 1 ? '<button class="btn btn--ghost btn--sm" type="button" data-move="' + i + '" data-dir="1">↓ Down</button>' : '')
+        + '<button class="link-btn link-btn--danger" type="button" data-remove="' + i + '">Remove</button>'
+        + '</div></div>'
+        + '<div class="row2">'
+        + tField(i, 'quote_en', 'Testimonial in English', true, 'In the client’s words…')
+        + tField(i, 'quote_fr', 'Témoignage en français', true, 'Dans les mots du client…')
+        + '</div>'
+        + tField(i, 'name', 'Who said it', false, 'e.g. Managing Director (not the client’s name, unless they asked)')
+        + '<div class="row2">'
+        + tField(i, 'role_en', 'Context (English)', false, 'e.g. Manufacturing group, Douala')
+        + tField(i, 'role_fr', 'Contexte (français)', false, 'ex. Groupe industriel, Douala')
+        + '</div>'
+        + '<label class="check"><input type="checkbox" id="t' + i + '_permission" data-i="' + i + '" data-key="permission"' + (t.permission ? ' checked' : '') + '> The client has agreed in writing to this being published</label>'
+        + '</div>';
+    }).join('');
+  }
+
+  $('testimonialList').addEventListener('input', function (event) {
+    var el = event.target;
+    var i = el.getAttribute('data-i'), key = el.getAttribute('data-key');
+    if (i === null || !key) return;
+    state.testimonials[+i][key] = el.type === 'checkbox' ? el.checked : el.value;
+    state.dirty = true;
+  });
+  $('testimonialList').addEventListener('change', function (event) {
+    if (event.target.type === 'checkbox') renderTestimonials();
+  });
+  $('testimonialList').addEventListener('click', function (event) {
+    var move = event.target.closest('[data-move]');
+    var remove = event.target.closest('[data-remove]');
+    var list = state.testimonials;
+    if (move) {
+      var i = +move.getAttribute('data-move'), j = i + (+move.getAttribute('data-dir'));
+      var item = list.splice(i, 1)[0];
+      list.splice(j, 0, item);
+      state.dirty = true;
+      renderTestimonials();
+    } else if (remove) {
+      var k = +remove.getAttribute('data-remove');
+      if (!window.confirm('Remove testimonial ' + (k + 1) + '? It disappears from the website when you save.')) return;
+      list.splice(k, 1);
+      state.dirty = true;
+      renderTestimonials();
+    }
+  });
+
+  $('addTestimonial').addEventListener('click', function () {
+    var blank = { permission: false };
+    T_FIELDS.forEach(function (k) { blank[k] = ''; });
+    state.testimonials.push(blank);
+    state.dirty = true;
+    renderTestimonials();
+    var last = $('t' + (state.testimonials.length - 1) + '_quote_en');
+    if (last) last.focus();
+  });
+
+  $('saveTestimonials').addEventListener('click', function () {
+    var button = this;
+    button.disabled = true;
+    button.textContent = 'Saving…';
+    api('/api/testimonials', { method: 'POST', body: { testimonials: state.testimonials, sha: state.testimonialsSha } })
+      .then(function (data) {
+        state.testimonialsSha = data.sha;
+        state.dirty = false;
+        var shown = state.testimonials.filter(function (t) { return t.permission && (t.quote_en || t.quote_fr); }).length;
+        toast('Saved. ' + (shown ? shown + ' testimonial' + (shown > 1 ? 's' : '') + ' will be on the home page' : 'The home page will not show testimonials') + ' in about two minutes.');
+        setTimeout(refreshStatus, 4000);
+      })
+      .catch(function (error) { toast(error.message, true); })
+      .then(function () { button.disabled = false; button.textContent = 'Save'; });
+  });
+
+  $('openTestimonials').addEventListener('click', openTestimonials);
+  $('backFromTestimonials').addEventListener('click', function () {
+    if (!confirmLeave()) return;
+    state.dirty = false;
+    openList();
   });
 
   // ------------------------------------------------------------------ Markdown toolbar

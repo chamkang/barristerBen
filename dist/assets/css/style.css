@@ -553,16 +553,24 @@ hr { border: 0; border-top: 1px solid var(--line); margin: var(--sp-6) 0; }
   isolation: isolate;
 }
 /*
- * The hero photograph: a law library (Unsplash, free licence). Replace the URL
- * with a photograph of the firm's own office or library when one is available,
- * e.g. url("../img/hero-library.jpg") once the file is in assets/img/.
+ * The hero photograph: a law library (Unsplash, free licence), stored in
+ * assets/img/ in two sizes. To use a photograph of the firm's own office or
+ * library, replace both files (about 2200 and 1100 px wide) keeping the names.
  */
 .hero__bg {
   position: absolute; inset: 0; z-index: -2;
   background:
     linear-gradient(90deg, rgba(15,14,16,.94) 0%, rgba(15,14,16,.86) 42%, rgba(15,14,16,.55) 72%, rgba(15,14,16,.72) 100%),
     linear-gradient(0deg, rgba(15,14,16,.85) 0%, transparent 38%),
-    #151416 url("https://images.unsplash.com/photo-1479142506502-19b3a3b7ff33?auto=format&fit=crop&w=2200&q=70") center 40% / cover no-repeat;
+    #151416 url("../img/hero-law-library.jpg") center 40% / cover no-repeat;
+}
+@media (max-width: 760px) {
+  .hero__bg {
+    background:
+      linear-gradient(90deg, rgba(15,14,16,.94) 0%, rgba(15,14,16,.86) 42%, rgba(15,14,16,.55) 72%, rgba(15,14,16,.72) 100%),
+      linear-gradient(0deg, rgba(15,14,16,.85) 0%, transparent 38%),
+      #151416 url("../img/hero-law-library-1100.jpg") center 40% / cover no-repeat;
+  }
 }
 .hero__bg::after {
   content: "";
@@ -1837,3 +1845,47 @@ html:not(.js) .nav-toggle { display: none; }
 .site-header__actions .btn { white-space: nowrap; }
 html[lang="fr"] .hero__title { font-size: clamp(2rem, 4vw, 3.3rem); }
 html[lang="fr"] .nav__list { gap: clamp(.3rem, 1vw, .8rem); }
+
+/* -----------------------------------------------------------------------------
+ * International clients page
+ * -------------------------------------------------------------------------- */
+.page-international .grid--4 .card h3 { font-size: 1.12rem; }
+.ask-list {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--sp-6);
+  margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line);
+}
+.ask-list__item {
+  display: flex; flex-direction: column; align-items: flex-start; gap: .3rem;
+  padding: 1.05rem 0; border-bottom: 1px solid var(--line);
+}
+.ask-list__q {
+  display: inline-flex; align-items: baseline; gap: .5rem;
+  font-family: var(--font-serif); font-size: 1.16rem; font-weight: 600; line-height: 1.35;
+  color: var(--ink); text-decoration: none;
+}
+.ask-list__q .ico { flex: none; color: var(--gold-deep); transform: translateY(2px); transition: transform .2s; }
+.ask-list__q:hover, .ask-list__q:focus-visible { color: var(--gold-deep); }
+.ask-list__q:hover .ico { transform: translate(3px, 2px); }
+.ask-list__more {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-size: .86rem; font-weight: 500; color: var(--gold-deep); text-decoration: none; white-space: nowrap;
+}
+.ask-list__more:hover { text-decoration: underline; text-underline-offset: 3px; }
+.caution {
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--sp-5);
+  max-width: 900px; padding: clamp(1.4rem, 3vw, 2.2rem);
+  background: var(--paper); border: 1px solid var(--line); border-left: 4px solid var(--gold);
+  border-radius: var(--r);
+}
+.caution__icon {
+  display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(195,155,83,.14); color: var(--gold-deep);
+}
+.caution__title { font-size: var(--fs-h3); margin-bottom: .7rem; }
+.caution p { color: var(--muted); max-width: 70ch; }
+.caution p:last-child { margin-bottom: 0; }
+.intl-faq { max-width: 900px; }
+@media (max-width: 760px) {
+  .ask-list { grid-template-columns: 1fr; }
+  .caution { grid-template-columns: 1fr; }
+}

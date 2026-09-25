@@ -6,6 +6,7 @@ require_once dirname(__DIR__) . '/includes/functions.php';
 set_lang('fr');
 require_once dirname(__DIR__) . '/includes/data-practice.php';
 require_once dirname(__DIR__) . '/includes/data-blog.php';
+require_once dirname(__DIR__) . '/includes/data-testimonials.php';
 require_once dirname(__DIR__) . '/includes/data-faq.php';
 
 $page = [
@@ -261,6 +262,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
 </section>
 
 <!-- ======================================================== TESTIMONIALS -->
+<?php $quotes = testimonials(); ?>
+<?php if ($quotes !== []): ?>
 <section class="section section--bone">
   <div class="wrap">
     <div class="section-head section-head--center reveal">
@@ -268,30 +271,20 @@ $latest   = array_slice(blog_posts(), 0, 3);
       <h2>Travailler avec nous, concrètement</h2>
       <p class="lede">
         L’identité de nos clients est confidentielle : ces témoignages sont publiés avec leur accord
-        et sans nom. <strong>Remplacez-les ou complétez-les dans <code>fr/index.php</code> à mesure
-        que vous recueillez d’autres témoignages.</strong>
+        et sans nom.
       </p>
     </div>
 
     <div class="grid grid--3">
-      <?php
-      $quotes = [
-        ['q' => 'Dès la première réunion, ils nous ont dit que la structure envisagée ne passerait pas le premier audit. Personne d’autre ne l’avait dit. La reconstruire a coûté une fraction de ce qu’aurait coûté l’erreur.', 'n' => 'Directeur général', 'r' => 'Groupe industriel, Douala', 'a' => 'DG'],
-        ['q' => 'Il nous fallait un conseil local capable d’échanger avec nos avocats parisiens sans traduire chaque notion. Le cabinet Fonju l’a fait, et l’opération a été conclue dans les délais.', 'n' => 'Directeur juridique', 'r' => 'Investisseur européen, entrée en zone CEMAC', 'a' => 'DJ'],
-        ['q' => 'Le terrain que nous allions acheter avait un titre en apparence parfait. La recherche a montré que le vendeur ne pouvait pas légalement le vendre. Cette vérification a sauvé tout l’investissement.', 'n' => 'Client particulier', 'r' => 'Acquisition immobilière, Littoral', 'a' => 'CP'],
-      ];
-      foreach ($quotes as $i => $q): ?>
-        <figure class="quote-card reveal" data-delay="<?= $i + 1 ?>">
+      <?php foreach ($quotes as $i => $q): ?>
+        <figure class="quote-card reveal" data-delay="<?= min($i + 1, 3) ?>">
           <?= icon('quote', 30) ?>
-          <blockquote><?= $q['q'] ?></blockquote>
-          <div class="quote-card__stars" aria-label="Cinq sur cinq">
-            <?= str_repeat(icon('star', 15), 5) ?>
-          </div>
+          <blockquote><?= e($q['quote']) ?></blockquote>
           <figcaption class="quote-card__by">
-            <span class="quote-card__avatar" aria-hidden="true"><?= $q['a'] ?></span>
+            <span class="quote-card__avatar" aria-hidden="true"><?= e($q['initials']) ?></span>
             <span>
-              <span class="quote-card__name"><?= $q['n'] ?></span><br>
-              <span class="quote-card__role"><?= $q['r'] ?></span>
+              <span class="quote-card__name"><?= e($q['name']) ?></span><?php if ($q['role'] !== ''): ?><br>
+              <span class="quote-card__role"><?= e($q['role']) ?></span><?php endif; ?>
             </span>
           </figcaption>
         </figure>
@@ -299,6 +292,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
     </div>
   </div>
 </section>
+<?php endif; ?>
 
 <!-- ============================================================ INSIGHTS -->
 <section class="section">

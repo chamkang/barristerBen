@@ -30,6 +30,7 @@ $both = static fn(string $path, string $freq, string $priority) => [
 
 $entries[] = $both('',                   'weekly',  '1.0');
 $entries[] = $both('about.php',          'monthly', '0.8');
+$entries[] = $both('international-clients.php', 'monthly', '0.9');
 $entries[] = $both('practice-areas.php', 'monthly', '0.9');
 $entries[] = $both('team.php',           'monthly', '0.7');
 $entries[] = $both('blog.php',           'weekly',  '0.8');

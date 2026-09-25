@@ -1,16 +1,16 @@
 </main>
 
-<?php if (empty($page['hide_cta'])): ?>
+<?php if (empty($page['hide_cta'])): $cta = $page['cta'] ?? []; ?>
 <section class="cta-band" aria-labelledby="ctaHeading">
   <div class="wrap cta-band__inner">
     <div class="cta-band__text reveal">
       <p class="eyebrow eyebrow--gold"><?= e(t('Speak to a lawyer')) ?></p>
-      <h2 id="ctaHeading" class="cta-band__title"><?= t('Tell us what happened.<br>We will tell you where you stand.') ?></h2>
-      <p class="cta-band__lede"><?= e(t('A first consultation gives you our view of your legal position, the realistic options with their cost and timeline, and a clear recommendation. If you do not need a lawyer, we will say so.')) ?></p>
+      <h2 id="ctaHeading" class="cta-band__title"><?= isset($cta['title']) ? e($cta['title']) : t('Tell us what happened.<br>We will tell you where you stand.') ?></h2>
+      <p class="cta-band__lede"><?= e($cta['lede'] ?? t('A first consultation gives you our view of your legal position, the realistic options with their cost and timeline, and a clear recommendation. If you do not need a lawyer, we will say so.')) ?></p>
     </div>
     <div class="cta-band__actions reveal">
       <a class="btn btn--gold btn--lg" href="<?= e(url('contact.php')) ?>#consultation"><?= e(t('Book a consultation')) ?> <?= icon('arrow', 18) ?></a>
-      <a class="btn btn--ghost btn--lg" href="<?= e(whatsapp_url()) ?>" target="_blank" rel="noopener"><?= icon('whatsapp', 18) ?> <?= e(t('Chat on WhatsApp')) ?></a>
+      <a class="btn btn--ghost btn--lg" href="<?= e(whatsapp_url($cta['wa_text'] ?? null)) ?>" target="_blank" rel="noopener"><?= icon('whatsapp', 18) ?> <?= e(t('Chat on WhatsApp')) ?></a>
       <p class="cta-band__note"><?= icon('clock', 14) ?> <?= e(t('We reply to enquiries within one business day.')) ?></p>
     </div>
   </div>
@@ -50,6 +50,7 @@
         <ul class="site-footer__links">
           <li><a href="<?= e(url('about.php')) ?>"><?= e(t('About Fonju Law Firm')) ?></a></li>
           <li><a href="<?= e(url('team.php')) ?>"><?= e(t('Our legal team')) ?></a></li>
+          <li><a href="<?= e(url('international-clients.php')) ?>"><?= e(t('Clients outside Cameroon')) ?></a></li>
           <li><a href="<?= e(url('blog.php')) ?>"><?= e(t('Insights & legal updates')) ?></a></li>
           <li><a href="<?= e(url('faq.php')) ?>"><?= e(t('Frequently asked questions')) ?></a></li>
           <li><a href="<?= e(url('contact.php')) ?>"><?= e(t('Contact & directions')) ?></a></li>
@@ -158,6 +159,6 @@
   </div>
 </section>
 
-<script src="<?= e(asset('js/main.js')) ?>?v=2.1.0" defer></script>
+<script src="<?= e(asset('js/main.js')) ?>?v=2.2.0" defer></script>
 </body>
 </html>

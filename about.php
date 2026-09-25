@@ -124,6 +124,8 @@ require __DIR__ . '/includes/page-hero.php';
         <li><span class="pill"><?= icon('scale', 14) ?> 17 OHADA states</span></li>
         <li><span class="pill"><?= icon('users', 14) ?> English &amp; French</span></li>
       </ul>
+
+      <a class="btn btn--outline mt-6" href="<?= e(url('international-clients.php')) ?>">Working with clients outside Cameroon <?= icon('arrow', 16) ?></a>
     </div>
   </div>
 </section>

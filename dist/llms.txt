@@ -58,6 +58,7 @@ Fonju Law Firm is a law firm and legal consultancy in Douala, Cameroon. It advis
 
 - [About](https://fonjulawfirm.com/about): mission, approach and where the firm works
 - [Team](https://fonjulawfirm.com/team): the firm's lawyers
+- [International clients](https://fonjulawfirm.com/international-clients): for foreign companies, investors, individuals and Cameroonians abroad; English or French, handled remotely
 - [Frequently asked questions](https://fonjulawfirm.com/faq): fees, consultations, company formation, land, employment, disputes and foreign investment
 - [Contact](https://fonjulawfirm.com/contact): address, telephone, WhatsApp and enquiry form
 
@@ -65,6 +66,7 @@ Fonju Law Firm is a law firm and legal consultancy in Douala, Cameroon. It advis
 
 - [Accueil](https://fonjulawfirm.com/fr): le cabinet Fonju, cabinet d’avocats en droit des affaires à Douala
 - [Domaines d’expertise](https://fonjulawfirm.com/fr/practice-areas)
+- [Clients internationaux](https://fonjulawfirm.com/fr/international-clients): pour les entreprises étrangères, investisseurs, particuliers et Camerounais de l’étranger
 - [Questions fréquentes](https://fonjulawfirm.com/fr/faq)
 - [Contact](https://fonjulawfirm.com/fr/contact)
 - [Créer une société au Cameroun : comment se déroule réellement la procédure](https://fonjulawfirm.com/fr/insights/creer-une-societe-au-cameroun)

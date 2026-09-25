@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Articles · Fonju Law Firm</title>
+<title>Website editor · Fonju Law Firm</title>
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="/admin/admin.css?v=1">
+<link rel="stylesheet" href="/admin/admin.css?v=2">
 </head>
 <body>
 
@@ -22,7 +22,7 @@
       <circle cx="88" cy="160" r="26" fill="none" stroke="currentColor" stroke-width="10"/>
     </svg>
     <span class="bar__name">Fonju</span>
-    <span class="bar__app">Articles</span>
+    <span class="bar__app">Editor</span>
   </div>
   <div class="bar__right" id="barRight" hidden>
     <span class="build" id="buildStatus" hidden></span>
@@ -37,7 +37,7 @@
   <section class="login" id="viewLogin" hidden>
     <form class="card login__card" id="loginForm">
       <h1 class="login__title">Sign in</h1>
-      <p class="muted">Write, edit and publish the firm’s articles in English and French.</p>
+      <p class="muted">Write, edit and publish the firm’s articles and testimonials in English and French.</p>
       <label class="field">
         <span class="field__label">Password</span>
         <input type="password" id="password" autocomplete="current-password" required>
@@ -64,7 +64,10 @@
         <h1 class="page-title">Articles</h1>
         <p class="muted">Published articles appear on the website about two minutes after you save.</p>
       </div>
-      <button class="btn btn--gold" type="button" id="newArticle">+ New article</button>
+      <div class="list-head__actions">
+        <button class="btn btn--ghost" type="button" id="openTestimonials">Testimonials</button>
+        <button class="btn btn--gold" type="button" id="newArticle">+ New article</button>
+      </div>
     </div>
 
     <div class="tabs" role="tablist" aria-label="Language">
@@ -74,6 +77,32 @@
 
     <div class="card list" id="articleList" aria-live="polite">
       <p class="muted list__empty">Loading articles…</p>
+    </div>
+  </section>
+
+  <!-- ===================================================== TESTIMONIALS -->
+  <section id="viewTestimonials" hidden>
+    <div class="editor-head">
+      <button class="link-btn" type="button" id="backFromTestimonials">← All articles</button>
+      <div class="editor-head__actions">
+        <button class="btn btn--ghost" type="button" id="addTestimonial">+ Add testimonial</button>
+        <button class="btn btn--gold" type="button" id="saveTestimonials">Save</button>
+      </div>
+    </div>
+
+    <div class="list-head">
+      <div>
+        <h1 class="page-title">Testimonials</h1>
+        <p class="muted">Shown on the home page, in the order below. The section stays hidden until there is at least one.
+          Write each testimonial in English, French or both; each language's page shows only the ones written in it.</p>
+      </div>
+    </div>
+
+    <p class="note">Publish a testimonial only with the client’s <strong>written</strong> permission, keep it in their own words,
+      and do not name them unless they have asked to be named. Only testimonials with the permission box ticked appear on the website.</p>
+
+    <div class="t-list" id="testimonialList" aria-live="polite">
+      <p class="muted list__empty">Loading testimonials…</p>
     </div>
   </section>
 
@@ -211,6 +240,6 @@
 <input type="file" id="inlineImageFile" accept="image/jpeg,image/png,image/webp" hidden>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="/admin/admin.js?v=1"></script>
+<script src="/admin/admin.js?v=2"></script>
 </body>
 </html>
