@@ -55,22 +55,105 @@ split, and so on).
 | What you want to change | File |
 |---|---|
 | Phone, e-mail, address, hours, socials, SEO defaults | `includes/config.php` |
-| Practice areas (21 of them) | `includes/data-practice.php` |
-| Blog / Insights articles (9 of them) | `includes/data-blog.php` |
-| FAQ questions and answers (26, grouped) | `includes/data-faq.php` |
-| Lawyer profiles | `includes/data-team.php` |
+| Practice areas (21 of them) | `includes/data-practice.php` (French: `data-practice.fr.php`) |
+| Insights articles | `content/insights/en/*.md` and `content/insights/fr/*.md`, best edited at **`/admin`** |
+| FAQ questions and answers (26, grouped) | `includes/data-faq.php` (French: `data-faq.fr.php`) |
+| Lawyer profiles | `includes/data-team.php` (French text in each member's `'fr'` key) |
+| Interface wording in French (menus, buttons, footer…) | `includes/lang/fr.php` |
 | Colours, typography, spacing | `assets/css/style.css` (tokens at the top) |
-| Home page sections, testimonials | `index.php` |
+| Home page sections, testimonials | `index.php` (French: `fr/index.php`) |
+| Summary for AI assistants | `llms.php` (served as `/llms.txt`) |
 
 Each data file is an array of plain PHP arrays with comments explaining every key. Adding a new
-practice area or article is a copy-paste of one block — the listing pages, navigation, sitemap,
-RSS feed and structured data all pick it up automatically.
+practice area is a copy-paste of one block — the listing pages, navigation, sitemap, RSS feed and
+structured data all pick it up automatically.
 
-### Adding a blog post
+### Writing articles — the online editor at `/admin`
 
-Copy one block in `includes/data-blog.php`, change `slug`, `title`, `date`, `category`, `excerpt`,
-`tags` and `body`. Articles sort newest-first on their own. The body accepts simple HTML —
-`h2`, `h3`, `p`, `ul`/`ol`, `blockquote` and `strong` are all styled.
+The firm writes and publishes articles from the browser, with no code and no FTP:
+
+1. Open `https://fonjulawfirm.com/admin` and sign in with the editor password.
+2. **New article** → choose English or Français, write the title, the summary and the text. The
+   toolbar adds headings, bold, lists, quotes, links and images; **Preview** shows the result.
+3. Optional: a cover image (resized automatically in the browser), a **search title** (the words
+   clients type into Google, if they differ from the headline), and a link to the same article in
+   the other language (this connects the two with the EN/FR switch and `hreflang`).
+4. **Publish**. The site updates in about two minutes; the editor shows the progress.
+
+Drafts, future publication dates, editing and deleting all work the same way. Behind the scenes
+each article is a Markdown file in `content/insights/{en,fr}/` committed to GitHub, so every
+change is versioned and can be undone from the repository history.
+
+**One-time setup (the developer does this once, in Vercel):**
+
+1. **Root Directory must be blank** (the repository root) — otherwise the `/api` functions the
+   editor uses are not deployed. See section 8.
+2. Create a GitHub **fine-grained personal access token**: GitHub → Settings → Developer settings →
+   Fine-grained tokens → *Generate*. Repository access: **only `chamkang/barristerBen`**.
+   Permissions: **Contents: Read and write** (and optionally **Actions: Read**, so the editor can
+   show build progress). Set an expiry date and put a reminder in the calendar to renew it.
+3. In Vercel → Project → Settings → **Environment Variables**, add (Production):
+
+   | Name | Value |
+   |---|---|
+   | `ADMIN_PASSWORD` | A long passphrase, given only to the people who write articles |
+   | `SESSION_SECRET` | 40+ random characters (e.g. the output of `openssl rand -hex 32`) |
+   | `GITHUB_TOKEN` | The token from step 2 |
+   | `GITHUB_REPO` | `chamkang/barristerBen` |
+   | `GITHUB_BRANCH` | `main` (optional, this is the default) |
+
+4. Redeploy. Until the variables exist, `/admin` shows a setup screen listing what is missing.
+
+Security: the password is checked on the server only; the sign-in is a signed, HttpOnly cookie
+valid for 8 hours; every write needs that cookie *and* a same-origin request; `/admin` and `/api`
+are `noindex` and disallowed in `robots.txt`. To lock everyone out, change `SESSION_SECRET`.
+
+**How publishing reaches the site:** the editor commits the Markdown file → the GitHub Action in
+`.github/workflows/build-site.yml` runs `php build.php` and commits the new `dist/` → Vercel
+deploys that commit. The same action also runs every morning (05:15 UTC), which is what makes
+articles with a future date appear on their day.
+
+### Writing an article by hand
+
+Create `content/insights/en/my-article.md` (the file name is the web address):
+
+```markdown
+---
+title: "Headline shown on the page"
+seo_title: "What people type into Google (optional)"
+date: 2026-09-25
+category: "Corporate & Commercial"
+excerpt: "One or two sentences for cards and Google results."
+tags: ["OHADA", "Douala"]
+translation: slug-of-the-french-version
+---
+
+The text, in Markdown. ## for a section heading, **bold**, - lists, > quotes, [links](https://…).
+```
+
+All fields are documented at the top of `includes/data-blog.php`.
+
+### The French version
+
+Every page exists in French under `/fr/` (`/fr/`, `/fr/practice/…`, `/fr/insights/…`), with an
+EN/FR switch in the header and `hreflang` links so Google shows each audience the right language.
+
+- Page templates: `fr/*.php` — same structure as the English files.
+- Data: `data-practice.fr.php`, `data-faq.fr.php`, and the `'fr'` key in `data-team.php`.
+- Interface wording (menus, buttons, footer, form messages): `includes/lang/fr.php`, keyed by the
+  English text. A string missing there simply shows in English.
+- Articles: `content/insights/fr/`. French and English articles are independent; link a pair with
+  `translation:` (or the editor's "Translation" field).
+
+### Cookie consent
+
+A bilingual consent banner appears on the first visit. Nothing optional loads before a choice:
+Google Analytics runs only after "Analytics" is accepted, and the Google Map on the contact page is
+replaced by a "Show the map" button until "Maps & embedded content" is accepted (Google sets its own cookies
+when the map loads). Visitors can change their mind at any time through **Cookie settings** in the
+footer; withdrawing analytics consent deletes the `_ga` cookies. The choice is stored in the
+browser (`fonju-consent`) and asked again if `version` in `window.FONJU_CONSENT`
+(`includes/header.php`) is increased. The privacy policy has a matching "Cookies" section.
 
 ---
 
@@ -126,6 +209,28 @@ broken image icon. Add real images whenever they are ready:
   inside the relevant `.figure-panel` in `index.php` or `about.php`.
 - **Social share card** — `assets/img/og-default.png` (1200×630) is generated from
   `assets/img/og-default.svg`. Edit the SVG and re-export if the branding changes.
+- **Home page hero photo** — a law-library photograph from Unsplash (free licence, no attribution
+  required), loaded from Unsplash's CDN. It is set in `style.css` on `.hero` (search for
+  `images.unsplash.com`). To use your own photo, put a wide JPG (about 2200 px, under 400 KB) in
+  `assets/img/` and change that URL to it; a photo of the firm's own office or library is better
+  still.
+
+### The logo (the Key F)
+
+The firm's mark is an antique key whose bit forms an F, with the scales of justice inside its ring.
+
+- **On the site** it is drawn inline by `brand_mark($height)` in `includes/functions.php`, used in the
+  header, the footer and the homepage office panel. The key takes the surrounding text colour; the
+  scales use the `.brand__scales` class (gold).
+- **Brand files** live in `assets/img/brand/`: the key in colour, reversed, black and white
+  (`fonju-key-*.svg`), the horizontal logo (`fonju-logo-horizontal*.svg`, uses the free Cinzel font),
+  and `fonju-logo-512.png`, the logo Google reads from the structured data.
+- **Icons**: `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`,
+  `icon-maskable-512.png`, listed in `assets/site.webmanifest`.
+- **Palette**: charcoal `#151416` for dark sections, old gold `#C39B53`, ivory `#F6F0E4`, and oxblood
+  `#5C1A1F` used sparingly — the key itself and the firm's name. In the stylesheet these are the
+  `--ink-*`, `--gold*`, `--bone*` and `--brand` tokens at the top of `style.css`.
+- **Type**: Cinzel for the name and main titles, EB Garamond for sub-headings and quotes, Inter for body text.
 
 ---
 
@@ -149,6 +254,13 @@ broken image icon. Add real images whenever they are ready:
   automatically. Submit it in Google Search Console.
 - `robots.txt` with sitemap reference and sensible disallows.
 - RSS feed at `/feed.xml`, linked from `<head>`.
+- English and French versions of every page, linked with `hreflang` (and `x-default`) in the pages
+  and in the sitemap.
+- `/llms.txt` ([llmstxt.org](https://llmstxt.org)): a plain-text summary of the firm, its practice
+  areas and its articles, generated by `llms.php`, so AI assistants (ChatGPT, Perplexity, Claude,
+  Gemini) can describe and cite the firm accurately. `robots.txt` welcomes their crawlers.
+- Optional `seo_title` per article, so the Google title can use the exact search phrase while the
+  headline keeps its editorial voice.
 - Semantic HTML with one `h1` per page and a correct heading hierarchy.
 - Descriptive `alt` text, `aria-label`s, skip link, visible focus rings, and full keyboard support
   for the menu and accordions.
@@ -241,7 +353,13 @@ git add -A && git commit -m "Rebuild static site" && git push
 
 From then on, every `git push` redeploys automatically.
 
-#### Root Directory: leave it blank, or set it to `dist` — both work
+#### Root Directory: leave it blank
+
+> **The article editor needs the blank (repository-root) setting.** Its `/api` functions live in
+> the repository's `api/` folder, which Vercel only deploys when the Root Directory is the
+> repository root. With `dist`, the public site still works but `/admin` cannot sign in.
+
+For the static pages alone, both settings work:
 
 Vercel reads `vercel.json` from **the project's root directory**, which is whatever the
 dashboard's *Root Directory* setting points at. That means the file has to exist in the right
@@ -304,13 +422,21 @@ better free route.
 
 ### Publishing a content change
 
-1. Edit the data file — a new article in `includes/data-blog.php`, say.
-2. Check it locally at <http://localhost/barrister-Ben/>.
-3. `php build.php`
-4. `git add -A && git commit -m "Add article on X" && git push`
+Articles: use `/admin` (section 3); nothing else is needed.
 
-Vercel redeploys within a minute. The sitemap, RSS feed, category filters and structured data
-all update on their own.
+Anything else:
+
+1. Edit the file — a practice area in `includes/data-practice.php`, say.
+2. Check it locally at <http://localhost/barrister-Ben/>.
+3. `git add -A && git commit -m "Update practice areas" && git push`
+
+The GitHub Action (`.github/workflows/build-site.yml`) runs `php build.php`, commits the new
+`dist/`, and Vercel deploys it, usually within two minutes. You can still run `php build.php`
+yourself before pushing; the action simply finds nothing to change. The sitemap, RSS feed,
+`llms.txt`, category filters and structured data all update on their own.
+
+In the repository's **Settings → Actions → General → Workflow permissions**, "Read and write
+permissions" must be allowed (the workflow also requests `contents: write` itself).
 
 ---
 
@@ -329,7 +455,9 @@ all update on their own.
 | `/contact.php` | Enquiry form, contact details, opening hours, map |
 | `/privacy.php`, `/legal-notice.php` | Legal pages |
 | `/404.php` | Custom not-found page with useful routes back |
-| `/sitemap.xml`, `/feed.xml` | Generated automatically |
+| `/sitemap.xml`, `/feed.xml`, `/llms.txt` | Generated automatically |
+| `/fr/…` | The French version of every page above |
+| `/admin` | The article editor (password-protected, not indexed) |
 
 ---
 

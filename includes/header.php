@@ -16,11 +16,18 @@ require_once __DIR__ . '/data-practice.php';
  *     'schema'      => [ ...additional JSON-LD graphs... ],
  *     'og_type'     => 'website' | 'article',
  *     'body_class'  => 'page-about',
+ *     'alternates'  => ['en' => 'post.php?p=x', 'fr' => null],  // optional
  *   ];
+ *
+ * 'alternates' names the same page in each language. By default a page's
+ * canonical path exists in both, which is true of every page except articles
+ * (their slugs differ, and not every article is translated). A null entry
+ * means "no translation": no hreflang is emitted for it, and the language
+ * switcher falls back to that language's article list.
  */
 $page = array_merge([
-    'title'       => SEO_DEFAULTS['title'],
-    'description' => SEO_DEFAULTS['description'],
+    'title'       => t(SEO_DEFAULTS['title']),
+    'description' => t(SEO_DEFAULTS['description']),
     'canonical'   => '',
     'breadcrumbs' => [],
     'schema'      => [],
@@ -28,10 +35,22 @@ $page = array_merge([
     'og_image'    => SEO_DEFAULTS['image'],
     'body_class'  => '',
     'noindex'     => false,
+    'alternates'  => [],
 ], $page ?? []);
 
 $canonicalUrl = abs_url($page['canonical']);
 $ogImageUrl   = abs_url(ltrim($page['og_image'], '/'));
+
+// The same page in each language (null = not translated).
+$alternates = [];
+foreach (LANGS as $altLang) {
+    $alternates[$altLang] = array_key_exists($altLang, $page['alternates'])
+        ? $page['alternates'][$altLang]
+        : $page['canonical'];
+}
+$otherLang     = is_fr() ? 'en' : 'fr';
+$switchHref    = url_in($alternates[$otherLang] ?? 'blog.php', $otherLang);
+$switchLabel   = $otherLang === 'fr' ? 'Français' : 'English';
 
 // ---------------------------------------------------------------------------
 // Organisation structured data — emitted on every page.
@@ -61,10 +80,16 @@ $organisationSchema = [
     'name'        => SITE_NAME,
     'legalName'   => SITE_LEGALNAME,
     'url'         => SITE_URL . '/',
-    'description' => SEO_DEFAULTS['description'],
+    'description' => t(SEO_DEFAULTS['description']),
     'foundingDate' => SITE_FOUNDED,
-    'slogan'      => SITE_TAGLINE,
+    'slogan'      => t(SITE_TAGLINE),
     'image'       => $ogImageUrl,
+    'logo'        => [
+        '@type'  => 'ImageObject',
+        'url'    => abs_url('assets/img/brand/fonju-logo-512.png'),
+        'width'  => 512,
+        'height' => 512,
+    ],
     'telephone'   => [CONTACT['phone_primary'], CONTACT['phone_secondary']],
     'email'       => CONTACT['email_general'],
     'priceRange'  => '$$',
@@ -105,11 +130,11 @@ $graph = [$organisationSchema, [
     'url'   => SITE_URL . '/',
     'name'  => SITE_NAME,
     'publisher' => ['@id' => SITE_URL . '/#organization'],
-    'inLanguage' => 'en',
+    'inLanguage' => ['en', 'fr'],
 ]];
 
 if ($page['breadcrumbs'] !== []) {
-    $items = [['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => SITE_URL . '/']];
+    $items = [['@type' => 'ListItem', 'position' => 1, 'name' => t('Home'), 'item' => abs_url('')]];
     foreach ($page['breadcrumbs'] as $i => $crumb) {
         $items[] = [
             '@type'    => 'ListItem',
@@ -131,7 +156,7 @@ $jsonLd = json_encode(
 );
 ?>
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="<?= e(lang_meta()['code']) ?>" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -142,23 +167,30 @@ $jsonLd = json_encode(
 <meta name="robots" content="noindex, follow">
 <?php else: ?>
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<?php foreach ($alternates as $altLang => $altPath): if ($altPath === null) continue; ?>
+<link rel="alternate" hreflang="<?= e($altLang) ?>" href="<?= e(abs_url_in($altPath, $altLang)) ?>">
+<?php endforeach; ?>
+<?php if ($alternates['en'] !== null): ?>
+<link rel="alternate" hreflang="x-default" href="<?= e(abs_url_in($alternates['en'], 'en')) ?>">
+<?php endif; ?>
 <?php endif; ?>
 <meta name="author" content="<?= e(SITE_NAME) ?>">
 <meta name="geo.region" content="CM-LT">
 <meta name="geo.placename" content="Douala">
-<meta name="theme-color" content="#0b1220">
+<meta name="theme-color" content="#151416">
 
 <!-- Open Graph -->
 <meta property="og:type" content="<?= e($page['og_type']) ?>">
 <meta property="og:site_name" content="<?= e(SITE_NAME) ?>">
-<meta property="og:locale" content="<?= e(SEO_DEFAULTS['locale']) ?>">
+<meta property="og:locale" content="<?= e(lang_meta()['locale']) ?>">
+<meta property="og:locale:alternate" content="<?= e(lang_meta($otherLang)['locale']) ?>">
 <meta property="og:title" content="<?= e($page['title']) ?>">
 <meta property="og:description" content="<?= e($page['description']) ?>">
 <meta property="og:url" content="<?= e($canonicalUrl) ?>">
 <meta property="og:image" content="<?= e($ogImageUrl) ?>">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="<?= e(SITE_NAME . ' — ' . SITE_TAGLINE) ?>">
+<meta property="og:image:alt" content="<?= e(SITE_NAME . ' — ' . t(SITE_TAGLINE)) ?>">
 
 <!-- X / Twitter -->
 <meta name="twitter:card" content="summary_large_image">
@@ -173,53 +205,64 @@ $jsonLd = json_encode(
 <?php endif; ?>
 
 <link rel="icon" href="<?= e(asset('img/favicon.svg')) ?>" type="image/svg+xml">
+<link rel="icon" href="<?= e(asset('img/favicon-32.png')) ?>" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="<?= e(asset('img/apple-touch-icon.png')) ?>">
+<link rel="manifest" href="<?= e(asset('site.webmanifest')) ?>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap">
-<link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>?v=1.0.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>?v=2.1.0">
 <link rel="alternate" type="application/rss+xml" title="<?= e(SITE_NAME) ?> Insights" href="<?= e(url('feed.php')) ?>">
 
 <script type="application/ld+json"><?= $jsonLd ?></script>
 <script>document.documentElement.classList.replace('no-js','js');</script>
-<?php if (GOOGLE_ANALYTICS_ID !== ''): ?>
-<script async src="https://www.googletagmanager.com/gtag/js?id=<?= e(GOOGLE_ANALYTICS_ID) ?>"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','<?= e(GOOGLE_ANALYTICS_ID) ?>');</script>
-<?php endif; ?>
+<?php
+/*
+ * Nothing that sets a cookie loads until the visitor agrees. Google Analytics
+ * is started by the consent manager in main.js, and only once the visitor has
+ * accepted analytics in the cookie banner (see includes/footer.php).
+ */
+?>
+<script>window.FONJU_CONSENT = <?= json_encode(['ga' => GOOGLE_ANALYTICS_ID, 'version' => 1], JSON_UNESCAPED_SLASHES) ?>;</script>
 </head>
 <body class="<?= e($page['body_class']) ?>">
 
-<a class="skip-link" href="#main">Skip to main content</a>
+<a class="skip-link" href="#main"><?= e(t('Skip to main content')) ?></a>
 
 <div class="topbar">
   <div class="wrap topbar__inner">
     <ul class="topbar__meta">
       <li><a href="<?= e(tel_href(CONTACT['phone_primary'])) ?>"><?= icon('phone', 14) ?><?= e(CONTACT['phone_primary']) ?></a></li>
       <li><a href="mailto:<?= e(CONTACT['email_general']) ?>"><?= icon('mail', 14) ?><?= e(CONTACT['email_general']) ?></a></li>
-      <li class="topbar__hours"><?= icon('clock', 14) ?>Mon–Fri 8:00–19:30 · Sat 8:00–12:00</li>
+      <li class="topbar__hours"><?= icon('clock', 14) ?><?= e(t('Mon–Fri 8:00–19:30 · Sat 8:00–12:00')) ?></li>
     </ul>
-    <?= social_links('socials socials--bar', 15) ?>
+    <div class="topbar__end">
+      <nav class="lang-switch" aria-label="<?= e(t('Language')) ?>">
+        <?php foreach (LANGS as $l): ?>
+          <?php if ($l === lang()): ?>
+            <span class="lang-switch__item is-current" aria-current="true"><?= e(strtoupper($l)) ?></span>
+          <?php else: ?>
+            <a class="lang-switch__item" href="<?= e($switchHref) ?>" hreflang="<?= e($l) ?>" lang="<?= e($l) ?>"
+               title="<?= e($switchLabel) ?>"><?= e(strtoupper($l)) ?></a>
+          <?php endif; ?>
+        <?php endforeach; ?>
+      </nav>
+      <?= social_links('socials socials--bar', 15) ?>
+    </div>
   </div>
 </div>
 
 <header class="site-header" id="siteHeader">
   <div class="wrap site-header__inner">
-    <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e(SITE_NAME) ?> — home">
-      <span class="brand__mark" aria-hidden="true">
-        <svg viewBox="0 0 44 44" width="44" height="44" role="presentation">
-          <rect x="1" y="1" width="42" height="42" rx="9" fill="none" stroke="currentColor" stroke-width="1.2" opacity=".45"/>
-          <path d="M22 8v28M13 14h18M15 20.5h10" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/>
-          <path d="M13 14 8.5 24h9zM31 14l-4.5 10h9z" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
-          <path d="M16.5 36h11" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-        </svg>
-      </span>
+    <a class="brand" href="<?= e(url('/')) ?>" aria-label="<?= e(SITE_NAME . ' — ' . t('home')) ?>">
+      <span class="brand__mark" aria-hidden="true"><?= brand_mark(56) ?></span>
       <span class="brand__text">
-        <span class="brand__name">Fonju<em>Law Firm</em></span>
-        <span class="brand__sub">Douala · Cameroon</span>
+        <span class="brand__name">Fonju</span>
+        <span class="brand__sub"><?= e(t('Law Firm · Douala')) ?></span>
       </span>
     </a>
 
-    <nav class="nav" id="primaryNav" aria-label="Primary">
+    <nav class="nav" id="primaryNav" aria-label="<?= e(t('Primary')) ?>">
       <ul class="nav__list">
         <?php foreach (nav_items() as $item): ?>
           <?php
@@ -241,10 +284,13 @@ $jsonLd = json_encode(
 
     <div class="site-header__actions">
       <a class="btn btn--gold btn--sm" href="<?= e(url('contact.php')) ?>#consultation">
-        Book a Consultation <?= icon('arrow', 16) ?>
+        <?= e(t('Book a Consultation')) ?> <?= icon('arrow', 16) ?>
       </a>
+      <a class="lang-pill" href="<?= e($switchHref) ?>" hreflang="<?= e($otherLang) ?>" lang="<?= e($otherLang) ?>"
+         aria-label="<?= e($switchLabel) ?>"><?= e(strtoupper($otherLang)) ?></a>
       <button class="nav-toggle" id="navToggle" type="button"
-              aria-expanded="false" aria-controls="mobileNav" aria-label="Open menu">
+              aria-expanded="false" aria-controls="mobileNav" aria-label="<?= e(t('Open menu')) ?>"
+              data-label-open="<?= e(t('Open menu')) ?>" data-label-close="<?= e(t('Close menu')) ?>">
         <span class="nav-toggle__bar"></span>
         <span class="nav-toggle__bar"></span>
         <span class="nav-toggle__bar"></span>
@@ -267,8 +313,9 @@ $jsonLd = json_encode(
       <?php endforeach; ?>
     </ul>
     <div class="mobile-nav__foot">
-      <a class="btn btn--gold btn--block" href="<?= e(url('contact.php')) ?>#consultation">Book a Consultation</a>
+      <a class="btn btn--gold btn--block" href="<?= e(url('contact.php')) ?>#consultation"><?= e(t('Book a Consultation')) ?></a>
       <a class="mobile-nav__call" href="<?= e(tel_href(CONTACT['phone_primary'])) ?>"><?= icon('phone', 16) ?> <?= e(CONTACT['phone_primary']) ?></a>
+      <a class="mobile-nav__lang" href="<?= e($switchHref) ?>" hreflang="<?= e($otherLang) ?>" lang="<?= e($otherLang) ?>"><?= icon('globe', 16) ?> <?= e($switchLabel) ?></a>
       <?= social_links('socials socials--mobile', 20) ?>
     </div>
   </div>

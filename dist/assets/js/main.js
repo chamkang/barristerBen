@@ -24,7 +24,7 @@
   if (toggle && mobileNav) {
     var closeMenu = function () {
       toggle.setAttribute('aria-expanded', 'false');
-      toggle.setAttribute('aria-label', 'Open menu');
+      toggle.setAttribute('aria-label', toggle.getAttribute('data-label-open') || 'Open menu');
       mobileNav.hidden = true;
       document.body.classList.remove('is-locked');
     };
@@ -35,7 +35,7 @@
         closeMenu();
       } else {
         toggle.setAttribute('aria-expanded', 'true');
-        toggle.setAttribute('aria-label', 'Close menu');
+        toggle.setAttribute('aria-label', toggle.getAttribute('data-label-close') || 'Close menu');
         mobileNav.hidden = false;
         document.body.classList.add('is-locked');
       }
@@ -232,7 +232,7 @@
       var url = button.getAttribute('data-copy-link') || window.location.href;
       var done = function () {
         var original = button.getAttribute('aria-label');
-        button.setAttribute('aria-label', 'Link copied');
+        button.setAttribute('aria-label', button.getAttribute('data-copied-label') || 'Link copied');
         button.classList.add('is-copied');
         setTimeout(function () {
           button.setAttribute('aria-label', original);
@@ -272,4 +272,152 @@
   document.querySelectorAll('.marquee__track').forEach(function (track) {
     track.innerHTML += track.innerHTML;
   });
+
+  /* ---------------------------------------------------------- Cookie consent
+     Optional categories: "analytics" (Google Analytics, only when an ID is
+     configured in includes/config.php) and "media" (the Google Map). Nothing
+     in either category loads until the visitor agrees. The choice is kept in
+     localStorage under "fonju-consent"; bumping `version` in header.php asks
+     every visitor again. */
+  var CONSENT_KEY = 'fonju-consent';
+  var consentCfg = window.FONJU_CONSENT || { ga: '', version: 1 };
+  var banner = document.getElementById('consent');
+
+  var readConsent = function () {
+    try {
+      var data = JSON.parse(localStorage.getItem(CONSENT_KEY) || 'null');
+      return data && data.version === consentCfg.version ? data : null;
+    } catch (e) {
+      return null;
+    }
+  };
+
+  var writeConsent = function (choice) {
+    choice.version = consentCfg.version;
+    choice.date = new Date().toISOString();
+    try { localStorage.setItem(CONSENT_KEY, JSON.stringify(choice)); } catch (e) { /* private mode: applies to this page only */ }
+    return choice;
+  };
+
+  var gaLoaded = false;
+  var loadAnalytics = function () {
+    if (gaLoaded || !consentCfg.ga) return;
+    gaLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', consentCfg.ga);
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(consentCfg.ga);
+    document.head.appendChild(script);
+  };
+
+  var loadEmbeds = function () {
+    document.querySelectorAll('[data-consent-embed="media"]:not(.is-loaded)').forEach(function (box) {
+      var frame = document.createElement('iframe');
+      frame.src = box.getAttribute('data-embed-src');
+      frame.title = box.getAttribute('data-embed-title') || '';
+      frame.loading = 'lazy';
+      frame.referrerPolicy = 'no-referrer-when-downgrade';
+      frame.allowFullscreen = true;
+      box.innerHTML = '';
+      box.appendChild(frame);
+      box.classList.add('is-loaded');
+    });
+  };
+
+  var applyConsent = function (choice) {
+    if (choice && choice.analytics) loadAnalytics();
+    if (choice && choice.media) loadEmbeds();
+  };
+
+  if (banner) {
+    var choicesBox = document.getElementById('consentChoices');
+    var saveBtn = banner.querySelector('[data-consent="save"]');
+    var moreBtn = banner.querySelector('[data-consent="customise"]');
+    var boxes = banner.querySelectorAll('[data-consent-category]');
+
+    var setCustomise = function (open) {
+      choicesBox.hidden = !open;
+      saveBtn.hidden = !open;
+      moreBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+
+    var showBanner = function (current) {
+      boxes.forEach(function (box) {
+        box.checked = !!(current && current[box.getAttribute('data-consent-category')]);
+      });
+      banner.hidden = false;
+    };
+
+    var decide = function (choice) {
+      var previous = readConsent();
+      var saved = writeConsent(choice);
+      banner.hidden = true;
+
+      // Withdrawing analytics after it has run: clear its cookies and reload,
+      // which is the only way to stop a script that has already started.
+      if (previous && previous.analytics && !saved.analytics && gaLoaded) {
+        document.cookie.split(';').forEach(function (cookie) {
+          var name = cookie.split('=')[0].trim();
+          if (/^_ga/.test(name)) {
+            document.cookie = name + '=; Max-Age=0; path=/';
+            document.cookie = name + '=; Max-Age=0; path=/; domain=.' + location.hostname.replace(/^www\./, '');
+          }
+        });
+        location.reload();
+        return;
+      }
+
+      applyConsent(saved);
+    };
+
+    banner.addEventListener('click', function (event) {
+      var button = event.target.closest('[data-consent]');
+      if (!button) return;
+
+      switch (button.getAttribute('data-consent')) {
+        case 'accept':
+          decide({ analytics: true, media: true });
+          break;
+        case 'reject':
+          decide({ analytics: false, media: false });
+          break;
+        case 'customise':
+          setCustomise(choicesBox.hidden);
+          break;
+        case 'save':
+          var choice = { analytics: false, media: false };
+          boxes.forEach(function (box) { choice[box.getAttribute('data-consent-category')] = box.checked; });
+          decide(choice);
+          break;
+      }
+    });
+
+    // "Cookie settings" in the footer reopens the banner with the choices shown.
+    document.querySelectorAll('[data-cookie-settings]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        setCustomise(true);
+        showBanner(readConsent());
+        banner.querySelector('button').focus();
+      });
+    });
+
+    // "Show the map" records consent for that category only.
+    document.querySelectorAll('[data-consent-load]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var current = readConsent() || { analytics: false, media: false };
+        current[button.getAttribute('data-consent-load')] = true;
+        decide(current);
+      });
+    });
+
+    var stored = readConsent();
+    if (stored) {
+      applyConsent(stored);
+    } else {
+      showBanner(null);
+    }
+  }
 })();

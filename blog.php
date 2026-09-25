@@ -76,22 +76,7 @@ require __DIR__ . '/includes/page-hero.php';
 
     <div class="grid grid--3">
       <?php foreach ($filtered as $i => $post): ?>
-        <article class="post-card reveal<?= ($i === 0 && $activeCat === '') ? ' post-card--featured' : '' ?>" data-delay="<?= $i % 3 + 1 ?>">
-          <div class="post-card__cover">
-            <span class="post-card__cat"><?= e($post['category']) ?></span>
-            <?= icon('doc', 46) ?>
-          </div>
-          <div class="post-card__body">
-            <p class="post-card__meta">
-              <span><time datetime="<?= e($post['date']) ?>"><?= e(date('j F Y', strtotime($post['date']))) ?></time></span>
-              <span><?= reading_time($post['body']) ?> min read</span>
-              <span><?= e($post['author']) ?></span>
-            </p>
-            <h2 class="post-card__title"><a href="<?= e(url('post.php?p=' . $post['slug'])) ?>"><?= e($post['title']) ?></a></h2>
-            <p><?= e($post['excerpt']) ?></p>
-            <a class="link-arrow" href="<?= e(url('post.php?p=' . $post['slug'])) ?>">Read the article <?= icon('arrow', 15) ?></a>
-          </div>
-        </article>
+        <?= post_card($post, $i % 3 + 1, $i === 0 && $activeCat === '', 'h2') ?>
       <?php endforeach; ?>
     </div>
 

@@ -5,86 +5,7 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/data-practice.php';
 
-/* ---------------------------------------------------------------------------
-   Enquiry form handling
-   ---------------------------------------------------------------------------
-   Submissions are e-mailed to FORM_RECIPIENT and, in every case, appended to
-   storage/enquiries.log so that nothing is lost if the mail transport is not
-   configured (which is the default on a fresh XAMPP install).
---------------------------------------------------------------------------- */
-// Start the session before any output so the CSRF cookie can be set.
-$csrf      = csrf_token();
-
-$errors    = [];
-$sent      = false;
-$mailIssue = false;
-$values    = ['name' => '', 'email' => '', 'phone' => '', 'subject' => '', 'message' => ''];
-
-if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
-    foreach (array_keys($values) as $field) {
-        $values[$field] = trim((string) ($_POST[$field] ?? ''));
-    }
-
-    // Honeypot: a real person never fills a field they cannot see.
-    $trapped = trim((string) ($_POST['website'] ?? '')) !== '';
-
-    if (!csrf_valid($_POST['csrf'] ?? null)) {
-        $errors[] = 'Your session expired before the form was submitted. Please try again.';
-    }
-    if ($values['name'] === '') {
-        $errors[] = 'Please tell us your name.';
-    }
-    if ($values['email'] === '' || !filter_var($values['email'], FILTER_VALIDATE_EMAIL)) {
-        $errors[] = 'Please give a valid e-mail address so we can reply.';
-    }
-    if (mb_strlen($values['message']) < 20) {
-        $errors[] = 'Please describe your situation in a little more detail (at least 20 characters).';
-    }
-    if (empty($_POST['consent'])) {
-        $errors[] = 'Please confirm you understand how we handle your enquiry.';
-    }
-
-    if ($errors === [] && !$trapped) {
-        $subjectLine = $values['subject'] !== '' ? $values['subject'] : 'General enquiry';
-
-        $body = "New enquiry from the website\n"
-              . str_repeat('-', 46) . "\n"
-              . 'Name:    ' . $values['name'] . "\n"
-              . 'E-mail:  ' . $values['email'] . "\n"
-              . 'Phone:   ' . ($values['phone'] !== '' ? $values['phone'] : 'not given') . "\n"
-              . 'Subject: ' . $subjectLine . "\n"
-              . 'Time:    ' . date('Y-m-d H:i:s') . "\n"
-              . 'IP:      ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown') . "\n"
-              . str_repeat('-', 46) . "\n\n"
-              . $values['message'] . "\n";
-
-        // Always keep a local copy.
-        $storage = __DIR__ . '/storage';
-        if (!is_dir($storage)) {
-            @mkdir($storage, 0775, true);
-        }
-        @file_put_contents($storage . '/enquiries.log', $body . "\n" . str_repeat('=', 60) . "\n\n", FILE_APPEND | LOCK_EX);
-
-        $headers = [
-            'From: ' . SITE_NAME . ' Website <' . FORM_RECIPIENT . '>',
-            'Reply-To: ' . $values['name'] . ' <' . $values['email'] . '>',
-            'Content-Type: text/plain; charset=UTF-8',
-            'X-Mailer: PHP/' . PHP_VERSION,
-        ];
-
-        $delivered = @mail(FORM_RECIPIENT, FORM_SUBJECT . ' — ' . $subjectLine, $body, implode("\r\n", $headers));
-
-        $sent      = true;
-        $mailIssue = !$delivered;
-        $values    = array_fill_keys(array_keys($values), '');
-    }
-
-    if ($trapped) {
-        // Silently accept, so the bot learns nothing.
-        $sent   = true;
-        $values = array_fill_keys(array_keys($values), '');
-    }
-}
+require __DIR__ . '/includes/contact-handler.php';
 
 $page = [
     'title'       => 'Contact Fonju Law Firm | Lawyers in Akwa, Douala, Cameroon',
@@ -241,9 +162,9 @@ require __DIR__ . '/includes/page-hero.php';
             <span>
               <strong style="color:#fff;">Office</strong><br>
               <?= e(CONTACT['street']) ?><br>
-              <?= e(CONTACT['po_box']) ?><br>
-              <?= e(CONTACT['city']) ?>, <?= e(CONTACT['region']) ?><br>
-              <?= e(CONTACT['country']) ?>
+              <?= e(contact('po_box')) ?><br>
+              <?= e(contact('city')) ?>, <?= e(contact('region')) ?><br>
+              <?= e(contact('country')) ?>
             </span>
           </li>
           <li>
@@ -266,7 +187,7 @@ require __DIR__ . '/includes/page-hero.php';
             <?= icon('clock', 18) ?>
             <span>
               <strong style="color:#fff;">Opening hours</strong><br>
-              <?php foreach (OPENING_HOURS as $slot): ?>
+              <?php foreach (opening_hours() as $slot): ?>
                 <?= e($slot['days']) ?>: <?= e($slot['hours']) ?><br>
               <?php endforeach; ?>
             </span>
@@ -306,14 +227,7 @@ require __DIR__ . '/includes/page-hero.php';
       </p>
     </div>
 
-    <div class="map-frame reveal">
-      <iframe
-        title="Map showing the location of Fonju Law Firm in Akwa, Douala"
-        src="https://www.google.com/maps?q=<?= e(CONTACT['map_query']) ?>&amp;output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
-    </div>
+    <?php require __DIR__ . '/includes/map-embed.php'; ?>
   </div>
 </section>
 

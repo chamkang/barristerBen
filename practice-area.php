@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 require_once __DIR__ . '/includes/data-practice.php';
+require_once __DIR__ . '/includes/data-blog.php';
 
 $slug = isset($_GET['area']) ? preg_replace('/[^a-z0-9-]/', '', strtolower((string) $_GET['area'])) : '';
 $area = $slug === '' ? null : practice_area($slug);
@@ -55,6 +56,8 @@ $hero = [
     'lede'    => e($area['short']),
 ];
 require __DIR__ . '/includes/page-hero.php';
+
+$areaPosts = practice_posts($area['slug']);
 
 $related = array_values(array_filter(
     practice_areas(),
@@ -110,6 +113,17 @@ $related = array_values(array_filter(
           <?= icon('whatsapp', 17) ?> Message on WhatsApp
         </a>
       </div>
+
+      <?php if ($areaPosts !== []): ?>
+        <div class="sidebar__box">
+          <h3>Our articles on this subject</h3>
+          <ul class="sidebar__list">
+            <?php foreach ($areaPosts as $ap): ?>
+              <li><a href="<?= e(url('post.php?p=' . $ap['slug'])) ?>"><?= e($ap['title']) ?></a></li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      <?php endif; ?>
 
       <?php if ($related !== []): ?>
         <div class="sidebar__box">

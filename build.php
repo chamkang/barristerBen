@@ -57,29 +57,45 @@ require_once $bldRoot . '/includes/data-faq.php';
 require_once $bldRoot . '/includes/data-team.php';
 
 // ---------------------------------------------------------------------------
-// Routes: [script, $_GET, output path]
+// Routes: [script, $_GET, output path, language]
+// French pages are the templates in fr/, published under /fr/.
 // ---------------------------------------------------------------------------
 $bldRoutes = [
-    ['index.php',          [], 'index.html'],
-    ['about.php',          [], 'about.html'],
-    ['practice-areas.php', [], 'practice-areas.html'],
-    ['team.php',           [], 'team.html'],
-    ['blog.php',           [], 'blog.html'],
-    ['faq.php',            [], 'faq.html'],
-    ['contact.php',        [], 'contact.html'],
-    ['privacy.php',        [], 'privacy.html'],
-    ['legal-notice.php',   [], 'legal-notice.html'],
-    ['404.php',            [], '404.html'],
-    ['sitemap.php',        [], 'sitemap.xml'],
-    ['feed.php',           [], 'feed.xml'],
+    ['index.php',          [], 'index.html', 'en'],
+    ['about.php',          [], 'about.html', 'en'],
+    ['practice-areas.php', [], 'practice-areas.html', 'en'],
+    ['team.php',           [], 'team.html', 'en'],
+    ['blog.php',           [], 'blog.html', 'en'],
+    ['faq.php',            [], 'faq.html', 'en'],
+    ['contact.php',        [], 'contact.html', 'en'],
+    ['privacy.php',        [], 'privacy.html', 'en'],
+    ['legal-notice.php',   [], 'legal-notice.html', 'en'],
+    ['404.php',            [], '404.html', 'en'],
+    ['sitemap.php',        [], 'sitemap.xml', 'en'],
+    ['feed.php',           [], 'feed.xml', 'en'],
+    ['llms.php',           [], 'llms.txt', 'en'],
+
+    ['fr/index.php',          [], 'fr/index.html', 'fr'],
+    ['fr/about.php',          [], 'fr/about.html', 'fr'],
+    ['fr/practice-areas.php', [], 'fr/practice-areas.html', 'fr'],
+    ['fr/team.php',           [], 'fr/team.html', 'fr'],
+    ['fr/blog.php',           [], 'fr/blog.html', 'fr'],
+    ['fr/faq.php',            [], 'fr/faq.html', 'fr'],
+    ['fr/contact.php',        [], 'fr/contact.html', 'fr'],
+    ['fr/privacy.php',        [], 'fr/privacy.html', 'fr'],
+    ['fr/legal-notice.php',   [], 'fr/legal-notice.html', 'fr'],
 ];
 
-foreach (practice_areas() as $bldArea) {
-    $bldRoutes[] = ['practice-area.php', ['area' => $bldArea['slug']], 'practice/' . $bldArea['slug'] . '.html'];
+foreach (practice_areas_en() as $bldArea) {
+    $bldRoutes[] = ['practice-area.php', ['area' => $bldArea['slug']], 'practice/' . $bldArea['slug'] . '.html', 'en'];
+    $bldRoutes[] = ['fr/practice-area.php', ['area' => $bldArea['slug']], 'fr/practice/' . $bldArea['slug'] . '.html', 'fr'];
 }
 
-foreach (blog_posts() as $bldPost) {
-    $bldRoutes[] = ['post.php', ['p' => $bldPost['slug']], 'insights/' . $bldPost['slug'] . '.html'];
+foreach (blog_posts('en') as $bldPost) {
+    $bldRoutes[] = ['post.php', ['p' => $bldPost['slug']], 'insights/' . $bldPost['slug'] . '.html', 'en'];
+}
+foreach (blog_posts('fr') as $bldPost) {
+    $bldRoutes[] = ['fr/post.php', ['p' => $bldPost['slug']], 'fr/insights/' . $bldPost['slug'] . '.html', 'fr'];
 }
 
 unset($bldArea, $bldPost);
@@ -200,16 +216,19 @@ mkdir($bldDist, 0775, true);
 $bldCount = 0;
 
 foreach ($bldRoutes as $bldRoute) {
-    [$bldScript, $bldQuery, $bldTarget] = $bldRoute;
+    [$bldScript, $bldQuery, $bldTarget, $bldLang] = $bldRoute;
 
     $_GET     = $bldQuery;
     $_REQUEST = $bldQuery;
 
     // is_current() compares against SCRIPT_NAME, so it has to change per page
     // or every rendered page marks "Home" as the active nav item. BASE_PATH was
-    // already resolved from the first include and stays '' — all scripts sit at
-    // the document root, so dirname() is '/' either way.
+    // already resolved from the first include and stays ''.
     $_SERVER['SCRIPT_NAME'] = '/' . $bldScript;
+
+    // French templates switch the language themselves; English ones rely on
+    // the default, so reset it between pages.
+    set_lang($bldLang);
 
     // Each page assigns its own $page / $hero, but clear them first so a stale
     // value can never leak from the previously rendered page.
@@ -217,7 +236,13 @@ foreach ($bldRoutes as $bldRoute) {
 
     ob_start();
     include $bldRoot . '/' . $bldScript;
-    $bldHtml = $bldRewriteDoc((string) ob_get_clean());
+    $bldHtml = (string) ob_get_clean();
+
+    // Plain-text output (llms.txt) has URLs in the text rather than in
+    // attributes, so rewrite every absolute URL of our own.
+    $bldHtml = str_ends_with($bldTarget, '.txt')
+        ? (string) preg_replace_callback('~' . preg_quote(SITE_URL, '~') . '[^\s)]*~', static fn(array $m): string => $bldRewriteUrl($m[0]), $bldHtml)
+        : $bldRewriteDoc($bldHtml);
 
     $bldPath = $bldDist . '/' . $bldTarget;
     if (!is_dir(dirname($bldPath))) {
@@ -230,10 +255,12 @@ foreach ($bldRoutes as $bldRoute) {
     $bldLog[] = sprintf('  %-52s %6.1f KB', $bldTarget, strlen($bldHtml) / 1024);
 }
 
-unset($bldRoute, $bldScript, $bldQuery, $bldTarget, $bldHtml, $bldPath);
+unset($bldRoute, $bldScript, $bldQuery, $bldTarget, $bldLang, $bldHtml, $bldPath);
+set_lang('en');
 
-// Static assets and root files
-$bldAssets = $bldCopyTree($bldRoot . '/assets', $bldDist . '/assets');
+// Static assets, the article admin and root files
+$bldAssets  = $bldCopyTree($bldRoot . '/assets', $bldDist . '/assets');
+$bldAssets += $bldCopyTree($bldRoot . '/admin', $bldDist . '/admin');
 copy($bldRoot . '/robots.txt', $bldDist . '/robots.txt');
 
 /**

@@ -23,6 +23,9 @@ ErrorDocument 404 /404.php
   # Serve the RSS feed at /feed.xml as well as /feed.php.
   RewriteRule ^feed\.xml$ feed.php [L]
 
+  # Plain-language summary for AI assistants (https://llmstxt.org).
+  RewriteRule ^llms\.txt$ llms.php [L]
+
   # ---------------------------------------------------------------------------
   # OPTIONAL — force HTTPS in production. Uncomment once your SSL certificate
   # is installed, otherwise you will lock yourself out of a plain-HTTP site.

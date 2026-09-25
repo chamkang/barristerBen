@@ -17,6 +17,7 @@ $page = [
     'noindex'     => true,
     'body_class'  => 'page-404',
     'hide_cta'    => true,
+    'alternates'  => ['en' => '', 'fr' => ''],
 ];
 
 require __DIR__ . '/includes/header.php';

@@ -9,9 +9,9 @@ $hero = array_merge(['eyebrow' => '', 'title' => '', 'lede' => '', 'aside' => ''
 <section class="page-hero">
   <div class="wrap">
     <?php if (!empty($page['breadcrumbs'])): ?>
-      <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <nav class="breadcrumbs" aria-label="<?= e(t('Breadcrumb')) ?>">
         <ol>
-          <li><a href="<?= e(url('/')) ?>">Home</a></li>
+          <li><a href="<?= e(url('/')) ?>"><?= e(t('Home')) ?></a></li>
           <?php
           $last = count($page['breadcrumbs']) - 1;
           foreach ($page['breadcrumbs'] as $i => $crumb): ?>

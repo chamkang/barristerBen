@@ -17,7 +17,7 @@ require __DIR__ . '/includes/header.php';
 $hero = [
     'eyebrow' => 'Legal',
     'title'   => 'Privacy Policy',
-    'lede'    => 'How we handle the personal information you give us through this website. Last reviewed ' . date('F Y') . '.',
+    'lede'    => 'How we handle the personal information you give us through this website. Last reviewed ' . fmt_month() . '.',
 ];
 require __DIR__ . '/includes/page-hero.php';
 ?>
@@ -108,12 +108,22 @@ require __DIR__ . '/includes/page-hero.php';
         will respond promptly.
       </p>
 
-      <h2>Cookies and analytics</h2>
+      <h2 id="cookies">Cookies and analytics</h2>
       <p>
-        This website uses no advertising or tracking cookies. If website analytics is enabled, it is
-        used only to understand which pages are useful, in aggregate. Embedded content such as the
-        map on our contact page is served by a third party which may set its own cookies; you can
-        block those in your browser settings.
+        This website sets no advertising cookies. Apart from a strictly necessary security cookie
+        that may be used when you submit the contact form, it sets no cookies of its own. Two
+        optional features can involve third-party cookies, and neither loads until you agree in the
+        cookie banner:
+      </p>
+      <ul>
+        <li><strong>Analytics</strong> &mdash; where enabled, Google Analytics tells us, in aggregate,
+          which pages are read, so we can improve the site. It is not used for advertising.</li>
+        <li><strong>Maps &amp; embedded content</strong> &mdash; the Google Map on our contact page,
+          which Google serves from its own servers and which may set Google cookies.</li>
+      </ul>
+      <p>
+        Your choice is stored in your browser, not on our servers, and you can change it at any
+        time using the &ldquo;Cookie settings&rdquo; link at the foot of every page.
       </p>
 
       <h2>Changes</h2>

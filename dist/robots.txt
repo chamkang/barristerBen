@@ -1,6 +1,11 @@
 # =============================================================================
 # robots.txt — Fonju Law Firm
 # Update the Sitemap line if you deploy to a different domain.
+#
+# Every crawler is welcome, including the search and AI assistants' crawlers
+# (Googlebot, Bingbot, OAI-SearchBot, GPTBot, PerplexityBot, ClaudeBot...):
+# being readable by them is how the firm gets cited in AI answers.
+# A plain-language summary of the firm for AI assistants is at /llms.txt.
 # =============================================================================
 
 User-agent: *
@@ -10,8 +15,14 @@ Allow: /
 Disallow: /includes/
 Disallow: /storage/
 Disallow: /404.php
+Disallow: /fr/404.php
+
+# The article editor and its API
+Disallow: /admin
+Disallow: /api/
 
 # Filtered listings duplicate the main article list
 Disallow: /blog.php?category=
+Disallow: /fr/blog.php?category=
 
 Sitemap: https://fonjulawfirm.com/sitemap.xml

@@ -1,54 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0a1220"/>
-      <stop offset="0.55" stop-color="#0d1728"/>
-      <stop offset="1" stop-color="#101f36"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="0.82" cy="0.12" r="0.75">
-      <stop offset="0" stop-color="#c9a961" stop-opacity="0.30"/>
-      <stop offset="1" stop-color="#c9a961" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#e3cb92"/>
-      <stop offset="0.5" stop-color="#c9a961"/>
-      <stop offset="1" stop-color="#a5822f"/>
-    </linearGradient>
-    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#c9a961"/>
-      <stop offset="1" stop-color="#c9a961" stop-opacity="0"/>
-    </linearGradient>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#121113"/><stop offset="1" stop-color="#2a292e"/></linearGradient>
+    <radialGradient id="glow" cx="0.22" cy="0.5" r="0.5"><stop offset="0" stop-color="#C39B53" stop-opacity="0.22"/><stop offset="1" stop-color="#C39B53" stop-opacity="0"/></radialGradient>
   </defs>
-
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
-
-  <g stroke="#ffffff" stroke-opacity="0.05" stroke-width="1">
-    <path d="M150 0v630M350 0v630M550 0v630M750 0v630M950 0v630"/>
-  </g>
-
-  <!-- Scales mark -->
-  <svg x="860" y="150" width="260" height="260" viewBox="0 0 64 64" opacity="0.5">
-    <g stroke="#c9a961" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M32 10v44"/>
-      <path d="M16 19h32"/>
-      <path d="M21 54h22"/>
-      <path d="M16 19 8 35h16z"/>
-      <path d="M48 19 40 35h16z"/>
-    </g>
-  </svg>
-
-  <g font-family="Georgia, 'Times New Roman', serif" fill="#ffffff">
-    <text x="86" y="248" font-size="82" font-weight="700" letter-spacing="-2">Fonju Law Firm</text>
-  </g>
-
-  <rect x="86" y="286" width="150" height="3" rx="1.5" fill="url(#rule)"/>
-
-  <g font-family="Helvetica, Arial, sans-serif">
-    <text x="86" y="352" font-size="34" fill="#ffffff" fill-opacity="0.82">Corporate &amp; commercial law in Cameroon</text>
-    <text x="86" y="404" font-size="26" fill="#ffffff" fill-opacity="0.55">Douala · CEMAC · OHADA · English &amp; French</text>
-
-    <text x="86" y="536" font-size="19" fill="#c9a961" letter-spacing="4">ADVOCATES &amp; SOLICITORS · REPUBLIC OF CAMEROON</text>
-    <text x="86" y="574" font-size="19" fill="#ffffff" fill-opacity="0.45">fonjulawfirm.com</text>
-  </g>
+  <rect x="28" y="28" width="1144" height="574" fill="none" stroke="#C39B53" stroke-opacity="0.45" stroke-width="1.5"/>
+  <rect x="38" y="38" width="1124" height="554" fill="none" stroke="#C39B53" stroke-opacity="0.18" stroke-width="1"/>
+  <svg x="150" y="105" width="240" height="420" viewBox="52 14 104 182"><path d="M80 20 H150 V42 H138 V34 H130 V42 H96 V66 H132 V86 H96 V132 H80 Z" fill="#F6F0E4"/><rect x="74" y="98" width="28" height="7" rx="2" fill="#F6F0E4"/><rect x="74" y="124" width="28" height="7" rx="2" fill="#F6F0E4"/><circle cx="88" cy="160" r="26" fill="none" stroke="#F6F0E4" stroke-width="10"/><path d="M80 131 H96 L94 136 H82 Z" fill="#F6F0E4"/><path d="M84 26 H146 M84 70 H128" stroke="#151416" stroke-width="1.3"/><path d="M88 108 V120" stroke="#151416" stroke-width="1.3"/><path d="M88 146 V172 M80 174 H96" stroke="#C39B53" stroke-width="2.6" stroke-linecap="round"/><path d="M74 150 H102" stroke="#C39B53" stroke-width="2.4" stroke-linecap="round"/><circle cx="88" cy="146" r="2.4" fill="#C39B53"/><path d="M76 150 L72 160 M76 150 L80 160 M100 150 L96 160 M100 150 L104 160" stroke="#C39B53" stroke-width="1.1"/><path d="M70 160 H82 Q80 165 76 165 Q72 165 70 160 Z M94 160 H106 Q104 165 100 165 Q96 165 94 160 Z" fill="#C39B53"/></svg>
+  <rect x="452" y="150" width="2" height="330" fill="#C39B53" opacity="0.6"/>
+  <text x="506" y="292" font-family="Cinzel, Georgia, serif" font-weight="700" font-size="112" letter-spacing="18" fill="#F6F0E4">FONJU</text>
+  <rect x="510" y="330" width="70" height="2" fill="#C39B53"/>
+  <text x="600" y="340" font-family="Cinzel, Georgia, serif" font-weight="600" font-size="28" letter-spacing="11" fill="#C39B53">LAW FIRM</text>
+  <rect x="822" y="330" width="70" height="2" fill="#C39B53"/>
+  <text x="508" y="412" font-family="'EB Garamond', Georgia, serif" font-style="italic" font-weight="500" font-size="36" fill="#F6F0E4" fill-opacity="0.88">Corporate &amp; commercial law in Cameroon</text>
+  <text x="508" y="462" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="21" letter-spacing="3" fill="#F6F0E4" fill-opacity="0.6">DOUALA · CEMAC · OHADA · ENGLISH &amp; FRENCH</text>
+  <text x="508" y="540" font-family="Inter, Arial, sans-serif" font-weight="600" font-size="20" letter-spacing="2" fill="#C39B53">fonjulawfirm.com</text>
 </svg>

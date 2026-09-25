@@ -18,10 +18,31 @@ declare(strict_types=1);
  *   services  Bullet list of concrete deliverables
  *   sections  Sub-headings with body copy
  *   featured  Shown in the "flagship" grid on the home page
+ *
+ * French: the translated title, group, short, intro, services and sections of
+ * each area are in data-practice.fr.php, keyed by slug. When you add or edit
+ * an area here, update its French entry too; an area with no French entry
+ * falls back to English on the French site.
  * ---------------------------------------------------------------------------
  */
 
 function practice_areas(): array
+{
+    static $fr = null;
+
+    $areas = practice_areas_en();
+
+    if (!is_fr()) {
+        return $areas;
+    }
+
+    $fr ??= require __DIR__ . '/data-practice.fr.php';
+
+    return array_map(static fn(array $a): array => array_replace($a, $fr[$a['slug']] ?? []), $areas);
+}
+
+/** The master list, in English. */
+function practice_areas_en(): array
 {
     return [
 

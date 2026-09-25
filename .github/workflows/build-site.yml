@@ -1,0 +1,53 @@
+# Rebuilds the static site (dist/) whenever the content or source changes,
+# including every article published from the /admin editor, and commits the
+# result. Vercel then deploys that commit automatically.
+#
+# It also runs once a day, so an article dated in the future appears on its
+# publication date and the sitemap stays current.
+
+name: Build static site
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'dist/**'
+  schedule:
+    - cron: '15 5 * * *'   # 06:15 in Douala (UTC+1)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-site
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, dom
+          coverage: none
+
+      - name: Build dist/
+        run: php build.php
+
+      - name: Commit dist/ if it changed
+        run: |
+          if [ -z "$(git status --porcelain dist)" ]; then
+            echo "dist/ is already up to date."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A dist
+          git commit -m "Rebuild site"
+          # Another commit (e.g. a second article) may have landed meanwhile.
+          git pull --rebase --autostash origin main
+          git push

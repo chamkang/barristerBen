@@ -14,16 +14,22 @@ if ($post === null) {
     exit;
 }
 
-$canonical = 'post.php?p=' . $post['slug'];
-$shareUrl  = abs_url($canonical);
-$minutes   = reading_time($post['body']);
+$canonical   = 'post.php?p=' . $post['slug'];
+$shareUrl    = abs_url($canonical);
+$minutes     = reading_time($post['body']);
+$translation = post_translation($post);
 
 $page = [
-    'title'       => $post['title'] . ' | Fonju Law Firm',
+    'title'       => ($post['seo_title'] ?: $post['title']) . ' | Fonju Law Firm',
     'description' => mb_substr($post['excerpt'], 0, 158),
     'canonical'   => $canonical,
     'og_type'     => 'article',
+    'og_image'    => $post['image'] !== '' ? $post['image'] : SEO_DEFAULTS['image'],
     'body_class'  => 'page-post',
+    'alternates'  => [
+        'en' => $canonical,
+        'fr' => $translation === null ? null : 'post.php?p=' . $translation,
+    ],
     'breadcrumbs' => [
         ['name' => 'Insights',       'url' => 'blog.php'],
         ['name' => $post['category'], 'url' => 'blog.php?category=' . rawurlencode($post['category'])],
@@ -57,8 +63,9 @@ $hero = [
     'lede'    => e($post['excerpt']),
     'aside'   => '<p class="article-meta">'
         . '<span>' . icon('users', 15) . e($post['author']) . '</span>'
-        . '<span>' . icon('clock', 15) . '<time datetime="' . e($post['date']) . '">' . e(date('j F Y', strtotime($post['date']))) . '</time></span>'
+        . '<span>' . icon('clock', 15) . '<time datetime="' . e($post['date']) . '">' . e(fmt_date($post['date'])) . '</time></span>'
         . '<span>' . icon('doc', 15) . $minutes . ' min read</span>'
+        . ($translation !== null ? '<span>' . icon('globe', 15) . '<a href="' . e(url_in('post.php?p=' . $translation, 'fr')) . '" hreflang="fr" lang="fr">Lire en français</a></span>' : '')
         . '</p>',
 ];
 require __DIR__ . '/includes/page-hero.php';
@@ -70,6 +77,9 @@ $related = related_posts($post, 3);
   <div class="wrap detail">
 
     <article class="detail__main">
+      <?php if ($post['image'] !== ''): ?>
+        <figure class="article-cover reveal"><img src="<?= e(md_safe_url($post['image'])) ?>" alt="" width="1200" height="675"></figure>
+      <?php endif; ?>
       <div class="prose reveal">
         <?= $post['body'] ?>
       </div>

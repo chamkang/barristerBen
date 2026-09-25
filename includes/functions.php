@@ -7,16 +7,32 @@ function e(?string $s): string
     return htmlspecialchars((string) $s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
-/** Build a site-root-relative URL that also works inside an XAMPP sub-folder. */
+require_once __DIR__ . '/i18n.php';
+
+/**
+ * Build a site-root-relative URL that also works inside an XAMPP sub-folder.
+ * Page URLs follow the current language (see includes/i18n.php).
+ */
 function url(string $path = '/'): string
 {
-    return BASE_PATH . '/' . ltrim($path, '/');
+    return BASE_PATH . '/' . lang_path($path);
+}
+
+/** url() for a specific language — language switcher and hreflang links. */
+function url_in(string $path, string $lang): string
+{
+    return BASE_PATH . '/' . lang_path($path, $lang);
 }
 
 /** Absolute URL — canonical tags, sitemap, structured data. */
 function abs_url(string $path = '/'): string
 {
-    return SITE_URL . '/' . ltrim($path, '/');
+    return SITE_URL . '/' . lang_path($path);
+}
+
+function abs_url_in(string $path, string $lang): string
+{
+    return SITE_URL . '/' . lang_path($path, $lang);
 }
 
 function asset(string $path): string
@@ -41,13 +57,13 @@ function is_current(string|array $file): bool
 function nav_items(): array
 {
     return [
-        ['label' => 'Home',           'file' => 'index.php',                                  'href' => url('/')],
-        ['label' => 'About',          'file' => 'about.php',                                  'href' => url('about.php')],
-        ['label' => 'Practice Areas', 'file' => ['practice-areas.php', 'practice-area.php'],  'href' => url('practice-areas.php')],
-        ['label' => 'Our Team',       'file' => 'team.php',                                   'href' => url('team.php')],
-        ['label' => 'Insights',       'file' => ['blog.php', 'post.php'],                     'href' => url('blog.php')],
-        ['label' => 'FAQ',            'file' => 'faq.php',                                    'href' => url('faq.php')],
-        ['label' => 'Contact',        'file' => 'contact.php',                                'href' => url('contact.php')],
+        ['label' => t('Home'),           'file' => 'index.php',                                  'href' => url('/')],
+        ['label' => t('About'),          'file' => 'about.php',                                  'href' => url('about.php')],
+        ['label' => t('Practice Areas'), 'file' => ['practice-areas.php', 'practice-area.php'],  'href' => url('practice-areas.php')],
+        ['label' => t('Our Team'),       'file' => 'team.php',                                   'href' => url('team.php')],
+        ['label' => t('Insights'),       'file' => ['blog.php', 'post.php'],                     'href' => url('blog.php')],
+        ['label' => t('FAQ'),            'file' => 'faq.php',                                    'href' => url('faq.php')],
+        ['label' => t('Contact'),        'file' => 'contact.php',                                'href' => url('contact.php')],
     ];
 }
 
@@ -103,10 +119,33 @@ function icon(string $name, int $size = 20): string
          . '" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">' . $d . '</svg>';
 }
 
+/**
+ * The firm's mark: an antique key whose bit forms an F, with the scales of
+ * justice inside its ring. The key takes the surrounding text colour; the
+ * scales use .brand__scales (gold). This is the simplified master, drawn for
+ * screen sizes; the detailed artwork lives in assets/img/brand/.
+ */
+function brand_mark(int $height = 46): string
+{
+    $width = (int) round($height * 104 / 182);
+
+    return '<svg class="brand-key" width="' . $width . '" height="' . $height . '" viewBox="52 14 104 182"'
+         . ' fill="currentColor" aria-hidden="true" focusable="false">'
+         . '<path d="M80 20H150V42H138V34H130V42H96V66H132V86H96V132H80Z"/>'
+         . '<rect x="74" y="98" width="28" height="7" rx="2"/><rect x="74" y="124" width="28" height="7" rx="2"/>'
+         . '<path d="M80 131H96L94 136H82Z"/>'
+         . '<circle cx="88" cy="160" r="26" fill="none" stroke="currentColor" stroke-width="10"/>'
+         . '<g class="brand__scales">'
+         . '<path d="M88 146V172M80 174H96M74 150H102" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>'
+         . '<path d="M76 150 72 160M76 150 80 160M100 150 96 160M100 150 104 160" fill="none" stroke="currentColor" stroke-width="1.8"/>'
+         . '<path d="M70 160H82Q80 165 76 165Q72 165 70 160ZM94 160H106Q104 165 100 165Q96 165 94 160Z"/>'
+         . '</g></svg>';
+}
+
 /** Render the social icon row used in the header, footer and contact page. */
 function social_links(string $class = 'socials', int $size = 18): string
 {
-    $out = '<ul class="' . e($class) . '" aria-label="' . e(SITE_NAME) . ' on social media">';
+    $out = '<ul class="' . e($class) . '" aria-label="' . e(SITE_NAME . ' ' . t('on social media')) . '">';
 
     foreach (SOCIALS as $key => $s) {
         $live = $s['url'] !== '' && $s['url'] !== '#';
@@ -114,7 +153,7 @@ function social_links(string $class = 'socials', int $size = 18): string
               . ($live ? ' target="_blank"' : '')
               . ' rel="' . ($live ? 'noopener' : 'nofollow noopener') . '"'
               . ' data-network="' . e($key) . '"'
-              . ' aria-label="' . e(SITE_NAME . ' on ' . $s['label']) . '">'
+              . ' aria-label="' . e(SITE_NAME . ' ' . t('on') . ' ' . $s['label']) . '">'
               . icon($key, $size)
               . '<span class="socials__name">' . e($s['label']) . '</span></a></li>';
     }
@@ -122,8 +161,10 @@ function social_links(string $class = 'socials', int $size = 18): string
     return $out . '</ul>';
 }
 
-function whatsapp_url(string $text = 'Hello Fonju Law Firm, I would like to request a consultation.'): string
+function whatsapp_url(?string $text = null): string
 {
+    $text ??= t('Hello Fonju Law Firm, I would like to request a consultation.');
+
     return 'https://wa.me/' . CONTACT['whatsapp'] . '?text=' . rawurlencode($text);
 }
 
@@ -134,7 +175,13 @@ function tel_href(string $number): string
 
 function full_address(string $sep = ', '): string
 {
-    return implode($sep, [CONTACT['street'], CONTACT['po_box'], CONTACT['city'], CONTACT['country']]);
+    return implode($sep, [contact('street'), contact('po_box'), contact('city'), contact('country')]);
+}
+
+/** Opening hours with the day and time wording in the current language. */
+function opening_hours(): array
+{
+    return array_map(static fn(array $slot): array => ['days' => t($slot['days']), 'hours' => t($slot['hours'])] + $slot, OPENING_HOURS);
 }
 
 /** Rough reading time for an article body. */

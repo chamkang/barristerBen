@@ -8,7 +8,7 @@ require_once __DIR__ . '/includes/data-blog.php';
 require_once __DIR__ . '/includes/data-faq.php';
 
 $page = [
-    'title'       => 'Fonju Law Firm | Corporate & Commercial Lawyers in Douala, Cameroon',
+    'title'       => 'Lawyers in Douala, Cameroon | Fonju Law Firm, Corporate & Business Law',
     'description' => 'Douala legal consultancy advising business across Cameroon and the CEMAC/OHADA zone: corporate, investment, maritime, IP, employment and litigation.',
     'canonical'   => '',
     'body_class'  => 'page-home',
@@ -158,7 +158,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
       <div class="figure-panel">
         <!-- Drop a real photograph at assets/img/office-douala.jpg and uncomment:
              <img src="<?= e(asset('img/office-douala.jpg')) ?>" alt="Fonju Law Firm office in Akwa, Douala"> -->
-        <span class="figure-panel__mark"><?= icon('scale', 92) ?></span>
+        <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
         <span class="figure-panel__caption">
           <strong>Rue Ernest Betote, Akwa</strong>
           Douala, Littoral Region &mdash; serving Cameroon, Chad, the Central African Republic and the wider CEMAC market.
@@ -314,21 +314,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
 
     <div class="grid grid--3">
       <?php foreach ($latest as $i => $post): ?>
-        <article class="post-card reveal" data-delay="<?= $i + 1 ?>">
-          <div class="post-card__cover">
-            <span class="post-card__cat"><?= e($post['category']) ?></span>
-            <?= icon('doc', 46) ?>
-          </div>
-          <div class="post-card__body">
-            <p class="post-card__meta">
-              <span><time datetime="<?= e($post['date']) ?>"><?= e(date('j F Y', strtotime($post['date']))) ?></time></span>
-              <span><?= reading_time($post['body']) ?> min read</span>
-            </p>
-            <h3><a href="<?= e(url('post.php?p=' . $post['slug'])) ?>"><?= e($post['title']) ?></a></h3>
-            <p><?= e($post['excerpt']) ?></p>
-            <a class="link-arrow" href="<?= e(url('post.php?p=' . $post['slug'])) ?>">Read the article <?= icon('arrow', 15) ?></a>
-          </div>
-        </article>
+        <?= post_card($post, $i + 1) ?>
       <?php endforeach; ?>
     </div>
 

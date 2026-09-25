@@ -8,11 +8,18 @@ declare(strict_types=1);
  * Rendered as an accessible accordion on /faq.php and emitted as FAQPage
  * structured data, which is what makes the questions eligible to appear
  * directly in Google results. Answers may contain simple inline HTML.
+ *
+ * The French questions and answers are in data-faq.fr.php. Keep the two in
+ * step when you add or change a question.
  * ---------------------------------------------------------------------------
  */
 
 function faq_groups(): array
 {
+    if (is_fr()) {
+        return require __DIR__ . '/data-faq.fr.php';
+    }
+
     return [
 
         'Working with the firm' => [

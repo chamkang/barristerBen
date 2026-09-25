@@ -24,9 +24,13 @@ const SITE_FOUNDED   = '2014';
  */
 const SITE_URL = 'https://fonjulawfirm.com';
 
-/** Set to '' when the site lives at the web root, or '/barrister-Ben' for XAMPP. */
+/**
+ * '' when the site lives at the web root, or '/barrister-Ben' for XAMPP.
+ * French pages run from fr/, so that folder is stripped to find the site root.
+ */
 $fonjuDir = str_replace(DIRECTORY_SEPARATOR, '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
-define('BASE_PATH', ($fonjuDir === '/' || $fonjuDir === '.') ? '' : rtrim($fonjuDir, '/'));
+$fonjuDir = (string) preg_replace('~/fr$~', '', $fonjuDir);
+define('BASE_PATH', in_array($fonjuDir, ['', '/', '.'], true) ? '' : rtrim($fonjuDir, '/'));
 unset($fonjuDir);
 
 // ---------------------------------------------------------------------------

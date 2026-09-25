@@ -17,7 +17,7 @@ require __DIR__ . '/includes/header.php';
 $hero = [
     'eyebrow' => 'Legal',
     'title'   => 'Legal Notice &amp; Disclaimer',
-    'lede'    => 'The basis on which this website is published and the limits of what you should rely on it for. Last reviewed ' . date('F Y') . '.',
+    'lede'    => 'The basis on which this website is published and the limits of what you should rely on it for. Last reviewed ' . fmt_month() . '.',
 ];
 require __DIR__ . '/includes/page-hero.php';
 ?>
