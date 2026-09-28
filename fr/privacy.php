@@ -27,17 +27,6 @@ require dirname(__DIR__) . '/includes/page-hero.php';
   <div class="wrap wrap--narrow">
     <div class="prose reveal">
 
-      <div class="alert alert--err mb-6" role="note">
-        <?= icon('shield', 20) ?>
-        <div>
-          <strong>Modèle &mdash; à faire relire avant la mise en ligne.</strong>
-          Cette politique est une base solide rédigée pour un cabinet d’avocats camerounais, mais elle
-          doit être confrontée à vos pratiques réelles de traitement des données et à la législation
-          camerounaise applicable en matière de protection des données personnelles et de
-          cybersécurité avant la mise en ligne. Modifiez-la dans <code>fr/privacy.php</code>.
-        </div>
-      </div>
-
       <h2>Qui sommes-nous</h2>
       <p>
         Ce site est exploité par <?= e(SITE_LEGALNAME) ?> (« nous », « le cabinet »). Nos bureaux sont

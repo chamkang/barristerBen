@@ -26,17 +26,6 @@ require __DIR__ . '/includes/page-hero.php';
   <div class="wrap wrap--narrow">
     <div class="prose reveal">
 
-      <div class="alert alert--err mb-6" role="note">
-        <?= icon('shield', 20) ?>
-        <div>
-          <strong>Template &mdash; have this reviewed before launch.</strong>
-          This policy is a solid starting point drafted for a Cameroonian law firm, but it must be
-          checked against your actual data handling practices and the applicable Cameroonian data
-          protection and cybersecurity legislation before the site goes live. Edit it in
-          <code>privacy.php</code>.
-        </div>
-      </div>
-
       <h2>Who we are</h2>
       <p>
         <?= e(SITE_LEGALNAME) ?> ("we", "us", "the firm") operates this website. Our office is at
