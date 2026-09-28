@@ -337,6 +337,11 @@ Then in cPanel → **File Manager**, open your **home folder** (the one that *co
 (`openssl rand -hex 32`) and the token. Set its permissions to 0600. Being outside the website
 folder, it can never be downloaded, and deployments never touch it.
 
+**When the token expires** (GitHub e-mails a reminder first): only the editor stops saving; the
+site and the automatic deployments are unaffected, because deployments use the FTP secrets, which
+do not expire. Renew it at GitHub → Settings → Developer settings → Fine-grained tokens → the
+token → **Regenerate token**, then paste the new value into .
+
 **5. First deployment.** GitHub → **Actions → Deploy → Run workflow** (or push any commit). The
 first run uploads the whole site, which takes a few minutes; later runs upload only changes.
 Then open <https://fonjulawfirm.com> and <https://fonjulawfirm.com/admin>.

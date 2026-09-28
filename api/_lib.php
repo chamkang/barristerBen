@@ -228,6 +228,15 @@ function gh(array $cfg, string $path, string $method = 'GET', ?array $body = nul
     if ($text === false) {
         throw new ApiError('Could not reach GitHub: ' . $error);
     }
+    // 401: the token has expired or been revoked; 403 with no permission: wrong scopes.
+    // Not reported as 401 to the browser, which would send the lawyer back to sign-in.
+    if ($status === 401 || ($status === 403 && !str_starts_with($path, '/actions/'))) {
+        throw new ApiError(
+            'Saving is paused: the website\'s GitHub access token has expired or no longer has permission. '
+            . 'The site itself is unaffected. Ask your web developer to renew the token (README, "Deploying to Namecheap", step 4).',
+            503
+        );
+    }
     return ['status' => $status, 'data' => json_decode((string) $text, true)];
 }
 
