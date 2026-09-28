@@ -64,13 +64,14 @@
         <ul class="contact-list">
           <li>
             <?= icon('pin', 18) ?>
-            <span><?= e(contact('street')) ?><br><?= e(contact('po_box')) ?><br><?= e(contact('city')) ?>, <?= e(contact('country')) ?></span>
+            <span><?= e(contact('building')) ?><br><?= e(contact('street')) ?><br><?= e(contact('po_box')) ?><br><?= e(contact('city')) ?>, <?= e(contact('country')) ?></span>
           </li>
           <li>
             <?= icon('phone', 18) ?>
             <span>
               <a href="<?= e(tel_href(CONTACT['phone_primary'])) ?>"><?= e(CONTACT['phone_primary']) ?></a><br>
-              <a href="<?= e(tel_href(CONTACT['phone_secondary'])) ?>"><?= e(CONTACT['phone_secondary']) ?></a>
+              <a href="<?= e(tel_href(CONTACT['phone_secondary'])) ?>"><?= e(CONTACT['phone_secondary']) ?></a><br>
+              <a href="<?= e(tel_href(CONTACT['phone_landline'])) ?>"><?= e(CONTACT['phone_landline']) ?></a>
             </span>
           </li>
           <li>

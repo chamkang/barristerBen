@@ -4,7 +4,7 @@ seo_title: "How to Register a Company in Cameroon: Steps and Pitfalls"
 date: 2026-08-18
 updated: 2026-08-18
 category: "Corporate"
-author: "Bar. Fonju Bernard"
+author: "Bar. Fonju Bernard Fuelancha"
 excerpt: "The official timeline says a few days. The realistic timeline depends on decisions you make before you ever reach the registry. Here is the sequence that works."
 tags:
   - "Company formation"

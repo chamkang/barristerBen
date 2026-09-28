@@ -4,7 +4,7 @@ seo_title: "Investing in Cameroon: Structures, Incentives and Repatriation"
 date: 2026-05-28
 updated: 2026-05-28
 category: "Investment"
-author: "Bar. Fonju Bernard"
+author: "Bar. Fonju Bernard Fuelancha"
 excerpt: "Investors ask about incentives first. They should ask about repatriation first, because that is the constraint that shapes the whole structure."
 tags:
   - "FDI"

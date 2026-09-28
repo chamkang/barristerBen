@@ -47,10 +47,13 @@ unset($fonjuDir);
 const CONTACT = [
     'phone_primary'    => '+237 699 96 41 77',
     'phone_secondary'  => '+237 676 37 11 80',
+    'phone_landline'   => '+237 233 43 90 22',
     'whatsapp'         => '237699964177',              // digits only, country code first
     'email_general'    => 'info@fonjulawfirm.com',
     'email_principal'  => 'fonjubernard@fonjulawfirm.com',
-    'street'           => 'Rue Ernest Betote, Akwa',
+    'street'           => 'Rue Pau, Akwa',
+    'building'         => '1st floor, Immeuble Froid-Cam',
+    'landmark'         => 'Opposite the Bureau des transports',
     'po_box'           => 'P.O. Box 15354',
     'city'             => 'Douala',
     'region'           => 'Littoral',
@@ -58,7 +61,18 @@ const CONTACT = [
     'country_code'     => 'CM',
     'latitude'         => '4.0480',
     'longitude'        => '9.7043',
-    'map_query'        => 'Rue+Ernest+Betote+Akwa+Douala+Cameroon',
+    'map_query'        => 'Immeuble+Froid-Cam+Rue+Pau+Akwa+Douala+Cameroon',
+];
+
+// ---------------------------------------------------------------------------
+// FIRM REGISTRATION — shown on the legal notice (mentions légales)
+// ---------------------------------------------------------------------------
+const FIRM_REGISTRATION = [
+    'principal'      => 'Fonju Bernard Fuelancha',     // publication director
+    'bar'            => 'Cameroon Bar',                // Barreau du Cameroun
+    'bar_number'     => '00105A0029',                  // principal's bar registration (matricule)
+    'niu'            => 'P066900334100G',              // taxpayer number (N° contribuable / NIU)
+    'cnps'           => '351-01048854-S',              // CNPS employer number
 ];
 
 const OPENING_HOURS = [

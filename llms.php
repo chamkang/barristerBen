@@ -37,10 +37,10 @@ $line();
 $line('- Name: ' . SITE_NAME . ' (' . SITE_LEGALNAME . ')');
 $line('- Founded: ' . SITE_FOUNDED);
 if ($founder !== null) {
-    $line('- Founder and managing partner: ' . $founder['name']);
+    $line('- Founder and managing partner: ' . $founder['name'] . ', Advocate at the ' . FIRM_REGISTRATION['bar'] . ' (no. ' . FIRM_REGISTRATION['bar_number'] . '), former legal assistant at the International Criminal Tribunal for Rwanda (United Nations)');
 }
 $line('- Office: ' . full_address());
-$line('- Telephone: ' . CONTACT['phone_primary'] . ', ' . CONTACT['phone_secondary'] . ' (WhatsApp on the first number)');
+$line('- Telephone: ' . CONTACT['phone_primary'] . ', ' . CONTACT['phone_secondary'] . ', ' . CONTACT['phone_landline'] . ' (WhatsApp on the first number)');
 $line('- E-mail: ' . CONTACT['email_general']);
 $line('- Opening hours: ' . implode('; ', array_map(static fn(array $s): string => $s['days'] . ' ' . $s['hours'], OPENING_HOURS)));
 $line('- Languages: English and French');

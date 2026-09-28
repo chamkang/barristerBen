@@ -4,7 +4,7 @@ seo_title: "Créer une entreprise au Cameroun : étapes et pièges à éviter"
 date: 2026-08-18
 updated: 2026-08-18
 category: "Droit des sociétés"
-author: "Me Fonju Bernard"
+author: "Me Fonju Bernard Fuelancha"
 excerpt: "Le délai officiel parle de quelques jours. Le délai réel dépend des décisions que vous prenez avant même d’arriver au guichet. Voici l’ordre qui fonctionne."
 tags:
   - "Création d’entreprise"

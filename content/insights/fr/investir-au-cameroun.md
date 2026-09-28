@@ -4,7 +4,7 @@ seo_title: "Investir au Cameroun : structures, incitations et rapatriement"
 date: 2026-05-28
 updated: 2026-05-28
 category: "Investissement"
-author: "Me Fonju Bernard"
+author: "Me Fonju Bernard Fuelancha"
 excerpt: "Les investisseurs demandent d’abord quelles sont les incitations. Ils devraient d’abord demander comment rapatrier leurs revenus, car c’est la contrainte qui façonne toute la structure."
 tags:
   - "Investissement étranger"

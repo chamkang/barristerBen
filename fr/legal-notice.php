@@ -27,26 +27,21 @@ require dirname(__DIR__) . '/includes/page-hero.php';
   <div class="wrap wrap--narrow">
     <div class="prose reveal">
 
-      <div class="alert alert--err mb-6" role="note">
-        <?= icon('shield', 20) ?>
-        <div>
-          <strong>Modèle &mdash; à faire relire avant la mise en ligne.</strong>
-          Confirmez les informations d’immatriculation du cabinet, les inscriptions au barreau et la
-          couverture en responsabilité civile professionnelle, puis complétez les éléments ci-dessous.
-          Modifiez cette page dans <code>fr/legal-notice.php</code>.
-        </div>
-      </div>
-
       <h2>Éditeur du site</h2>
       <p>
-        Ce site est édité par <?= e(SITE_LEGALNAME) ?>, cabinet de conseil juridique établi
-        <?= e(full_address()) ?>.<br>
-        Téléphone : <?= e(CONTACT['phone_primary']) ?> / <?= e(CONTACT['phone_secondary']) ?><br>
+        Ce site est édité par le cabinet Fonju &amp; Partners, cabinet d’avocats dont le titulaire,
+        Me <?= e(FIRM_REGISTRATION['principal']) ?>, est avocat au Barreau du Cameroun
+        (matricule <?= e(FIRM_REGISTRATION['bar_number']) ?>).
+      </p>
+      <p>
+        Siège : <?= e(full_address()) ?> (<?= e(lcfirst(contact('landmark'))) ?>).<br>
+        Téléphone : <?= e(CONTACT['phone_primary']) ?> / <?= e(CONTACT['phone_secondary']) ?> / <?= e(CONTACT['phone_landline']) ?><br>
         E-mail : <?= e(CONTACT['email_general']) ?>
       </p>
       <p>
-        <em>À compléter : numéro RCCM, numéro d’identifiant unique (NIU), barreau d’inscription des
-        avocats du cabinet et nom du directeur de la publication.</em>
+        Numéro de contribuable (NIU) : <?= e(FIRM_REGISTRATION['niu']) ?><br>
+        Numéro d’employeur CNPS : <?= e(FIRM_REGISTRATION['cnps']) ?><br>
+        Directeur de la publication : Me <?= e(FIRM_REGISTRATION['principal']) ?>
       </p>
 
       <h2>Absence de conseil juridique</h2>

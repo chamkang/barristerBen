@@ -9,7 +9,7 @@ require __DIR__ . '/includes/contact-handler.php';
 
 $page = [
     'title'       => 'Contact Fonju & Partners Law Firm | Lawyers in Akwa, Douala, Cameroon',
-    'description' => 'Contact Fonju & Partners Law Firm, Rue Ernest Betote, Akwa, Douala. Call +237 699 96 41 77, message us on WhatsApp, or send an enquiry. We reply within a day.',
+    'description' => 'Contact Fonju & Partners Law Firm, Immeuble Froid-Cam, Rue Pau, Akwa, Douala. Call +237 699 96 41 77, message us on WhatsApp, or send an enquiry. We reply within a day.',
     'canonical'   => 'contact.php',
     'breadcrumbs' => [['name' => 'Contact', 'url' => 'contact.php']],
     'body_class'  => 'page-contact',
@@ -161,7 +161,9 @@ require __DIR__ . '/includes/page-hero.php';
             <?= icon('pin', 18) ?>
             <span>
               <strong style="color:#fff;">Office</strong><br>
-              <?= e(CONTACT['street']) ?><br>
+              <?= e(contact('building')) ?><br>
+              <?= e(contact('street')) ?><br>
+              <?= e(contact('landmark')) ?><br>
               <?= e(contact('po_box')) ?><br>
               <?= e(contact('city')) ?>, <?= e(contact('region')) ?><br>
               <?= e(contact('country')) ?>
@@ -172,7 +174,8 @@ require __DIR__ . '/includes/page-hero.php';
             <span>
               <strong style="color:#fff;">Call or text</strong><br>
               <a href="<?= e(tel_href(CONTACT['phone_primary'])) ?>"><?= e(CONTACT['phone_primary']) ?></a><br>
-              <a href="<?= e(tel_href(CONTACT['phone_secondary'])) ?>"><?= e(CONTACT['phone_secondary']) ?></a>
+              <a href="<?= e(tel_href(CONTACT['phone_secondary'])) ?>"><?= e(CONTACT['phone_secondary']) ?></a><br>
+              <?= e(t('Landline')) ?>: <a href="<?= e(tel_href(CONTACT['phone_landline'])) ?>"><?= e(CONTACT['phone_landline']) ?></a>
             </span>
           </li>
           <li>
@@ -220,10 +223,10 @@ require __DIR__ . '/includes/page-hero.php';
   <div class="wrap">
     <div class="section-head reveal">
       <p class="eyebrow">Find us</p>
-      <h2>Rue Ernest Betote, Akwa &mdash; Douala</h2>
+      <h2>Immeuble Froid-Cam, Akwa &mdash; Douala</h2>
       <p class="lede">
-        We are in Akwa, Douala&rsquo;s central business district, a short distance from the port and
-        the main commercial banks.
+        We are on the first floor of the Froid-Cam building on Rue Pau, opposite the Bureau des
+        transports, in Akwa, Douala&rsquo;s central business district.
       </p>
     </div>
 

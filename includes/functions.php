@@ -207,7 +207,7 @@ function tel_href(string $number): string
 
 function full_address(string $sep = ', '): string
 {
-    return implode($sep, [contact('street'), contact('po_box'), contact('city'), contact('country')]);
+    return implode($sep, [contact('building'), contact('street'), contact('po_box'), contact('city'), contact('country')]);
 }
 
 /** Opening hours with the day and time wording in the current language. */

@@ -76,12 +76,16 @@ $hasPlaceholders = (bool) array_filter($members, static fn(array $m): bool => !e
             <p class="team-card__role"><?= e($member['role']) ?></p>
             <p class="team-card__bio"><?= e($member['bio']) ?></p>
 
+            <?php if ($member['focus'] !== [] || $member['languages'] !== []): ?>
             <ul class="pill-row team-card__meta">
               <?php foreach ($member['focus'] as $focus): ?>
                 <li><span class="pill"><?= e($focus) ?></span></li>
               <?php endforeach; ?>
-              <li><span class="pill pill--gold"><?= icon('globe', 13) ?> <?= e(implode(' / ', $member['languages'])) ?></span></li>
+              <?php if ($member['languages'] !== []): ?>
+                <li><span class="pill pill--gold"><?= icon('globe', 13) ?> <?= e(implode(' / ', $member['languages'])) ?></span></li>
+              <?php endif; ?>
             </ul>
+            <?php endif; ?>
 
             <div class="team-card__links">
               <?php if ($member['email'] !== ''): ?>

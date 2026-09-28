@@ -109,7 +109,7 @@ function contact(string $key): string
     $value = CONTACT[$key] ?? '';
 
     return match ($key) {
-        'country' => t($value),
+        'country', 'building', 'landmark' => t($value),
         'po_box'  => is_fr() ? str_replace('P.O. Box', 'B.P.', $value) : $value,
         default   => $value,
     };

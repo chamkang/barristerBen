@@ -161,7 +161,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
              <img src="<?= e(asset('img/office-douala.jpg')) ?>" alt="Fonju & Partners Law Firm office in Akwa, Douala"> -->
         <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
         <span class="figure-panel__caption">
-          <strong>Rue Ernest Betote, Akwa</strong>
+          <strong>Immeuble Froid-Cam, Rue Pau, Akwa</strong>
           Douala, Littoral Region &mdash; serving Cameroon, Chad, the Central African Republic and the wider CEMAC market.
         </span>
       </div>

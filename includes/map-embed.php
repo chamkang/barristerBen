@@ -14,7 +14,7 @@ $mapLink  = 'https://www.google.com/maps/search/?api=1&query=' . CONTACT['map_qu
      data-embed-title="<?= e(t('Map showing the location of Fonju & Partners Law Firm in Akwa, Douala')) ?>">
   <div class="map-consent">
     <span class="map-consent__icon"><?= icon('pin', 30) ?></span>
-    <p class="map-consent__title"><?= e(contact('street')) ?>, <?= e(contact('city')) ?></p>
+    <p class="map-consent__title">Immeuble Froid-Cam, <?= e(contact('street')) ?>, <?= e(contact('city')) ?></p>
     <p class="map-consent__text"><?= e(t('The map is provided by Google, which may set cookies when it loads.')) ?></p>
     <div class="map-consent__actions">
       <button class="btn btn--gold btn--sm" type="button" data-consent-load="media"><?= e(t('Show the map')) ?></button>

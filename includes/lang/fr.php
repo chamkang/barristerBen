@@ -7,6 +7,10 @@ declare(strict_types=1);
  * templates; a string missing here simply shows in English.
  */
 return [
+    // Office address (includes/config.php)
+    '1st floor, Immeuble Froid-Cam'      => '1er étage, immeuble Froid-Cam',
+    'Opposite the Bureau des transports' => 'Face au Bureau des transports',
+    'Landline'                           => 'Fixe',
     'Clients outside Cameroon' => 'Clients hors du Cameroun',
     // Navigation
     'Home'            => 'Accueil',

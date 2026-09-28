@@ -26,26 +26,21 @@ require __DIR__ . '/includes/page-hero.php';
   <div class="wrap wrap--narrow">
     <div class="prose reveal">
 
-      <div class="alert alert--err mb-6" role="note">
-        <?= icon('shield', 20) ?>
-        <div>
-          <strong>Template &mdash; have this reviewed before launch.</strong>
-          Confirm the firm&rsquo;s registration details, bar admission particulars and professional
-          indemnity position, then complete the placeholders below. Edit this page in
-          <code>legal-notice.php</code>.
-        </div>
-      </div>
-
       <h2>Site publisher</h2>
       <p>
-        This website is published by <?= e(SITE_LEGALNAME) ?>, a legal consultancy operating from
-        <?= e(full_address()) ?>.<br>
-        Telephone: <?= e(CONTACT['phone_primary']) ?> / <?= e(CONTACT['phone_secondary']) ?><br>
+        This website is published by <?= e(SITE_NAME) ?>, a law firm whose principal,
+        Bar. <?= e(FIRM_REGISTRATION['principal']) ?>, is an Advocate at the
+        <?= e(FIRM_REGISTRATION['bar']) ?> (registration no. <?= e(FIRM_REGISTRATION['bar_number']) ?>).
+      </p>
+      <p>
+        Office: <?= e(full_address()) ?> (<?= e(lcfirst(contact('landmark'))) ?>).<br>
+        Telephone: <?= e(CONTACT['phone_primary']) ?> / <?= e(CONTACT['phone_secondary']) ?> / <?= e(CONTACT['phone_landline']) ?><br>
         E-mail: <?= e(CONTACT['email_general']) ?>
       </p>
       <p>
-        <em>To complete: trade register (RCCM) number, taxpayer number (NIU), the Bar at which the
-        firm&rsquo;s advocates are admitted, and the name of the publication director.</em>
+        Taxpayer number (NIU): <?= e(FIRM_REGISTRATION['niu']) ?><br>
+        CNPS employer number: <?= e(FIRM_REGISTRATION['cnps']) ?><br>
+        Publication director: Bar. <?= e(FIRM_REGISTRATION['principal']) ?>
       </p>
 
       <h2>No legal advice</h2>

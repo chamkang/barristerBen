@@ -161,7 +161,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
       <div class="figure-panel">
         <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
         <span class="figure-panel__caption">
-          <strong>Rue Ernest Betote, Akwa</strong>
+          <strong>Immeuble Froid-Cam, rue Pau, Akwa</strong>
           Douala, région du Littoral &mdash; au service du Cameroun, du Tchad, de la République centrafricaine et de l’ensemble du marché CEMAC.
         </span>
       </div>

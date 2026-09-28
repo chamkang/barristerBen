@@ -4,7 +4,7 @@ seo_title: "iGaming and Betting Regulation in Cameroon and Central Africa"
 date: 2026-04-30
 updated: 2026-04-30
 category: "iGaming"
-author: "Bar. Fonju Bernard"
+author: "Bar. Fonju Bernard Fuelancha"
 excerpt: "Online gaming is growing faster than the legislation written to govern it. Operators who engage early consistently secure better terms than those who regularise later."
 tags:
   - "iGaming"

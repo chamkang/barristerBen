@@ -4,7 +4,7 @@ seo_title: "Jeux en ligne et paris sportifs : la régulation en Afrique centrale
 date: 2026-04-30
 updated: 2026-04-30
 category: "Jeux en ligne"
-author: "Me Fonju Bernard"
+author: "Me Fonju Bernard Fuelancha"
 excerpt: "Les jeux en ligne croissent plus vite que la législation censée les encadrer. Les opérateurs qui s’engagent tôt obtiennent systématiquement de meilleures conditions que ceux qui se régularisent ensuite."
 tags:
   - "Jeux en ligne"
