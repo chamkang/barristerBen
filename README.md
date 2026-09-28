@@ -340,7 +340,7 @@ folder, it can never be downloaded, and deployments never touch it.
 **When the token expires** (GitHub e-mails a reminder first): only the editor stops saving; the
 site and the automatic deployments are unaffected, because deployments use the FTP secrets, which
 do not expire. Renew it at GitHub → Settings → Developer settings → Fine-grained tokens → the
-token → **Regenerate token**, then paste the new value into .
+token → **Regenerate token**, then paste the new value into `fonju-admin-config.php`.
 
 **5. First deployment.** GitHub → **Actions → Deploy → Run workflow** (or push any commit). The
 first run uploads the whole site, which takes a few minutes; later runs upload only changes.
