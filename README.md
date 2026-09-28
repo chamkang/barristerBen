@@ -311,7 +311,10 @@ cPanel → **MultiPHP Manager**, set it there.)
 - Log in: `deploy` (it becomes `deploy@fonjulawfirm.com`)
 - Password: generate a strong one
 - **Directory: `fonjulawfirm.com`** — replace what cPanel suggests with exactly the site folder,
-  so this account can only ever see the website.
+  so this account can only ever see the website. cPanel refills this box with
+  `fonjulawfirm.com/deploy` when you type the login, so edit it **last**. With the extra
+  `/deploy`, the site is uploaded into a sub-folder and the live address shows an empty listing.
+  The directory cannot be changed later; delete and recreate the account instead.
 
 Note the server name under *Configure FTP Client* (usually `ftp.fonjulawfirm.com`, or your server's
 host name such as `server123.web-hosting.com`).

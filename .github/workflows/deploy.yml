@@ -126,8 +126,21 @@ jobs:
         if: steps.secrets.outputs.ready == 'true'
         run: |
           sleep 5
-          for path in / /fr/ /about /api/session; do
-            code=$(curl -s -o /dev/null -w '%{http_code}' "https://fonjulawfirm.com$path")
-            echo "$path -> $code"
-            [ "$code" = "200" ] || { echo "::warning::https://fonjulawfirm.com$path returned $code"; }
+          fail=0
+          # Each page must answer 200 AND contain the firm's name, so a directory
+          # listing or a copy uploaded to the wrong folder is caught.
+          for path in / /fr/ /about /international-clients /llms.txt; do
+            code=$(curl -s -o /tmp/live -w '%{http_code}' "https://fonjulawfirm.com$path")
+            if [ "$code" = "200" ] && grep -q 'Fonju' /tmp/live; then
+              echo "OK    $path"
+            else
+              echo "::error::https://fonjulawfirm.com$path returned $code without the site's content. Check that the FTP account's directory is the fonjulawfirm.com folder itself (README, 'Deploying to Namecheap', step 2)."
+              fail=1
+            fi
           done
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://fonjulawfirm.com/api/session")
+          echo "API   /api/session -> $code"
+          [ "$code" = "200" ] || { echo "::error::The editor API (/api/session) returned $code."; fail=1; }
+          code=$(curl -s -o /dev/null -w '%{http_code}' "https://fonjulawfirm.com/includes/config.php")
+          [ "$code" = "404" ] || [ "$code" = "403" ] || { echo "::error::includes/ is reachable from the web ($code); .htaccess is not being applied."; fail=1; }
+          exit $fail
