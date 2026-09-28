@@ -51,7 +51,9 @@ ErrorDocument 404 /404.php
   RewriteCond %{THE_REQUEST} ^GET\s(/[^\s?]*?)index\.php[\s?] [NC]
   RewriteRule ^ %1 [R=301,L,NE]
 
-  RewriteCond %{REQUEST_URI} !/api/
+  # Never for the editor API or the blocked folders (LiteSpeed would otherwise
+  # redirect /includes/x.php before answering 404).
+  RewriteCond %{THE_REQUEST} !/(api|includes|storage|tools|content|dist|node_modules)/ [NC]
   RewriteCond %{THE_REQUEST} ^GET\s(/[^\s?]*?)([a-z0-9-]+)\.php[\s?] [NC]
   RewriteRule ^ %1%2 [R=301,L,NE]
 
