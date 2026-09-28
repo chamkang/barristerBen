@@ -107,7 +107,7 @@ const SEO_DEFAULTS = [
     'locale'      => 'en_CM',
 ];
 
-const GOOGLE_ANALYTICS_ID = '';   // e.g. 'G-XXXXXXXXXX' — leave empty to disable
+const GOOGLE_ANALYTICS_ID = 'G-B4JSR6T50N';   // leave empty to disable
 const GOOGLE_SITE_VERIFY  = '';   // Search Console verification token
 
 // ---------------------------------------------------------------------------
