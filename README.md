@@ -1,20 +1,28 @@
 # Fonju Law Firm — Website
 
 A complete rebuild of fonjulawfirm.com: a fast, SEO-ready, fully responsive website for a
-Douala-based legal consultancy. No build step, no framework, no database — plain PHP, CSS and
-JavaScript that runs on XAMPP locally and on any standard Apache/cPanel host.
+Douala-based legal consultancy, in English and French. No build step, no framework, no database —
+plain PHP, CSS and JavaScript. It runs on the firm's Namecheap hosting, is deployed automatically
+from GitHub, and includes a browser-based editor for articles and testimonials.
 
 ---
 
 ## 1. Running it locally
 
-The project is already in `C:\xampp\htdocs\barrister-Ben`.
+**Website and editor together (recommended)** — from the project folder:
 
-1. Start **Apache** from the XAMPP Control Panel.
-2. Open <http://localhost/barrister-Ben/>.
+```bash
+C:/xampp/php/php.exe -S localhost:8098 tools/router.php
+```
 
-That is the whole setup. `BASE_PATH` is detected automatically, so the site works both in the
-`barrister-Ben` sub-folder and at a domain root.
+Then open <http://localhost:8098/> (French: `/fr/`) and the editor at <http://localhost:8098/admin>.
+`tools/router.php` follows the same rules as `.htaccess`, so clean addresses, blocked folders and
+the editor's `/api` behave exactly as on the live server. The editor runs in **local mode**: you are
+signed in automatically, and saving writes straight to the files in this folder (nothing goes to
+GitHub or the live site; review or undo with git).
+
+**XAMPP** also works: start Apache and open <http://localhost/barrister-Ben/>. `BASE_PATH` is
+detected automatically, so the site works in a sub-folder. (The editor needs the command above.)
 
 ---
 
@@ -86,34 +94,19 @@ Drafts, future publication dates, editing and deleting all work the same way. Be
 each article is a Markdown file in `content/insights/{en,fr}/` committed to GitHub, so every
 change is versioned and can be undone from the repository history.
 
-**One-time setup (the developer does this once, in Vercel):**
-
-1. **Root Directory must be blank** (the repository root) — otherwise the `/api` functions the
-   editor uses are not deployed. See section 8.
-2. Create a GitHub **fine-grained personal access token**: GitHub → Settings → Developer settings →
-   Fine-grained tokens → *Generate*. Repository access: **only `chamkang/barristerBen`**.
-   Permissions: **Contents: Read and write** (and optionally **Actions: Read**, so the editor can
-   show build progress). Set an expiry date and put a reminder in the calendar to renew it.
-3. In Vercel → Project → Settings → **Environment Variables**, add (Production):
-
-   | Name | Value |
-   |---|---|
-   | `ADMIN_PASSWORD` | A long passphrase, given only to the people who write articles |
-   | `SESSION_SECRET` | 40+ random characters (e.g. the output of `openssl rand -hex 32`) |
-   | `GITHUB_TOKEN` | The token from step 2 |
-   | `GITHUB_REPO` | `chamkang/barristerBen` |
-   | `GITHUB_BRANCH` | `main` (optional, this is the default) |
-
-4. Redeploy. Until the variables exist, `/admin` shows a setup screen listing what is missing.
+**One-time setup:** see "Deploying to Namecheap", step 4 (section 8). The editor needs a
+settings file on the server with its password, a session secret and a GitHub token.
 
 Security: the password is checked on the server only; the sign-in is a signed, HttpOnly cookie
 valid for 8 hours; every write needs that cookie *and* a same-origin request; `/admin` and `/api`
-are `noindex` and disallowed in `robots.txt`. To lock everyone out, change `SESSION_SECRET`.
+are `noindex` and disallowed in `robots.txt`; the settings file lives outside the website folder.
+To sign everyone out, change `SESSION_SECRET`.
 
-**How publishing reaches the site:** the editor commits the Markdown file → the GitHub Action in
-`.github/workflows/build-site.yml` runs `php build.php` and commits the new `dist/` → Vercel
-deploys that commit. The same action also runs every morning (05:15 UTC), which is what makes
-articles with a future date appear on their day.
+**How publishing reaches the site:** the editor commits the file to GitHub → the **Deploy**
+GitHub Action checks the site and uploads the change to the server → live, usually within two
+minutes. GitHub stays the single source of truth, so every change is versioned and a deployment
+never overwrites an article. Articles with a future date appear on their day automatically (the
+PHP site checks the date on every visit).
 
 ### Testimonials
 
@@ -292,160 +285,97 @@ The firm's mark is an antique key whose bit forms an F, with the scales of justi
 
 ## 8. Deploying
 
-There are two ways to put this online, and the right one depends on whether your host runs PHP.
+The live site is **fonjulawfirm.com on Namecheap** (shared hosting, LiteSpeed web server, PHP).
+The PHP source is deployed as it is — no build step — by the GitHub Action in
+`.github/workflows/deploy.yml` on every push to `main`:
 
-| | **A. Static host** (Vercel, Netlify, Cloudflare Pages) | **B. PHP host** (cPanel, shared hosting, VPS) |
-|---|---|---|
-| Cost | Free, permanently | Usually paid; free tiers are slow |
-| Speed | Global CDN, very fast | Single server |
-| Contact form | Needs a free form service (5 minutes to set up) | Works as built, sends real e-mail |
-| Publishing a change | `php build.php`, then `git push` | Upload the changed file |
-| SSL, custom domain | Automatic | You configure it |
+1. **Check** — every PHP file must parse, and the main pages plus every article must render with
+   no PHP errors.
+2. **Deploy** — only the changed files are uploaded over FTPS to the site's folder. Files that exist
+   only on the server (the enquiry log, the editor's settings) are never touched.
+3. **Smoke test** — the live home page, French home page, About page and editor API must answer.
 
-Both serve identical HTML. **A is recommended** unless you specifically need PHP-side e-mail.
+Excluded from the upload: `.github/`, `tools/`, `dist/`, `README.md`, `build.php`, `vercel.json`.
+`.htaccess` also blocks `includes/`, `content/`, `storage/`, `tools/` and hidden files from the web.
 
----
+### Deploying to Namecheap — one-time setup
 
-### A. Static host — Vercel (free)
+The site's folder on the server is **`fonjulawfirm.com`** in your home directory (it is an addon
+domain, so it is *not* `public_html`).
 
-Vercel cannot run PHP, so `build.php` renders the whole site to plain HTML in `dist/` first.
-The PHP source stays the content management system; `dist/` is just its output, and it is
-committed to the repository so Vercel has something to serve.
+**1. PHP version.** cPanel → **Select PHP Version** → choose **8.2** or newer and make sure the
+extensions `curl`, `mbstring` and `intl` are ticked. (If the domain has its own setting under
+cPanel → **MultiPHP Manager**, set it there.)
 
-**Step 1 — set the live domain.** In `includes/config.php`:
+**2. An FTP account just for deployments.** cPanel → **FTP Accounts** → *Add FTP Account*:
+- Log in: `deploy` (it becomes `deploy@fonjulawfirm.com`)
+- Password: generate a strong one
+- **Directory: `fonjulawfirm.com`** — replace what cPanel suggests with exactly the site folder,
+  so this account can only ever see the website.
 
-```php
-const SITE_URL = 'https://barrister-ben.vercel.app';   // or your own domain
-```
+Note the server name under *Configure FTP Client* (usually `ftp.fonjulawfirm.com`, or your server's
+host name such as `server123.web-hosting.com`).
 
-Also update the last line of `robots.txt` to match.
+**3. GitHub secrets.** github.com/chamkang/barristerBen → **Settings → Secrets and variables →
+Actions → New repository secret**, one per line:
 
-**Step 2 — make the contact form work.** Static hosts cannot process a form, so point it at a
-free form service:
+| Secret | Value |
+|---|---|
+| `FTP_SERVER` | `ftp.fonjulawfirm.com` (or the host name from step 2) |
+| `FTP_USERNAME` | `deploy@fonjulawfirm.com` |
+| `FTP_PASSWORD` | the password from step 2 |
+| `FTP_SERVER_DIR` | *leave unset* when the FTP account's directory is the site folder (step 2). If you use the main cPanel FTP login instead, set it to `fonjulawfirm.com/` |
 
-1. Go to <https://web3forms.com>, enter the firm's e-mail address, and copy the access key
-   they send you. No account or card required.
-2. In `includes/config.php`:
+**4. The editor's settings file.** Create a GitHub **fine-grained token**: GitHub → Settings →
+Developer settings → Fine-grained tokens → *Generate new token*. Repository access: **only
+`chamkang/barristerBen`**. Permissions: **Contents: Read and write**, and **Actions: Read** (lets
+the editor show "Website up to date"). Set an expiry and a calendar reminder to renew it.
 
-```php
-const FORM_ENDPOINT   = 'https://api.web3forms.com/submit';
-const FORM_ACCESS_KEY = 'paste-your-key-here';
-```
+Then in cPanel → **File Manager**, open your **home folder** (the one that *contains*
+`fonjulawfirm.com`), create `fonju-admin-config.php`, paste in the contents of
+`tools/fonju-admin-config.example.php` and fill in the password, a session secret
+(`openssl rand -hex 32`) and the token. Set its permissions to 0600. Being outside the website
+folder, it can never be downloaded, and deployments never touch it.
 
-Submissions then arrive as e-mail at that address. Formspree works the same way (use its
-form URL as `FORM_ENDPOINT` and leave `FORM_ACCESS_KEY` empty). Leave both empty and
-`build.php` will warn you that the form goes nowhere.
+**5. First deployment.** GitHub → **Actions → Deploy → Run workflow** (or push any commit). The
+first run uploads the whole site, which takes a few minutes; later runs upload only changes.
+Then open <https://fonjulawfirm.com> and <https://fonjulawfirm.com/admin>.
 
-**Step 3 — build.**
+**6. After it is live.** Submit `https://fonjulawfirm.com/sitemap.xml` in Google Search Console and
+Bing Webmaster Tools, and delete the old Vercel project (Vercel → Project → Settings → Delete), so
+an out-of-date copy of the site is not left online at `*.vercel.app`.
 
-```bash
-php build.php
-```
+**Contact form.** On Namecheap the form sends e-mail with PHP's `mail()` from
+`FORM_RECIPIENT` (`info@fonjulawfirm.com`), and every enquiry is also saved in
+`storage/enquiries.log` on the server. Create the `info@fonjulawfirm.com` mailbox in cPanel →
+**Email Accounts** (or point it at the firm's mail provider), then send a test enquiry. Keep
+`FORM_ENDPOINT` empty.
 
-It prints every page it writes, then a list of warnings for anything still unfinished
-(placeholder social links, placeholder team members, missing form endpoint).
+**If a deployment fails:** open GitHub → Actions → the red run → the failed step. "Check" failures
+name the page and the PHP error; FTP failures are almost always a wrong secret or server-dir.
+Re-run after fixing. The site stays on the previous version until a deployment succeeds.
 
-**Step 4 — commit and push.**
+### Optional: static export (Vercel, Netlify, Cloudflare Pages)
 
-```bash
-git add -A && git commit -m "Rebuild static site" && git push
-```
-
-**Step 5 — connect Vercel.** Once only:
-
-1. Sign in at <https://vercel.com> with your GitHub account.
-2. **Add New → Project**, then import `chamkang/barristerBen`.
-3. Leave every setting alone — `vercel.json` already tells Vercel that the site is the
-   pre-built `dist/` folder, with clean URLs and caching and security headers configured.
-4. **Deploy.** It takes about thirty seconds, and you get a
-   `https://barrister-ben.vercel.app` address.
-
-From then on, every `git push` redeploys automatically.
-
-#### Root Directory: leave it blank
-
-> **The article editor needs the blank (repository-root) setting.** Its `/api` functions live in
-> the repository's `api/` folder, which Vercel only deploys when the Root Directory is the
-> repository root. With `dist`, the public site still works but `/admin` cannot sign in.
-
-For the static pages alone, both settings work:
-
-Vercel reads `vercel.json` from **the project's root directory**, which is whatever the
-dashboard's *Root Directory* setting points at. That means the file has to exist in the right
-place for whichever setup you pick, so `build.php` writes a second copy into `dist/`:
-
-| Root Directory | Config Vercel reads | Serves |
-|---|---|---|
-| *(blank — repository root)* | `./vercel.json` | `dist/`, via `outputDirectory` |
-| `dist` | `./dist/vercel.json` | that folder directly |
-
-The `dist/` copy is generated with the build keys (`framework`, `installCommand`,
-`buildCommand`, `outputDirectory`) stripped, because `"outputDirectory": "dist"` read from
-*inside* `dist/` would send Vercel looking for `dist/dist`.
-
-This matters more than it looks. [`cleanUrls` defaults to
-`false`](https://vercel.com/docs/project-configuration/vercel-json#cleanurls), and every
-internal link, canonical tag and sitemap entry the build emits is extensionless
-(`/about`, `/practice/corporate-law`). If Vercel never sees a `vercel.json` with
-`cleanUrls: true`, only the `.html` paths resolve — the deployment succeeds and the site is
-broken. Keeping both copies in sync removes that failure mode entirely.
-
-Blank is still the better default: it is the setting a fresh import already has, so nobody
-has to remember it.
-
-**Step 6 — custom domain.** In Vercel: **Project → Settings → Domains → Add**, enter
-`fonjulawfirm.com`, and set the DNS records Vercel shows you at your registrar. SSL is issued
-automatically and free. Then set `SITE_URL` to the real domain, rebuild, and push.
-
-> **Netlify or Cloudflare Pages** work identically. Netlify: drag the `dist/` folder onto
-> <https://app.netlify.com/drop> for an instant deploy, or connect the repository and set the
-> publish directory to `dist` with an empty build command. Cloudflare Pages: connect the
-> repository, framework preset **None**, build output directory `dist`.
-
----
-
-### B. PHP host (cPanel, shared hosting, VPS)
-
-Use this when you want the contact form to send mail from your own domain with no third party.
-
-1. Upload everything **except** `dist/`, `build.php` and `vercel.json` to `public_html`.
-2. In `includes/config.php`, set `SITE_URL` to the live domain and leave `FORM_ENDPOINT` empty
-   so the form posts back to `contact.php`.
-3. Update the `Sitemap:` line in `robots.txt`.
-4. Install the SSL certificate, then uncomment the HTTPS redirect block in `.htaccess`.
-5. Uncomment the `Strict-Transport-Security` header in `.htaccess`.
-6. Pick `www` or non-`www` and uncomment the matching canonical-host rule in `.htaccess`.
-7. Make `storage/` writable by PHP (0755 is normally enough).
-8. Configure SMTP in the host's PHP settings so `mail()` actually delivers.
-
-`.htaccess` already provides gzip compression, long-lived asset caching, security headers,
-directory-listing suppression, a custom 404 page, and clean `/sitemap.xml` and `/feed.xml`
-addresses. Every block is wrapped in `<IfModule>`, so a host missing a module will not throw
-a 500.
-
-**Free PHP hosting** exists (InfinityFree, AwardSpace) but is slow, ad-supported and
-unreliable for a professional firm. If the budget is tight, option A plus Web3Forms is the
-better free route.
+`php build.php` still renders the whole site to plain HTML in `dist/` (ignored by git), with
+`vercel.json` for clean URLs and headers. The contact form then needs `FORM_ENDPOINT`
+(e.g. Web3Forms), and the editor, articles with future dates and the enquiry log are not available.
+Use it only if the site ever has to move to a host without PHP.
 
 ---
 
 ### Publishing a content change
 
-Articles: use `/admin` (section 3); nothing else is needed.
+Articles and testimonials: use `/admin`; nothing else is needed.
 
 Anything else:
 
 1. Edit the file — a practice area in `includes/data-practice.php`, say.
-2. Check it locally at <http://localhost/barrister-Ben/>.
+2. Check it locally (section 1).
 3. `git add -A && git commit -m "Update practice areas" && git push`
 
-The GitHub Action (`.github/workflows/build-site.yml`) runs `php build.php`, commits the new
-`dist/`, and Vercel deploys it, usually within two minutes. You can still run `php build.php`
-yourself before pushing; the action simply finds nothing to change. The sitemap, RSS feed,
-`llms.txt`, category filters and structured data all update on their own.
-
-In the repository's **Settings → Actions → General → Workflow permissions**, "Read and write
-permissions" must be allowed (the workflow also requests `contents: write` itself).
+The **Deploy** action checks and uploads it; follow it under GitHub → Actions. The sitemap, RSS
+feed, `llms.txt`, category filters and structured data all update on their own.
 
 ---
 
@@ -454,35 +384,29 @@ permissions" must be allowed (the workflow also requests `contents: write` itsel
 | URL | Purpose |
 |---|---|
 | `/` | Home — hero, why the firm, about, practice areas, process, testimonials, insights, FAQ |
-| `/about.php` | The firm, its pillars, location, philosophy, full capability list |
-| `/practice-areas.php` | All 21 areas with live search and group filtering |
-| `/practice-area.php?area=…` | A detail page per area — intro, sections, service list, sidebar |
-| `/team.php` | Lawyer profiles |
-| `/blog.php` | Insights listing, filterable by category |
-| `/post.php?p=…` | Article with sharing, related posts and a disclaimer |
-| `/faq.php` | 26 questions in 6 groups, as an accessible accordion |
-| `/contact.php` | Enquiry form, contact details, opening hours, map |
-| `/privacy.php`, `/legal-notice.php` | Legal pages |
-| `/404.php` | Custom not-found page with useful routes back |
+| `/about` | The firm, its pillars, location, philosophy, full capability list |
+| `/practice-areas` | All 21 areas with live search and group filtering |
+| `/practice/…` | A detail page per area — intro, sections, service list, sidebar |
+| `/team` | Lawyer profiles |
+| `/blog` | Insights listing, filterable by category |
+| `/insights/…` | Article with sharing, related posts and a disclaimer |
+| `/faq` | 26 questions in 6 groups, as an accessible accordion |
+| `/contact` | Enquiry form, contact details, opening hours, map |
+| `/privacy`, `/legal-notice` | Legal pages |
+| `/404` | Custom not-found page with useful routes back |
 | `/sitemap.xml`, `/feed.xml`, `/llms.txt` | Generated automatically |
 | `/fr/…` | The French version of every page above |
 | `/admin` | The article editor (password-protected, not indexed) |
 
 ---
 
-## 10. Optional: clean URLs
+## 10. Clean addresses
 
-The site uses query-string URLs (`/practice-area.php?area=corporate-law`), which are fully
-indexable and canonicalised. If you later want `/practice/corporate-law` instead, add to `.htaccess`:
-
-```apache
-RewriteRule ^practice/([a-z0-9-]+)/?$ practice-area.php?area=$1 [L,QSA]
-RewriteRule ^insights/([a-z0-9-]+)/?$ post.php?p=$1 [L,QSA]
-```
-
-Then update `url('practice-area.php?area=' . $slug)` to `url('practice/' . $slug)` throughout, so
-the canonical tags and sitemap point at the new form. Do both together — never leave two live URLs
-for the same page.
+The site uses clean addresses: `/about`, `/practice/corporate-law`, `/insights/…`, and `/fr/…` for
+French. `url()` in `includes/functions.php` produces them (see `pretty_path()`), and `.htaccess`
+maps them to the PHP scripts. Old `.php` addresses redirect permanently (301) to the clean ones,
+so there is only ever one address per page. `CLEAN_URLS` in `includes/config.php` switches this
+off for a server without URL rewriting.
 
 ---
 

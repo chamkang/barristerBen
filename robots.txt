@@ -14,15 +14,15 @@ Allow: /
 # Internal and non-content paths
 Disallow: /includes/
 Disallow: /storage/
-Disallow: /404.php
-Disallow: /fr/404.php
+Disallow: /404
+Disallow: /fr/404
 
 # The article editor and its API
 Disallow: /admin
 Disallow: /api/
 
 # Filtered listings duplicate the main article list
-Disallow: /blog.php?category=
-Disallow: /fr/blog.php?category=
+Disallow: /blog?category=
+Disallow: /fr/blog?category=
 
 Sitemap: https://fonjulawfirm.com/sitemap.xml

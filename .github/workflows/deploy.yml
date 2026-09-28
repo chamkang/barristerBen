@@ -1,0 +1,133 @@
+# Deploys the website to the Namecheap server on every push to main,
+# including every article or testimonial saved in the /admin editor.
+#
+#   1. Check  — every PHP file must parse, and the key pages must render
+#               without errors (on PHP's built-in server with tools/router.php,
+#               which follows the same rules as .htaccess).
+#   2. Deploy — uploads only what changed, over FTPS, to the folder that
+#               serves fonjulawfirm.com. Files that exist only on the server
+#               (the enquiry log, the editor's settings) are never touched.
+#
+# One-time setup: see "Deploying to Namecheap" in README.md. It needs these
+# repository secrets (Settings > Secrets and variables > Actions):
+#   FTP_SERVER       e.g. ftp.fonjulawfirm.com
+#   FTP_USERNAME     the FTP account, e.g. deploy@fonjulawfirm.com
+#   FTP_PASSWORD     its password
+#   FTP_SERVER_DIR   optional: the site folder as seen by that FTP account,
+#                    ending in "/". Leave unset ("./") when the FTP account's
+#                    home IS the fonjulawfirm.com folder (recommended).
+
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, curl, intl
+          coverage: none
+
+      - name: Every PHP file parses
+        run: |
+          find . -name '*.php' -not -path './dist/*' -not -path './.git/*' -print0 \
+            | xargs -0 -n1 php -l > /dev/null
+
+      - name: Key pages render without errors
+        run: |
+          php -S 127.0.0.1:8080 tools/router.php > /tmp/php-server.log 2>&1 &
+          sleep 2
+          fail=0
+          for path in / /fr/ /about /fr/about /international-clients /practice-areas \
+                      /practice/corporate-law /fr/practice/corporate-law /blog /fr/blog \
+                      /faq /contact /fr/contact /privacy /sitemap.xml /feed.xml /llms.txt; do
+            code=$(curl -s -o /tmp/page -w '%{http_code}' "http://127.0.0.1:8080$path")
+            if [ "$code" != "200" ] || grep -qE '(Fatal error|Warning|Deprecated|Parse error|Notice)</b>:' /tmp/page; then
+              echo "::error::$path returned $code or printed a PHP error"; fail=1
+            fi
+          done
+          # Every article, in both languages, from the sitemap.
+          for url in $(grep -o '<loc>[^<]*/insights/[^<]*</loc>' <(curl -s http://127.0.0.1:8080/sitemap.xml) | sed -E 's#<loc>https?://[^/]+##; s#</loc>##'); do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "http://127.0.0.1:8080$url")
+            [ "$code" = "200" ] || { echo "::error::$url returned $code"; fail=1; }
+          done
+          if grep -qiE 'fatal|warning' /tmp/php-server.log; then cat /tmp/php-server.log; fail=1; fi
+          exit $fail
+
+  deploy:
+    needs: check
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://fonjulawfirm.com
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the deployment secrets are set
+        id: secrets
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          missing=""
+          for name in FTP_SERVER FTP_USERNAME FTP_PASSWORD; do
+            [ -n "${!name}" ] || missing="$missing $name"
+          done
+          if [ -n "$missing" ]; then
+            echo "::warning::Not deployed yet: add these repository secrets (see README, 'Deploying to Namecheap'):$missing"
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Upload changed files over FTPS
+        if: steps.secrets.outputs.ready == 'true'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            .claude/**
+            .vscode/**
+            dist/**
+            tools/**
+            README.md
+            build.php
+            vercel.json
+            storage/*.log
+            storage/.dev-secret
+            storage/admin-config.php
+
+      - name: The live site answers
+        if: steps.secrets.outputs.ready == 'true'
+        run: |
+          sleep 5
+          for path in / /fr/ /about /api/session; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' "https://fonjulawfirm.com$path")
+            echo "$path -> $code"
+            [ "$code" = "200" ] || { echo "::warning::https://fonjulawfirm.com$path returned $code"; }
+          done

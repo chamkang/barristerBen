@@ -154,7 +154,7 @@
       .then(function (r) { return r.json(); })
       .then(function (data) {
         if (!data.configured) {
-          $('setupError').textContent = 'The server settings (password, session secret and GitHub access) have not been added yet.';
+          $('setupError').textContent = 'The settings file (password, session secret and GitHub access) has not been added to the server yet.';
           show('setup');
         } else if (data.signedIn) {
           openList();
@@ -164,7 +164,7 @@
         }
       })
       .catch(function () {
-        $('setupError').textContent = 'The admin service could not be reached. It only runs on the live (Vercel) website, not on a local copy.';
+        $('setupError').textContent = 'The editor service could not be reached. On your own computer, start it with: php -S localhost:8098 tools/router.php';
         show('setup');
       });
   }

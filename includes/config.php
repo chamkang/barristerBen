@@ -25,6 +25,14 @@ const SITE_FOUNDED   = '2014';
 const SITE_URL = 'https://fonjulawfirm.com';
 
 /**
+ * Clean addresses: /about, /practice/corporate-law, /insights/…, /fr/… instead
+ * of about.php and practice-area.php?area=…. They need the rewrite rules in
+ * .htaccess (Apache, LiteSpeed — including XAMPP and Namecheap) or
+ * tools/dev-server.js. Set to false only on a server without URL rewriting.
+ */
+const CLEAN_URLS = true;
+
+/**
  * '' when the site lives at the web root, or '/barrister-Ben' for XAMPP.
  * French pages run from fr/, so that folder is stripped to find the site root.
  */

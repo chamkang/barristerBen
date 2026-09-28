@@ -35,7 +35,7 @@ $page = [
     'noindex'     => $activeCat !== '',
     'schema'      => [[
         '@type'       => 'Blog',
-        '@id'         => SITE_URL . '/blog.php#blog',
+        '@id'         => abs_url('blog.php') . '#blog',
         'name'        => SITE_NAME . ' Insights',
         'description' => 'Practical legal insights on Cameroonian and OHADA business law.',
         'url'         => abs_url('blog.php'),

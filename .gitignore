@@ -14,6 +14,12 @@ desktop.ini
 node_modules/
 .vercel
 
-# NOTE: dist/ is deliberately COMMITTED.
-# Vercel, Netlify and Cloudflare Pages cannot run PHP, so the static build has
-# to be generated locally (php build.php) and committed for them to serve it.
+# Static export (php build.php). No longer deployed: the live site runs the
+# PHP directly on Namecheap. Generate it locally only if you need it.
+dist/
+
+# Editor settings and local secrets — never commit these.
+fonju-admin-config.php
+storage/admin-config.php
+storage/.dev-secret
+.ftp-deploy-sync-state.json

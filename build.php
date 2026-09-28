@@ -121,7 +121,7 @@ $bldRewriteUrl = static function (string $url): string {
 
         // Category-filtered listings have no static page (they are noindex
         // anyway), so collapse them onto the main listing.
-        $u = preg_replace('~blog\.php\?category=[^"&\s]*~', 'blog', $u) ?? $u;
+        $u = preg_replace('~blog(?:\.php)?\?category=[^"&\s]*~', 'blog', $u) ?? $u;
 
         // Remaining top-level pages lose the .php extension; index.php -> /.
         $u = preg_replace('~\bindex\.php\b~', '', $u) ?? $u;

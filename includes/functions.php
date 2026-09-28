@@ -10,29 +10,61 @@ function e(?string $s): string
 require_once __DIR__ . '/i18n.php';
 
 /**
+ * Turns a script path into its public address when CLEAN_URLS is on:
+ *   about.php -> about              practice-area.php?area=x -> practice/x
+ *   index.php -> (root)             post.php?p=x             -> insights/x
+ *   fr/index.php -> fr/             sitemap.php -> sitemap.xml (also feed, llms)
+ * The matching rewrite rules are in .htaccess.
+ */
+function pretty_path(string $p): string
+{
+    if (!CLEAN_URLS || str_starts_with($p, 'assets/') || str_starts_with($p, 'admin/')) {
+        return $p;
+    }
+
+    $hash = '';
+    if (($h = strpos($p, '#')) !== false) {
+        [$p, $hash] = [substr($p, 0, $h), substr($p, $h)];
+    }
+
+    $p = (string) preg_replace(
+        ['~(^|/)practice-area\.php\?area=([a-z0-9-]+)$~', '~(^|/)post\.php\?p=([a-z0-9-]+)$~'],
+        ['$1practice/$2', '$1insights/$2'],
+        $p
+    );
+    $p = strtr($p, ['sitemap.php' => 'sitemap.xml', 'feed.php' => 'feed.xml', 'llms.php' => 'llms.txt']);
+    $p = (string) preg_replace('~(^|/)index\.php(?=$|\?)~', '$1', $p);
+    $p = (string) preg_replace('~^((?:fr/)?[a-z0-9-]+)\.php(?=$|\?)~', '$1', $p);
+
+    // The French home page is a folder, so it keeps its slash: /fr/
+    $p = rtrim($p, '/');
+    return ($p === 'fr' ? 'fr/' : $p) . $hash;
+}
+
+/**
  * Build a site-root-relative URL that also works inside an XAMPP sub-folder.
  * Page URLs follow the current language (see includes/i18n.php).
  */
 function url(string $path = '/'): string
 {
-    return BASE_PATH . '/' . lang_path($path);
+    return BASE_PATH . '/' . pretty_path(lang_path($path));
 }
 
 /** url() for a specific language — language switcher and hreflang links. */
 function url_in(string $path, string $lang): string
 {
-    return BASE_PATH . '/' . lang_path($path, $lang);
+    return BASE_PATH . '/' . pretty_path(lang_path($path, $lang));
 }
 
 /** Absolute URL — canonical tags, sitemap, structured data. */
 function abs_url(string $path = '/'): string
 {
-    return SITE_URL . '/' . lang_path($path);
+    return SITE_URL . '/' . pretty_path(lang_path($path));
 }
 
 function abs_url_in(string $path, string $lang): string
 {
-    return SITE_URL . '/' . lang_path($path, $lang);
+    return SITE_URL . '/' . pretty_path(lang_path($path, $lang));
 }
 
 function asset(string $path): string

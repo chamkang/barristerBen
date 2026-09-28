@@ -15,7 +15,7 @@ $page = [
     'body_class'  => 'page-faq',
     'schema'      => [[
         '@type'      => 'FAQPage',
-        '@id'        => SITE_URL . '/faq.php#faq',
+        '@id'        => abs_url('faq.php') . '#faq',
         'mainEntity' => array_map(static fn(array $item): array => [
             '@type'          => 'Question',
             'name'           => strip_tags($item['q']),
