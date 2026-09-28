@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FONJU LAW FIRM — DESIGN SYSTEM
+   FONJU & PARTNERS LAW FIRM — DESIGN SYSTEM
    --------------------------------------------------------------------------
    1.  Tokens
    2.  Reset & base
@@ -1714,7 +1714,8 @@ html:not(.js) .nav-toggle { display: none; }
 @media (max-width: 640px) {
   html { scroll-padding-top: 90px; }
   .topbar__meta li:nth-child(2) { display: none; }
-  .brand__sub { display: none; }
+  .brand__sub-rest { display: none; }
+  .brand__sub { font-size: .58rem; letter-spacing: .24em; margin-top: .3rem; }
   .site-header__actions .btn { display: none; }
   .form__row { grid-template-columns: 1fr; }
   .float-wa__label { display: none; }

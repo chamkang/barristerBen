@@ -8,8 +8,8 @@ require_once __DIR__ . '/includes/data-practice.php';
 require __DIR__ . '/includes/contact-handler.php';
 
 $page = [
-    'title'       => 'Contact Fonju Law Firm | Lawyers in Akwa, Douala, Cameroon',
-    'description' => 'Contact Fonju Law Firm, Rue Ernest Betote, Akwa, Douala. Call +237 699 96 41 77, message us on WhatsApp, or send an enquiry. We reply within a day.',
+    'title'       => 'Contact Fonju & Partners Law Firm | Lawyers in Akwa, Douala, Cameroon',
+    'description' => 'Contact Fonju & Partners Law Firm, Rue Ernest Betote, Akwa, Douala. Call +237 699 96 41 77, message us on WhatsApp, or send an enquiry. We reply within a day.',
     'canonical'   => 'contact.php',
     'breadcrumbs' => [['name' => 'Contact', 'url' => 'contact.php']],
     'body_class'  => 'page-contact',
@@ -141,7 +141,7 @@ require __DIR__ . '/includes/page-hero.php';
           <input id="consent" type="checkbox" name="consent" value="1" required>
           <label for="consent">
             I understand that sending this enquiry does not create a lawyer&ndash;client relationship,
-            and I consent to Fonju Law Firm holding these details in order to respond.
+            and I consent to Fonju & Partners Law Firm holding these details in order to respond.
             <a href="<?= e(url('privacy.php')) ?>">Privacy policy</a>.
           </label>
         </div>

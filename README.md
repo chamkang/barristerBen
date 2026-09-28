@@ -1,4 +1,4 @@
-# Fonju Law Firm — Website
+# Fonju & Partners Law Firm — Website
 
 A complete rebuild of fonjulawfirm.com: a fast, SEO-ready, fully responsive website for a
 Douala-based legal consultancy, in English and French. No build step, no framework, no database —

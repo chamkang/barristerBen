@@ -6,8 +6,8 @@ require_once dirname(__DIR__) . '/includes/functions.php';
 set_lang('fr');
 
 $page = [
-    'title'       => 'Politique de confidentialité | Cabinet Fonju',
-    'description' => 'Comment le cabinet Fonju collecte, utilise, conserve et protège les données personnelles transmises via fonjulawfirm.com, et les droits dont vous disposez.',
+    'title'       => 'Politique de confidentialité | Cabinet Fonju & Partners',
+    'description' => 'Comment le cabinet Fonju & Partners collecte, utilise, conserve et protège les données personnelles transmises via fonjulawfirm.com, et les droits dont vous disposez.',
     'canonical'   => 'privacy.php',
     'breadcrumbs' => [['name' => 'Politique de confidentialité', 'url' => 'privacy.php']],
     'body_class'  => 'page-legal',

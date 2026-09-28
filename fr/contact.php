@@ -9,8 +9,8 @@ require_once dirname(__DIR__) . '/includes/data-practice.php';
 require dirname(__DIR__) . '/includes/contact-handler.php';
 
 $page = [
-    'title'       => 'Contacter le cabinet Fonju | Avocats à Akwa, Douala, Cameroun',
-    'description' => 'Contactez le cabinet Fonju, rue Ernest Betote, Akwa, Douala. Appelez le +237 699 96 41 77, écrivez-nous sur WhatsApp ou envoyez une demande. Réponse sous un jour.',
+    'title'       => 'Contacter le cabinet Fonju & Partners | Avocats à Akwa, Douala, Cameroun',
+    'description' => 'Contactez le cabinet Fonju & Partners, rue Ernest Betote, Akwa, Douala. Appelez le +237 699 96 41 77, écrivez-nous sur WhatsApp ou envoyez une demande. Réponse sous un jour.',
     'canonical'   => 'contact.php',
     'breadcrumbs' => [['name' => 'Contact', 'url' => 'contact.php']],
     'body_class'  => 'page-contact',
@@ -140,7 +140,7 @@ require dirname(__DIR__) . '/includes/page-hero.php';
           <input id="consent" type="checkbox" name="consent" value="1" required>
           <label for="consent">
             Je comprends que l’envoi de cette demande ne crée pas de relation avocat&ndash;client, et
-            j’accepte que le cabinet Fonju conserve ces informations afin de me répondre.
+            j’accepte que le cabinet Fonju & Partners conserve ces informations afin de me répondre.
             <a href="<?= e(url('privacy.php')) ?>">Politique de confidentialité</a>.
           </label>
         </div>

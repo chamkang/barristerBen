@@ -26,12 +26,12 @@ return [
     'Back to top'     => 'Retour en haut',
 
     // Identity and SEO defaults
-    'Law Firm · Douala' => 'Cabinet d’avocats · Douala',
+    'Law Firm' => 'Avocats',
     'Corporate & Commercial Law in Cameroon' => 'Droit des affaires au Cameroun',
-    'Fonju Law Firm | Corporate & Commercial Lawyers in Douala, Cameroon'
-        => 'Cabinet Fonju | Avocats en droit des affaires à Douala, Cameroun',
-    'Fonju Law Firm is a Douala-based international legal consultancy advising businesses across Cameroon and the CEMAC/OHADA zone on corporate law, investment, maritime, mining, IP, employment and litigation.'
-        => 'Le cabinet Fonju est un cabinet de conseil juridique international basé à Douala, qui accompagne les entreprises au Cameroun et dans la zone CEMAC/OHADA en droit des sociétés, investissement, droit maritime, mines, propriété intellectuelle, droit du travail et contentieux.',
+    'Fonju & Partners Law Firm | Corporate & Commercial Lawyers in Douala, Cameroon'
+        => 'Cabinet Fonju & Partners | Avocats en droit des affaires à Douala, Cameroun',
+    'Fonju & Partners Law Firm is a Douala-based international legal consultancy advising businesses across Cameroon and the CEMAC/OHADA zone on corporate law, investment, maritime, mining, IP, employment and litigation.'
+        => 'Le cabinet Fonju & Partners est un cabinet de conseil juridique international basé à Douala, qui accompagne les entreprises au Cameroun et dans la zone CEMAC/OHADA en droit des sociétés, investissement, droit maritime, mines, propriété intellectuelle, droit du travail et contentieux.',
 
     // Contact details and hours
     'Cameroon'          => 'Cameroun',
@@ -42,15 +42,15 @@ return [
     '8:00 AM – 12:00 PM' => '8 h 00 – 12 h 00',
     'Closed'            => 'Fermé',
     'Mon–Fri 8:00–19:30 · Sat 8:00–12:00' => 'Lun–ven 8 h–19 h 30 · sam 8 h–12 h',
-    'Hello Fonju Law Firm, I would like to request a consultation.'
-        => 'Bonjour Cabinet Fonju, je souhaite demander une consultation.',
+    'Hello Fonju & Partners Law Firm, I would like to request a consultation.'
+        => 'Bonjour Cabinet Fonju & Partners, je souhaite demander une consultation.',
 
     // Buttons and calls to action
     'Book a Consultation' => 'Rendez-vous',
     'Book a consultation' => 'Prendre rendez-vous',
     'Chat on WhatsApp'    => 'Écrire sur WhatsApp',
     'Chat with us'        => 'Écrivez-nous',
-    'Chat with Fonju Law Firm on WhatsApp' => 'Écrire au cabinet Fonju sur WhatsApp',
+    'Chat with Fonju & Partners Law Firm on WhatsApp' => 'Écrire au cabinet Fonju & Partners sur WhatsApp',
     'Read the article'    => 'Lire l’article',
     'min read'            => 'min de lecture',
 
@@ -70,7 +70,7 @@ return [
     'on'                => 'sur',
     'All practice areas' => 'Tous les domaines d’expertise',
     'The Firm'          => 'Le cabinet',
-    'About Fonju Law Firm' => 'Présentation du cabinet',
+    'About Fonju & Partners Law Firm' => 'Présentation du cabinet',
     'Our legal team'    => 'Notre équipe',
     'Insights & legal updates' => 'Actualités juridiques',
     'Frequently asked questions' => 'Questions fréquentes',
@@ -99,7 +99,7 @@ return [
     'Save my choices' => 'Enregistrer mes choix',
 
     // Map
-    'Map showing the location of Fonju Law Firm in Akwa, Douala' => 'Carte indiquant l’emplacement du cabinet Fonju à Akwa, Douala',
+    'Map showing the location of Fonju & Partners Law Firm in Akwa, Douala' => 'Carte indiquant l’emplacement du cabinet Fonju & Partners à Akwa, Douala',
     'The map is provided by Google, which may set cookies when it loads.' => 'La carte est fournie par Google, qui peut déposer des cookies lors de son chargement.',
     'Show the map'        => 'Afficher la carte',
     'Open in Google Maps' => 'Ouvrir dans Google Maps',

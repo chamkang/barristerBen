@@ -4,7 +4,7 @@ seo_title: "Licenciement au Cameroun : la procédure du Code du travail"
 date: 2026-07-09
 updated: 2026-07-09
 category: "Droit du travail"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "Les employeurs perdent rarement un contentieux de licenciement parce que le motif était mauvais. Ils perdent parce que la procédure était incomplète. Le dossier doit être bouclé avant toute annonce."
 tags:
   - "Code du travail"

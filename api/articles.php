@@ -76,7 +76,7 @@ function normalise(array $in): array
     if (mb_strlen(trim($a['body'])) < 50) $errors[] = 'The article text is too short.';
     if ($a['translation'] !== '' && !preg_match(SLUG_RE, $a['translation'])) $errors[] = 'The linked translation is not valid.';
     if ($a['image'] !== '' && !preg_match('~^/assets/img/insights/[A-Za-z0-9/_\-.]+$~', $a['image']) && !str_starts_with($a['image'], 'https://')) $errors[] = 'The cover image address is not valid.';
-    if ($a['author'] === '') $a['author'] = $a['lang'] === 'fr' ? 'Cabinet Fonju' : 'Fonju Law Firm';
+    if ($a['author'] === '') $a['author'] = $a['lang'] === 'fr' ? 'Cabinet Fonju & Partners' : 'Fonju & Partners Law Firm';
     if ($a['excerpt'] === '') $errors[] = 'Write a one or two sentence summary.';
 
     return [$a, $errors];

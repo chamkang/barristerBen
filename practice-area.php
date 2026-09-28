@@ -18,7 +18,7 @@ if ($area === null) {
 $canonical = 'practice-area.php?area=' . $area['slug'];
 
 $page = [
-    'title'       => $area['title'] . ' Lawyers in Cameroon | Fonju Law Firm',
+    'title'       => $area['title'] . ' Lawyers in Cameroon | Fonju & Partners Law Firm',
     'description' => mb_substr($area['short'], 0, 158),
     'canonical'   => $canonical,
     'body_class'  => 'page-practice-detail',
@@ -109,7 +109,7 @@ $related = array_values(array_filter(
           <li><?= icon('phone', 17) ?><a href="<?= e(tel_href(CONTACT['phone_primary'])) ?>"><?= e(CONTACT['phone_primary']) ?></a></li>
           <li><?= icon('mail', 17) ?><a href="mailto:<?= e(CONTACT['email_general']) ?>"><?= e(CONTACT['email_general']) ?></a></li>
         </ul>
-        <a class="btn btn--gold btn--block mt-5" href="<?= e(whatsapp_url('Hello Fonju Law Firm, I have a question about ' . $area['title'] . '.')) ?>" target="_blank" rel="noopener">
+        <a class="btn btn--gold btn--block mt-5" href="<?= e(whatsapp_url('Hello Fonju & Partners Law Firm, I have a question about ' . $area['title'] . '.')) ?>" target="_blank" rel="noopener">
           <?= icon('whatsapp', 17) ?> Message on WhatsApp
         </a>
       </div>

@@ -11,7 +11,7 @@ if (http_response_code() === 200) {
 }
 
 $page = [
-    'title'       => 'Page not found | Fonju Law Firm',
+    'title'       => 'Page not found | Fonju & Partners Law Firm',
     'description' => 'The page you are looking for could not be found. Browse our practice areas, insights and contact details instead.',
     'canonical'   => '404.php',
     'noindex'     => true,

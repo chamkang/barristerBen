@@ -4,7 +4,7 @@ seo_title: "Arbitrage OHADA ou tribunaux au Cameroun : quelle clause choisir"
 date: 2026-06-10
 updated: 2026-06-10
 category: "Contentieux"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "La clause de règlement des différends se négocie en dernier, en cinq minutes, par des personnes fatiguées. Elle détermine pourtant toute l’économie des litiges qui suivront."
 tags:
   - "Arbitrage"

@@ -4,7 +4,7 @@ seo_title: "Dépôt et enregistrement de marque OAPI : guide pratique"
 date: 2026-06-25
 updated: 2026-06-25
 category: "Propriété intellectuelle"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "Les entreprises camerounaises ont accès à un système d’enregistrement régional réellement puissant, et constamment sous-utilisé. Voici comment bien s’en servir."
 tags:
   - "OAPI"

@@ -272,7 +272,7 @@ return [
         'title' => 'Jeux en ligne et paris',
         'group' => 'Personnes et innovation',
         'short' => 'Agréments, conformité et structuration pour les opérateurs de jeux en ligne, de paris sportifs et de loteries en Afrique centrale.',
-        'intro' => 'La législation sur les jeux numériques évolue rapidement en Afrique centrale, et les opérateurs doivent souvent se conformer à des règles écrites pour des établissements physiques. Le cabinet Fonju a développé une activité de conseil dédiée aux jeux en ligne pour aider opérateurs, fournisseurs de plateformes et partenaires de paiement à entrer légalement sur le marché et à y rester.',
+        'intro' => 'La législation sur les jeux numériques évolue rapidement en Afrique centrale, et les opérateurs doivent souvent se conformer à des règles écrites pour des établissements physiques. Le cabinet Fonju & Partners a développé une activité de conseil dédiée aux jeux en ligne pour aider opérateurs, fournisseurs de plateformes et partenaires de paiement à entrer légalement sur le marché et à y rester.',
         'services' => [
             'Demandes et renouvellements d’agréments de jeux et de paris',
             'Analyse des écarts réglementaires pour les opérateurs entrant sur le marché CEMAC',

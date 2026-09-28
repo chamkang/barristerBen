@@ -24,7 +24,7 @@ function faq_groups(): array
 
         'Working with the firm' => [
             [
-                'q' => 'How do I book a consultation with Fonju Law Firm?',
+                'q' => 'How do I book a consultation with Fonju & Partners Law Firm?',
                 'a' => 'Call <strong>+237 699 96 41 77</strong> or <strong>+237 676 37 11 80</strong>, send a message on WhatsApp, e-mail <strong>info@fonjulawfirm.com</strong>, or complete the enquiry form on our contact page. We aim to respond to every enquiry within one business day, and urgent matters — a vessel arrest, an arrest of a person, an imminent deadline — are handled the same day.',
             ],
             [

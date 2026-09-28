@@ -10,8 +10,8 @@ require_once dirname(__DIR__) . '/includes/data-team.php';
 $members = team_members();
 
 $page = [
-    'title'       => 'Notre équipe | Avocats et conseils | Cabinet Fonju, Douala',
-    'description' => 'L’équipe du cabinet Fonju à Douala : des avocats et consultants formés dans des facultés de droit nationales et internationales, qui travaillent en français et en anglais.',
+    'title'       => 'Notre équipe | Avocats et conseils | Cabinet Fonju & Partners, Douala',
+    'description' => 'L’équipe du cabinet Fonju & Partners à Douala : des avocats et consultants formés dans des facultés de droit nationales et internationales, qui travaillent en français et en anglais.',
     'canonical'   => 'team.php',
     'breadcrumbs' => [['name' => 'Notre équipe', 'url' => 'team.php']],
     'body_class'  => 'page-team',

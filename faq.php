@@ -8,7 +8,7 @@ require_once __DIR__ . '/includes/data-faq.php';
 $groups = faq_groups();
 
 $page = [
-    'title'       => 'Frequently Asked Questions | Cameroon Legal Advice | Fonju Law Firm',
+    'title'       => 'Frequently Asked Questions | Cameroon Legal Advice | Fonju & Partners Law Firm',
     'description' => 'Answers on fees, consultations, company registration, land title checks, dismissals, arbitration and investing in Cameroon. Asked and answered plainly.',
     'canonical'   => 'faq.php',
     'breadcrumbs' => [['name' => 'FAQ', 'url' => 'faq.php']],

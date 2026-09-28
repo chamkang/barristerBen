@@ -30,7 +30,7 @@ $line('# ' . SITE_NAME);
 $line();
 $line('> ' . SEO_DEFAULTS['description']);
 $line();
-$line('Fonju Law Firm is a law firm and legal consultancy in Douala, Cameroon. It advises companies, investors and individuals, in English and French, on Cameroonian law and on the OHADA and CEMAC regional frameworks. It acts as local counsel for foreign clients entering Cameroon and Central Africa.');
+$line('Fonju & Partners Law Firm is a law firm and legal consultancy in Douala, Cameroon. It advises companies, investors and individuals, in English and French, on Cameroonian law and on the OHADA and CEMAC regional frameworks. It acts as local counsel for foreign clients entering Cameroon and Central Africa.');
 $line();
 $line('## Key facts');
 $line();
@@ -74,7 +74,7 @@ $line();
 
 $line('## En français');
 $line();
-$line('- [Accueil](' . abs_url_in('', 'fr') . '): le cabinet Fonju, cabinet d’avocats en droit des affaires à Douala');
+$line('- [Accueil](' . abs_url_in('', 'fr') . '): le cabinet Fonju & Partners, cabinet d’avocats en droit des affaires à Douala');
 $line('- [Domaines d’expertise](' . abs_url_in('practice-areas.php', 'fr') . ')');
 $line('- [Clients internationaux](' . abs_url_in('international-clients.php', 'fr') . '): pour les entreprises étrangères, investisseurs, particuliers et Camerounais de l’étranger');
 $line('- [Questions fréquentes](' . abs_url_in('faq.php', 'fr') . ')');

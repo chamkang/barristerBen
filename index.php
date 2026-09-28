@@ -9,7 +9,7 @@ require_once __DIR__ . '/includes/data-testimonials.php';
 require_once __DIR__ . '/includes/data-faq.php';
 
 $page = [
-    'title'       => 'Lawyers in Douala, Cameroon | Fonju Law Firm, Corporate & Business Law',
+    'title'       => 'Lawyers in Douala, Cameroon | Fonju & Partners Law Firm',
     'description' => 'Douala legal consultancy advising business across Cameroon and the CEMAC/OHADA zone: corporate, investment, maritime, IP, employment and litigation.',
     'canonical'   => '',
     'body_class'  => 'page-home',
@@ -36,7 +36,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
       </h1>
 
       <p class="hero__lede">
-        Fonju Law Firm is an international legal consultancy based in Douala, advising companies,
+        Fonju & Partners Law Firm is an international legal consultancy based in Douala, advising companies,
         investors and individuals across Cameroon and the wider CEMAC and OHADA region. We are
         defined by precision, proactive counsel and an unwavering commitment to client confidentiality.
       </p>
@@ -151,14 +151,14 @@ $latest   = array_slice(blog_posts(), 0, 3);
         <li><?= icon('check', 16) ?><span><strong>Accessible and tenacious.</strong> Transparent about cost, direct about risk, and relentless once instructed.</span></li>
       </ul>
       <p class="mt-6">
-        <a class="btn btn--outline" href="<?= e(url('about.php')) ?>">More about Fonju Law Firm <?= icon('arrow', 16) ?></a>
+        <a class="btn btn--outline" href="<?= e(url('about.php')) ?>">More about Fonju & Partners Law Firm <?= icon('arrow', 16) ?></a>
       </p>
     </div>
 
     <div class="reveal" data-delay="2">
       <div class="figure-panel">
         <!-- Drop a real photograph at assets/img/office-douala.jpg and uncomment:
-             <img src="<?= e(asset('img/office-douala.jpg')) ?>" alt="Fonju Law Firm office in Akwa, Douala"> -->
+             <img src="<?= e(asset('img/office-douala.jpg')) ?>" alt="Fonju & Partners Law Firm office in Akwa, Douala"> -->
         <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
         <span class="figure-panel__caption">
           <strong>Rue Ernest Betote, Akwa</strong>

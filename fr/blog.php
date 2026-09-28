@@ -22,11 +22,11 @@ $canonical = $activeCat === '' ? 'blog.php' : 'blog.php?category=' . rawurlencod
 
 $page = [
     'title'       => $activeCat === ''
-        ? 'Actualités | Droit des affaires au Cameroun et OHADA | Cabinet Fonju'
-        : $activeCat . ' | Actualités juridiques | Cabinet Fonju',
+        ? 'Actualités | Droit des affaires au Cameroun et OHADA | Cabinet Fonju & Partners'
+        : $activeCat . ' | Actualités juridiques | Cabinet Fonju & Partners',
     'description' => $activeCat === ''
         ? 'Notes pratiques sur le droit des affaires camerounais et OHADA : création de société, foncier, droit du travail, marques OAPI, arbitrage, fiscalité et investissement.'
-        : 'Articles « ' . $activeCat . ' » du cabinet Fonju, écrits pour les chefs d’entreprise, investisseurs et juristes au Cameroun et en zone CEMAC.',
+        : 'Articles « ' . $activeCat . ' » du cabinet Fonju & Partners, écrits pour les chefs d’entreprise, investisseurs et juristes au Cameroun et en zone CEMAC.',
     'canonical'   => $canonical,
     'breadcrumbs' => array_values(array_filter([
         ['name' => 'Actualités', 'url' => 'blog.php'],
@@ -37,7 +37,7 @@ $page = [
     'schema'      => [[
         '@type'       => 'Blog',
         '@id'         => abs_url('blog.php') . '#blog',
-        'name'        => 'Actualités du cabinet Fonju',
+        'name'        => 'Actualités du cabinet Fonju & Partners',
         'description' => 'Analyses juridiques pratiques sur le droit des affaires camerounais et OHADA.',
         'inLanguage'  => 'fr',
         'url'         => abs_url('blog.php'),

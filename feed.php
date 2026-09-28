@@ -18,7 +18,7 @@ echo '<?xml version="1.0" encoding="UTF-8"?>', "\n";
   <channel>
     <title><?= htmlspecialchars(SITE_NAME . ' — Insights', ENT_XML1) ?></title>
     <link><?= htmlspecialchars(abs_url('blog.php'), ENT_XML1) ?></link>
-    <description>Practical legal insights on Cameroonian and OHADA business law from Fonju Law Firm, Douala.</description>
+    <description>Practical legal insights on Cameroonian and OHADA business law from Fonju &amp; Partners Law Firm, Douala.</description>
     <language>en</language>
     <lastBuildDate><?= date(DATE_RSS, $built) ?></lastBuildDate>
     <atom:link href="<?= htmlspecialchars(abs_url('feed.php'), ENT_XML1) ?>" rel="self" type="application/rss+xml"/>

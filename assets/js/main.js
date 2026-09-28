@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FONJU LAW FIRM — INTERACTION LAYER
+   FONJU & PARTNERS LAW FIRM — INTERACTION LAYER
    No dependencies. Everything degrades gracefully without JavaScript.
    ========================================================================== */
 (function () {

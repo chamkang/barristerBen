@@ -4,7 +4,7 @@ seo_title: "Dismissing an Employee in Cameroon: The Labour Code Procedure"
 date: 2026-07-09
 updated: 2026-07-09
 category: "Employment"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "Employers rarely lose dismissal cases because the reason was bad. They lose because the procedure was incomplete. The file has to be finished before anyone is told anything."
 tags:
   - "Labour Code"

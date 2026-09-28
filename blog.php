@@ -21,11 +21,11 @@ $canonical = $activeCat === '' ? 'blog.php' : 'blog.php?category=' . rawurlencod
 
 $page = [
     'title'       => $activeCat === ''
-        ? 'Insights | Cameroon & OHADA Business Law | Fonju Law Firm'
-        : $activeCat . ' Insights | Cameroon Business Law | Fonju Law Firm',
+        ? 'Insights | Cameroon & OHADA Business Law | Fonju & Partners Law Firm'
+        : $activeCat . ' Insights | Cameroon Business Law | Fonju & Partners Law Firm',
     'description' => $activeCat === ''
         ? 'Practical notes on Cameroonian and OHADA business law: company formation, land title, employment, OAPI trade marks, arbitration, tax and investment.'
-        : 'Articles on ' . $activeCat . ' from Fonju Law Firm, written for business owners, investors and in-house teams operating in Cameroon and the CEMAC region.',
+        : 'Articles on ' . $activeCat . ' from Fonju & Partners Law Firm, written for business owners, investors and in-house teams operating in Cameroon and the CEMAC region.',
     'canonical'   => $canonical,
     'breadcrumbs' => array_values(array_filter([
         ['name' => 'Insights', 'url' => 'blog.php'],

@@ -12,7 +12,7 @@ if (http_response_code() === 200) {
 }
 
 $page = [
-    'title'       => 'Page introuvable | Cabinet Fonju',
+    'title'       => 'Page introuvable | Cabinet Fonju & Partners',
     'description' => 'La page demandée est introuvable. Consultez nos domaines d’expertise, nos actualités ou nos coordonnées.',
     'canonical'   => '404.php',
     'noindex'     => true,

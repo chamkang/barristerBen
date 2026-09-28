@@ -26,7 +26,7 @@
           <span class="brand__mark" aria-hidden="true"><?= brand_mark(52) ?></span>
           <span class="brand__text">
             <span class="brand__name">Fonju</span>
-            <span class="brand__sub"><?= e(t('Law Firm · Douala')) ?></span>
+            <span class="brand__sub">&amp; Partners<span class="brand__sub-rest"> · <?= e(t('Law Firm')) ?></span></span>
           </span>
         </a>
         <p class="site-footer__blurb"><?= e(t('An international legal consultancy based in Douala, advising businesses and individuals across Cameroon and the wider CEMAC and OHADA region. Precision, proactive counsel and absolute confidentiality.')) ?></p>
@@ -48,7 +48,7 @@
       <nav class="site-footer__col" aria-label="<?= e(t('The Firm')) ?>">
         <h2 class="site-footer__heading"><?= e(t('The Firm')) ?></h2>
         <ul class="site-footer__links">
-          <li><a href="<?= e(url('about.php')) ?>"><?= e(t('About Fonju Law Firm')) ?></a></li>
+          <li><a href="<?= e(url('about.php')) ?>"><?= e(t('About Fonju & Partners Law Firm')) ?></a></li>
           <li><a href="<?= e(url('team.php')) ?>"><?= e(t('Our legal team')) ?></a></li>
           <li><a href="<?= e(url('international-clients.php')) ?>"><?= e(t('Clients outside Cameroon')) ?></a></li>
           <li><a href="<?= e(url('blog.php')) ?>"><?= e(t('Insights & legal updates')) ?></a></li>
@@ -105,7 +105,7 @@
   </div>
 </footer>
 
-<a class="float-wa" href="<?= e(whatsapp_url()) ?>" target="_blank" rel="noopener" aria-label="<?= e(t('Chat with Fonju Law Firm on WhatsApp')) ?>">
+<a class="float-wa" href="<?= e(whatsapp_url()) ?>" target="_blank" rel="noopener" aria-label="<?= e(t('Chat with Fonju & Partners Law Firm on WhatsApp')) ?>">
   <?= icon('whatsapp', 26) ?>
   <span class="float-wa__label"><?= e(t('Chat with us')) ?></span>
 </a>
@@ -159,6 +159,6 @@
   </div>
 </section>
 
-<script src="<?= e(asset('js/main.js')) ?>?v=2.2.0" defer></script>
+<script src="<?= e(asset('js/main.js')) ?>?v=2.3.0" defer></script>
 </body>
 </html>

@@ -195,7 +195,7 @@ function social_links(string $class = 'socials', int $size = 18): string
 
 function whatsapp_url(?string $text = null): string
 {
-    $text ??= t('Hello Fonju Law Firm, I would like to request a consultation.');
+    $text ??= t('Hello Fonju & Partners Law Firm, I would like to request a consultation.');
 
     return 'https://wa.me/' . CONTACT['whatsapp'] . '?text=' . rawurlencode($text);
 }

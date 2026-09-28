@@ -1,4 +1,4 @@
-/* Fonju Law Firm — article admin.
+/* Fonju & Partners Law Firm — article admin.
  * Talks to the serverless functions in /api (see api/_lib.js). Articles are
  * Markdown files; the preview below mirrors the site's own Markdown support
  * (includes/content.php), so what you see is what gets published. */
@@ -12,7 +12,7 @@
     en: ['Corporate', 'Dispute Resolution', 'Employment', 'Intellectual Property', 'Investment', 'Real Estate', 'Regulatory', 'Technology', 'iGaming'],
     fr: ['Droit des sociétés', 'Contentieux', 'Droit du travail', 'Propriété intellectuelle', 'Investissement', 'Immobilier', 'Réglementation', 'Technologies', 'Jeux en ligne'],
   };
-  var AUTHORS = { en: 'Fonju Law Firm', fr: 'Cabinet Fonju' };
+  var AUTHORS = { en: 'Fonju & Partners Law Firm', fr: 'Cabinet Fonju & Partners' };
 
   // ------------------------------------------------------------------ API
   function api(path, options) {

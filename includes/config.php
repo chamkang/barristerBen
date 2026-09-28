@@ -1,7 +1,7 @@
 <?php
 /**
  * ---------------------------------------------------------------------------
- * FONJU LAW FIRM — SITE CONFIGURATION
+ * FONJU & PARTNERS LAW FIRM — SITE CONFIGURATION
  * ---------------------------------------------------------------------------
  * This is the ONLY file you need to edit for contact details, social media
  * links, office hours and site-wide SEO defaults.
@@ -13,9 +13,9 @@ declare(strict_types=1);
 // ---------------------------------------------------------------------------
 // 1. SITE IDENTITY
 // ---------------------------------------------------------------------------
-const SITE_NAME      = 'Fonju Law Firm';
+const SITE_NAME      = 'Fonju & Partners Law Firm';
 const SITE_TAGLINE   = 'Corporate & Commercial Law in Cameroon';
-const SITE_LEGALNAME = 'Fonju Law Firm — International Legal Consultancy';
+const SITE_LEGALNAME = 'Fonju & Partners Law Firm — International Legal Consultancy';
 const SITE_FOUNDED   = '2014';
 
 /**
@@ -87,8 +87,8 @@ const SOCIALS = [
 // 4. SEO DEFAULTS
 // ---------------------------------------------------------------------------
 const SEO_DEFAULTS = [
-    'title'       => 'Fonju Law Firm | Corporate & Commercial Lawyers in Douala, Cameroon',
-    'description' => 'Fonju Law Firm is a Douala-based international legal consultancy advising businesses across Cameroon and the CEMAC/OHADA zone on corporate law, investment, maritime, mining, IP, employment and litigation.',
+    'title'       => 'Fonju & Partners Law Firm | Corporate & Commercial Lawyers in Douala, Cameroon',
+    'description' => 'Fonju & Partners Law Firm is a Douala-based international legal consultancy advising businesses across Cameroon and the CEMAC/OHADA zone on corporate law, investment, maritime, mining, IP, employment and litigation.',
     'image'       => '/assets/img/og-default.png',   // PNG: Facebook, LinkedIn and X do not render SVG share cards
     'locale'      => 'en_CM',
 ];

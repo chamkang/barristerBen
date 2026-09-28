@@ -20,7 +20,7 @@ $minutes     = reading_time($post['body']);
 $translation = post_translation($post);
 
 $page = [
-    'title'       => ($post['seo_title'] ?: $post['title']) . ' | Fonju Law Firm',
+    'title'       => ($post['seo_title'] ?: $post['title']) . ' | Fonju & Partners Law Firm',
     'description' => mb_substr($post['excerpt'], 0, 158),
     'canonical'   => $canonical,
     'og_type'     => 'article',
@@ -123,7 +123,7 @@ $related = related_posts($post, 3);
         <h3>Have a question on this?</h3>
         <p style="font-size:.98rem;">If this article touches something you are dealing with, tell us what has happened. The first assessment costs you nothing but the conversation.</p>
         <a class="btn btn--gold btn--block mt-5" href="<?= e(url('contact.php')) ?>#consultation">Book a consultation</a>
-        <a class="btn btn--ghost btn--block mt-4" href="<?= e(whatsapp_url('Hello Fonju Law Firm, I read your article: ' . $post['title'])) ?>" target="_blank" rel="noopener">
+        <a class="btn btn--ghost btn--block mt-4" href="<?= e(whatsapp_url('Hello Fonju & Partners Law Firm, I read your article: ' . $post['title'])) ?>" target="_blank" rel="noopener">
           <?= icon('whatsapp', 16) ?> WhatsApp us
         </a>
       </div>

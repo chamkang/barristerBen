@@ -4,7 +4,7 @@ seo_title: "Arbitration or Court in Cameroon? Choosing a Dispute Clause"
 date: 2026-06-10
 updated: 2026-06-10
 category: "Dispute Resolution"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "The dispute resolution clause is negotiated last, in five minutes, by tired people. It then determines the entire economics of any dispute that follows."
 tags:
   - "Arbitration"

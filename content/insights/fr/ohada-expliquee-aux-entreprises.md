@@ -4,7 +4,7 @@ seo_title: "Le droit OHADA expliqué aux entreprises au Cameroun"
 date: 2026-08-05
 updated: 2026-08-05
 category: "Réglementation"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "Dix-sept pays, un droit des affaires commun et une cour supranationale capable de censurer votre décision nationale. Un guide pratique pour les entreprises étrangères et locales."
 tags:
   - "OHADA"

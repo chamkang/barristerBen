@@ -5,8 +5,8 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 
 $page = [
-    'title'       => 'Legal Notice & Disclaimer | Fonju Law Firm',
-    'description' => 'Legal notice, terms of use and disclaimer for the Fonju Law Firm website, including the limits of the information published here and the basis on which we accept instructions.',
+    'title'       => 'Legal Notice & Disclaimer | Fonju & Partners Law Firm',
+    'description' => 'Legal notice, terms of use and disclaimer for the Fonju & Partners Law Firm website, including the limits of the information published here and the basis on which we accept instructions.',
     'canonical'   => 'legal-notice.php',
     'breadcrumbs' => [['name' => 'Legal Notice', 'url' => 'legal-notice.php']],
     'body_class'  => 'page-legal',

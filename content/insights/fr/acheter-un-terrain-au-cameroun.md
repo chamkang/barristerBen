@@ -4,7 +4,7 @@ seo_title: "Achat de terrain au Cameroun : 7 vérifications du titre foncier"
 date: 2026-07-22
 updated: 2026-07-22
 category: "Immobilier"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "La terre est l’actif le plus disputé du Cameroun, et le plus souvent mal vendu. Presque chaque échec remonte à une vérification omise avant l’acompte."
 tags:
   - "Titre foncier"

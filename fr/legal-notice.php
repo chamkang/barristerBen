@@ -6,8 +6,8 @@ require_once dirname(__DIR__) . '/includes/functions.php';
 set_lang('fr');
 
 $page = [
-    'title'       => 'Mentions légales et avertissement | Cabinet Fonju',
-    'description' => 'Mentions légales, conditions d’utilisation et avertissement du site du cabinet Fonju : limites des informations publiées et conditions dans lesquelles nous acceptons un mandat.',
+    'title'       => 'Mentions légales et avertissement | Cabinet Fonju & Partners',
+    'description' => 'Mentions légales, conditions d’utilisation et avertissement du site du cabinet Fonju & Partners : limites des informations publiées et conditions dans lesquelles nous acceptons un mandat.',
     'canonical'   => 'legal-notice.php',
     'breadcrumbs' => [['name' => 'Mentions légales', 'url' => 'legal-notice.php']],
     'body_class'  => 'page-legal',

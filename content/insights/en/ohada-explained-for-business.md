@@ -4,7 +4,7 @@ seo_title: "OHADA Business Law Explained for Companies in Cameroon"
 date: 2026-08-05
 updated: 2026-08-05
 category: "Regulatory"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "Seventeen countries, one commercial code and a supranational court that can overturn your national judgment. A practical orientation for foreign and local businesses."
 tags:
   - "OHADA"

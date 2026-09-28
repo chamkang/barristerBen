@@ -10,7 +10,7 @@ require_once dirname(__DIR__) . '/includes/data-testimonials.php';
 require_once dirname(__DIR__) . '/includes/data-faq.php';
 
 $page = [
-    'title'       => 'Avocat à Douala, Cameroun | Cabinet d’avocats Fonju, droit des affaires',
+    'title'       => 'Avocat à Douala, Cameroun | Cabinet Fonju & Partners, avocats d’affaires',
     'description' => 'Cabinet d’avocats à Douala : droit des sociétés, investissement, maritime, propriété intellectuelle, travail et contentieux au Cameroun et en zone OHADA.',
     'canonical'   => '',
     'body_class'  => 'page-home',
@@ -37,7 +37,7 @@ $latest   = array_slice(blog_posts(), 0, 3);
       </h1>
 
       <p class="hero__lede">
-        Le cabinet Fonju est un cabinet de conseil juridique international basé à Douala, au service
+        Le cabinet Fonju & Partners est un cabinet de conseil juridique international basé à Douala, au service
         des entreprises, des investisseurs et des particuliers au Cameroun et dans toute la zone CEMAC
         et OHADA. Il se distingue par sa rigueur, un conseil proactif et un attachement sans faille
         à la confidentialité.

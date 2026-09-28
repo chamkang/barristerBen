@@ -4,7 +4,7 @@ seo_title: "Protection des données au Cameroun : guide pour les entreprises"
 date: 2026-05-14
 updated: 2026-05-14
 category: "Technologies"
-author: "Cabinet Fonju"
+author: "Cabinet Fonju & Partners"
 excerpt: "Grands comptes et partenaires étrangers refusent désormais de contracter sans clauses adéquates sur les données. La conformité est discrètement devenue une condition de vente."
 tags:
   - "Protection des données"

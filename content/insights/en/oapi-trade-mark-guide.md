@@ -4,7 +4,7 @@ seo_title: "OAPI Trademark Registration: A Practical Guide"
 date: 2026-06-25
 updated: 2026-06-25
 category: "Intellectual Property"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "Cameroonian businesses have access to a regional registration system that is genuinely powerful and consistently underused. Here is how to use it well."
 tags:
   - "OAPI"

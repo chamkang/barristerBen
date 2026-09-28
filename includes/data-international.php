@@ -20,7 +20,7 @@ function international_content(): array
 function international_en(): array
 {
     return [
-        'title'       => 'Lawyer in Cameroon for Foreign Companies & Individuals | Fonju Law Firm',
+        'title'       => 'Lawyer in Cameroon for Foreign Companies & Individuals | Fonju & Partners Law Firm',
         'description' => 'English- and French-speaking lawyers in Douala for foreign companies, investors, individuals and Cameroonians abroad. Remote from start to finish, fees agreed in writing.',
         'crumb'       => 'International clients',
         'eyebrow'     => 'International clients',
@@ -78,14 +78,14 @@ function international_en(): array
 
         'cta_h2'      => 'Tell us what you need in Cameroon',
         'cta_p'       => 'Describe the situation in a few lines. We reply within one business day with our view, the options and the likely cost.',
-        'wa_text'     => 'Hello Fonju Law Firm, I am contacting you from abroad about a matter in Cameroon.',
+        'wa_text'     => 'Hello Fonju & Partners Law Firm, I am contacting you from abroad about a matter in Cameroon.',
     ];
 }
 
 function international_fr(): array
 {
     return [
-        'title'       => 'Avocat au Cameroun pour étrangers, entreprises et diaspora | Cabinet Fonju',
+        'title'       => 'Avocat au Cameroun pour étrangers, entreprises et diaspora | Cabinet Fonju & Partners',
         'description' => 'Avocats à Douala, francophones et anglophones, pour entreprises étrangères, investisseurs, particuliers et Camerounais de l’étranger. Tout à distance, honoraires fixés par écrit.',
         'crumb'       => 'Clients internationaux',
         'eyebrow'     => 'Clients internationaux',
@@ -143,6 +143,6 @@ function international_fr(): array
 
         'cta_h2'      => 'Dites-nous ce dont vous avez besoin au Cameroun',
         'cta_p'       => 'Décrivez la situation en quelques lignes. Nous répondons sous un jour ouvré avec notre analyse, les options et le coût probable.',
-        'wa_text'     => 'Bonjour Cabinet Fonju, je vous contacte depuis l’étranger au sujet d’une affaire au Cameroun.',
+        'wa_text'     => 'Bonjour Cabinet Fonju & Partners, je vous contacte depuis l’étranger au sujet d’une affaire au Cameroun.',
     ];
 }

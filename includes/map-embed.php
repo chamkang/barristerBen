@@ -11,7 +11,7 @@ $mapLink  = 'https://www.google.com/maps/search/?api=1&query=' . CONTACT['map_qu
 <div class="map-frame map-frame--consent reveal"
      data-consent-embed="media"
      data-embed-src="<?= e($mapEmbed) ?>"
-     data-embed-title="<?= e(t('Map showing the location of Fonju Law Firm in Akwa, Douala')) ?>">
+     data-embed-title="<?= e(t('Map showing the location of Fonju & Partners Law Firm in Akwa, Douala')) ?>">
   <div class="map-consent">
     <span class="map-consent__icon"><?= icon('pin', 30) ?></span>
     <p class="map-consent__title"><?= e(contact('street')) ?>, <?= e(contact('city')) ?></p>

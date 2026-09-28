@@ -7,7 +7,7 @@ require_once __DIR__ . '/includes/data-practice.php';
 require_once __DIR__ . '/includes/data-team.php';
 
 $page = [
-    'title'       => 'About Fonju Law Firm | International Legal Consultancy in Douala',
+    'title'       => 'About Fonju & Partners Law Firm | International Legal Consultancy in Douala',
     'description' => 'A Douala consortium of advocates and solicitors advising business across Cameroon and CEMAC. Our mission, expertise and how we work with clients.',
     'canonical'   => 'about.php',
     'breadcrumbs' => [['name' => 'About', 'url' => 'about.php']],
@@ -19,7 +19,7 @@ require __DIR__ . '/includes/header.php';
 $hero = [
     'eyebrow' => 'About the firm',
     'title'   => 'Specialised legal services,<br>delivered with precision',
-    'lede'    => 'Fonju Law Firm was founded on the principle that specialised legal services deliver superior results. Our mission is to be the most trusted and effective legal consultant for businesses driving innovation and growth in Cameroon.',
+    'lede'    => 'Fonju & Partners Law Firm was founded on the principle that specialised legal services deliver superior results. Our mission is to be the most trusted and effective legal consultant for businesses driving innovation and growth in Cameroon.',
 ];
 require __DIR__ . '/includes/page-hero.php';
 ?>
@@ -32,7 +32,7 @@ require __DIR__ . '/includes/page-hero.php';
       <h2>An international consultancy with <span class="accent">Cameroonian roots</span></h2>
       <div class="rule"></div>
       <p>
-        Fonju Law Firm is an international legal consultancy comprising a team of young, dedicated
+        Fonju & Partners Law Firm is an international legal consultancy comprising a team of young, dedicated
         lawyers with expertise across a wide range of legal areas. We pride ourselves on having in
         our membership a consortium of highly motivated Advocates and Solicitors of the Republic of
         Cameroon.

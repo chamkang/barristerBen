@@ -5,8 +5,8 @@ require_once __DIR__ . '/includes/config.php';
 require_once __DIR__ . '/includes/functions.php';
 
 $page = [
-    'title'       => 'Privacy Policy | Fonju Law Firm',
-    'description' => 'How Fonju Law Firm collects, uses, stores and protects personal data submitted through fonjulawfirm.com, and the rights available to you.',
+    'title'       => 'Privacy Policy | Fonju & Partners Law Firm',
+    'description' => 'How Fonju & Partners Law Firm collects, uses, stores and protects personal data submitted through fonjulawfirm.com, and the rights available to you.',
     'canonical'   => 'privacy.php',
     'breadcrumbs' => [['name' => 'Privacy Policy', 'url' => 'privacy.php']],
     'body_class'  => 'page-legal',

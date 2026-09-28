@@ -21,7 +21,7 @@ $minutes     = reading_time($post['body']);
 $translation = post_translation($post);
 
 $page = [
-    'title'       => ($post['seo_title'] ?: $post['title']) . ' | Cabinet Fonju',
+    'title'       => ($post['seo_title'] ?: $post['title']) . ' | Cabinet Fonju & Partners',
     'description' => mb_substr($post['excerpt'], 0, 158),
     'canonical'   => $canonical,
     'og_type'     => 'article',
@@ -124,7 +124,7 @@ $related = related_posts($post, 3);
         <h3>Une question sur ce sujet ?</h3>
         <p style="font-size:.98rem;">Si cet article touche à une situation que vous vivez, dites-nous ce qui s’est passé. La première évaluation ne vous coûte que la conversation.</p>
         <a class="btn btn--gold btn--block mt-5" href="<?= e(url('contact.php')) ?>#consultation">Prendre rendez-vous</a>
-        <a class="btn btn--ghost btn--block mt-4" href="<?= e(whatsapp_url('Bonjour Cabinet Fonju, j’ai lu votre article : ' . $post['title'])) ?>" target="_blank" rel="noopener">
+        <a class="btn btn--ghost btn--block mt-4" href="<?= e(whatsapp_url('Bonjour Cabinet Fonju & Partners, j’ai lu votre article : ' . $post['title'])) ?>" target="_blank" rel="noopener">
           <?= icon('whatsapp', 16) ?> Écrire sur WhatsApp
         </a>
       </div>

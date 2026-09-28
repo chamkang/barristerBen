@@ -4,7 +4,7 @@ seo_title: "Data Protection Law in Cameroon: A Guide for Businesses"
 date: 2026-05-14
 updated: 2026-05-14
 category: "Technology"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "Enterprise customers and foreign partners now refuse to contract without adequate data terms. Compliance has quietly become a sales requirement."
 tags:
   - "Data protection"

@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . '/includes/data-practice.php';
 require_once dirname(__DIR__) . '/includes/data-team.php';
 
 $page = [
-    'title'       => 'Le cabinet Fonju | Conseil juridique international à Douala',
+    'title'       => 'Le cabinet Fonju & Partners | Conseil juridique international à Douala',
     'description' => 'Un cabinet d’avocats et de conseils à Douala au service des entreprises au Cameroun et en zone CEMAC : notre mission, nos expertises et notre méthode.',
     'canonical'   => 'about.php',
     'breadcrumbs' => [['name' => 'Le cabinet', 'url' => 'about.php']],
@@ -20,7 +20,7 @@ require dirname(__DIR__) . '/includes/header.php';
 $hero = [
     'eyebrow' => 'Le cabinet',
     'title'   => 'Des services juridiques spécialisés,<br>rendus avec précision',
-    'lede'    => 'Le cabinet Fonju est né d’un principe : des services juridiques spécialisés produisent de meilleurs résultats. Notre mission est d’être le conseil juridique le plus fiable et le plus efficace des entreprises qui portent l’innovation et la croissance au Cameroun.',
+    'lede'    => 'Le cabinet Fonju & Partners est né d’un principe : des services juridiques spécialisés produisent de meilleurs résultats. Notre mission est d’être le conseil juridique le plus fiable et le plus efficace des entreprises qui portent l’innovation et la croissance au Cameroun.',
 ];
 require dirname(__DIR__) . '/includes/page-hero.php';
 ?>
@@ -33,7 +33,7 @@ require dirname(__DIR__) . '/includes/page-hero.php';
       <h2>Un cabinet international aux <span class="accent">racines camerounaises</span></h2>
       <div class="rule"></div>
       <p>
-        Le cabinet Fonju est un cabinet de conseil juridique international composé d’une équipe de
+        Le cabinet Fonju & Partners est un cabinet de conseil juridique international composé d’une équipe de
         jeunes avocats engagés, dont l’expertise couvre un large éventail de matières. Nous sommes fiers
         de réunir un collectif d’avocats et de conseils de la République du Cameroun particulièrement
         motivés.

@@ -4,7 +4,7 @@ seo_title: "Buying Land in Cameroon: 7 Checks Before You Pay"
 date: 2026-07-22
 updated: 2026-07-22
 category: "Real Estate"
-author: "Fonju Law Firm"
+author: "Fonju & Partners Law Firm"
 excerpt: "Land is the most disputed asset in Cameroon and the most frequently mis-sold. Almost every failure traces back to a check that was skipped before the deposit."
 tags:
   - "Land title"

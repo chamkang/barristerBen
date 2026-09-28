@@ -6,7 +6,7 @@ return [
 
     'Travailler avec le cabinet' => [
         [
-            'q' => 'Comment prendre rendez-vous avec le cabinet Fonju ?',
+            'q' => 'Comment prendre rendez-vous avec le cabinet Fonju & Partners ?',
             'a' => 'Appelez le <strong>+237 699 96 41 77</strong> ou le <strong>+237 676 37 11 80</strong>, écrivez-nous sur WhatsApp, envoyez un e-mail à <strong>info@fonjulawfirm.com</strong> ou remplissez le formulaire de notre page contact. Nous nous efforçons de répondre à chaque demande sous un jour ouvré, et les urgences — saisie d’un navire, arrestation d’une personne, échéance imminente — sont traitées le jour même.',
         ],
         [

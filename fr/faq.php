@@ -9,7 +9,7 @@ require_once dirname(__DIR__) . '/includes/data-faq.php';
 $groups = faq_groups();
 
 $page = [
-    'title'       => 'Questions fréquentes | Conseil juridique au Cameroun | Cabinet Fonju',
+    'title'       => 'Questions fréquentes | Conseil juridique au Cameroun | Cabinet Fonju & Partners',
     'description' => 'Honoraires, consultation, création de société, vérification des titres fonciers, licenciement, arbitrage et investissement au Cameroun : des réponses claires.',
     'canonical'   => 'faq.php',
     'breadcrumbs' => [['name' => 'FAQ', 'url' => 'faq.php']],

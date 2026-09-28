@@ -356,7 +356,7 @@ function practice_areas_en(): array
             'icon'  => 'spark',
             'featured' => false,
             'short' => 'Licensing, compliance and structuring for online gaming, sports betting and lottery operators in Central Africa.',
-            'intro' => 'Digital gaming legislation across Central Africa is evolving quickly, and operators are frequently asked to comply with rules that were written for land-based venues. Fonju Law Firm has built a dedicated iGaming consultancy practice to help operators, platform providers and payment partners enter the market lawfully and stay there.',
+            'intro' => 'Digital gaming legislation across Central Africa is evolving quickly, and operators are frequently asked to comply with rules that were written for land-based venues. Fonju & Partners Law Firm has built a dedicated iGaming consultancy practice to help operators, platform providers and payment partners enter the market lawfully and stay there.',
             'services' => [
                 'Gaming and betting licence applications and renewals',
                 'Regulatory gap analysis for operators entering the CEMAC market',

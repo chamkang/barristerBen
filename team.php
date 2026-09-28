@@ -8,8 +8,8 @@ require_once __DIR__ . '/includes/data-team.php';
 $members = team_members();
 
 $page = [
-    'title'       => 'Our Legal Team | Advocates & Solicitors | Fonju Law Firm Douala',
-    'description' => 'Meet the advocates and consultants of Fonju Law Firm, Douala: lawyers trained at national and international law schools, working in English and French.',
+    'title'       => 'Our Legal Team | Advocates & Solicitors | Fonju & Partners Law Firm Douala',
+    'description' => 'Meet the advocates and consultants of Fonju & Partners Law Firm, Douala: lawyers trained at national and international law schools, working in English and French.',
     'canonical'   => 'team.php',
     'breadcrumbs' => [['name' => 'Our Team', 'url' => 'team.php']],
     'body_class'  => 'page-team',

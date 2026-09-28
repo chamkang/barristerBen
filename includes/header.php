@@ -9,7 +9,7 @@ require_once __DIR__ . '/data-practice.php';
  * Every page defines $page BEFORE including this file:
  *
  *   $page = [
- *     'title'       => 'Page title | Fonju Law Firm',
+ *     'title'       => 'Page title | Fonju & Partners Law Firm',
  *     'description' => 'Under 160 characters, written for a human.',
  *     'canonical'   => 'about.php',
  *     'breadcrumbs' => [['name' => 'About', 'url' => 'about.php']],
@@ -79,6 +79,7 @@ $organisationSchema = [
     '@id'         => SITE_URL . '/#organization',
     'name'        => SITE_NAME,
     'legalName'   => SITE_LEGALNAME,
+    'alternateName' => ['Fonju & Partners', 'Fonju Law Firm', 'Cabinet Fonju & Partners'],
     'url'         => SITE_URL . '/',
     'description' => t(SEO_DEFAULTS['description']),
     'foundingDate' => SITE_FOUNDED,
@@ -211,7 +212,7 @@ $jsonLd = json_encode(
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=EB+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600;700&display=swap">
-<link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>?v=2.2.0">
+<link rel="stylesheet" href="<?= e(asset('css/style.css')) ?>?v=2.3.0">
 <link rel="alternate" type="application/rss+xml" title="<?= e(SITE_NAME) ?> Insights" href="<?= e(url('feed.php')) ?>">
 
 <script type="application/ld+json"><?= $jsonLd ?></script>
@@ -258,7 +259,7 @@ $jsonLd = json_encode(
       <span class="brand__mark" aria-hidden="true"><?= brand_mark(56) ?></span>
       <span class="brand__text">
         <span class="brand__name">Fonju</span>
-        <span class="brand__sub"><?= e(t('Law Firm · Douala')) ?></span>
+        <span class="brand__sub">&amp; Partners<span class="brand__sub-rest"> · <?= e(t('Law Firm')) ?></span></span>
       </span>
     </a>
 

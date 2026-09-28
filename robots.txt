@@ -1,5 +1,5 @@
 # =============================================================================
-# robots.txt — Fonju Law Firm
+# robots.txt — Fonju & Partners Law Firm
 # Update the Sitemap line if you deploy to a different domain.
 #
 # Every crawler is welcome, including the search and AI assistants' crawlers
