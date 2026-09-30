@@ -19,6 +19,9 @@ ErrorDocument 404 /404.php
   # 1. One address for the live site: https://fonjulawfirm.com (no "www").
   #    Limited to the real domain so local copies are never redirected.
   # ---------------------------------------------------------------------------
+  # Certificate checks (AutoSSL) must reach /.well-known/ on every host name
+  # without being redirected, or www. can never get its certificate.
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
   RewriteCond %{HTTP_HOST} ^(www\.)?fonjulawfirm\.com$ [NC]
   RewriteCond %{HTTPS} !=on [OR]
   RewriteCond %{HTTP_HOST} ^www\. [NC]
