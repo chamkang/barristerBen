@@ -23,17 +23,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
 ?>
 
 <!-- ================================================================ HERO -->
-<section class="hero">
+<section class="hero hero--editorial">
   <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__grid-lines" aria-hidden="true"></div>
-  <div class="hero__photo">
-    <img src="<?= e(asset('img/photos/team-seated-1800.jpg')) ?>"
-         srcset="<?= e(asset('img/photos/team-seated-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-seated-1800.jpg')) ?> 1800w"
-         sizes="(max-width: 980px) 100vw, 56vw"
-         width="1800" height="1352" fetchpriority="high"
-         alt="Les avocats du cabinet Fonju &amp; Partners en robe, le titulaire assis au premier rang">
-  </div>
-
   <div class="wrap hero__inner">
     <div class="hero__content">
       <p class="hero__badge"><b><?= icon('scale', 13) ?></b> Avocats et conseils · République du Cameroun</p>
@@ -58,26 +49,32 @@ $latest   = array_slice(blog_posts(), 0, 3);
           Nos domaines d’expertise
         </a>
       </div>
-
-      <dl class="hero__trust">
-        <div>
-          <dt class="k"><span data-count="<?= count(practice_areas()) ?>"><?= count(practice_areas()) ?></span></dt>
-          <dd class="v">Domaines d’expertise</dd>
-        </div>
-        <div>
-          <dt class="k"><span data-count="17" data-suffix="">17</span></dt>
-          <dd class="v">États OHADA couverts</dd>
-        </div>
-        <div>
-          <dt class="k">FR / EN</dt>
-          <dd class="v">Pratique bilingue</dd>
-        </div>
-        <div>
-          <dt class="k">24 h</dt>
-          <dd class="v">Délai de réponse</dd>
-        </div>
-      </dl>
     </div>
+
+    <figure class="hero__figure">
+      <img src="<?= e(asset('img/photos/team-robes-1800.jpg')) ?>"
+           srcset="<?= e(asset('img/photos/team-robes-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-1800.jpg')) ?> 1800w"
+           sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="1120" fetchpriority="high"
+           alt="Les avocats du cabinet Fonju &amp; Partners en robe">
+        <dl class="hero__trust">
+          <div>
+            <dt class="k"><span data-count="<?= count(practice_areas()) ?>"><?= count(practice_areas()) ?></span></dt>
+            <dd class="v">Domaines d’expertise</dd>
+          </div>
+          <div>
+            <dt class="k"><span data-count="17" data-suffix="">17</span></dt>
+            <dd class="v">États OHADA couverts</dd>
+          </div>
+          <div>
+            <dt class="k">FR / EN</dt>
+            <dd class="v">Pratique bilingue</dd>
+          </div>
+          <div>
+            <dt class="k">24 h</dt>
+            <dd class="v">Délai de réponse</dd>
+          </div>
+        </dl>
+    </figure>
   </div>
 </section>
 

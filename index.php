@@ -22,17 +22,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
 ?>
 
 <!-- ================================================================ HERO -->
-<section class="hero">
+<section class="hero hero--editorial">
   <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__grid-lines" aria-hidden="true"></div>
-  <div class="hero__photo">
-    <img src="<?= e(asset('img/photos/team-seated-1800.jpg')) ?>"
-         srcset="<?= e(asset('img/photos/team-seated-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-seated-1800.jpg')) ?> 1800w"
-         sizes="(max-width: 980px) 100vw, 56vw"
-         width="1800" height="1352" fetchpriority="high"
-         alt="The lawyers of Fonju &amp; Partners Law Firm in court robes, the principal seated in front">
-  </div>
-
   <div class="wrap hero__inner">
     <div class="hero__content">
       <p class="hero__badge"><b><?= icon('scale', 13) ?></b> Advocates &amp; Solicitors · Republic of Cameroon</p>
@@ -56,26 +47,32 @@ $latest   = array_slice(blog_posts(), 0, 3);
           Explore our practice areas
         </a>
       </div>
-
-      <dl class="hero__trust">
-        <div>
-          <dt class="k"><span data-count="<?= count(practice_areas()) ?>"><?= count(practice_areas()) ?></span></dt>
-          <dd class="v">Practice areas</dd>
-        </div>
-        <div>
-          <dt class="k"><span data-count="17" data-suffix="">17</span></dt>
-          <dd class="v">OHADA states covered</dd>
-        </div>
-        <div>
-          <dt class="k">EN / FR</dt>
-          <dd class="v">Bilingual practice</dd>
-        </div>
-        <div>
-          <dt class="k">24h</dt>
-          <dd class="v">Enquiry response</dd>
-        </div>
-      </dl>
     </div>
+
+    <figure class="hero__figure">
+      <img src="<?= e(asset('img/photos/team-robes-1800.jpg')) ?>"
+           srcset="<?= e(asset('img/photos/team-robes-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-1800.jpg')) ?> 1800w"
+           sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="1120" fetchpriority="high"
+           alt="The advocates of Fonju &amp; Partners Law Firm in court robes">
+        <dl class="hero__trust">
+          <div>
+            <dt class="k"><span data-count="<?= count(practice_areas()) ?>"><?= count(practice_areas()) ?></span></dt>
+            <dd class="v">Practice areas</dd>
+          </div>
+          <div>
+            <dt class="k"><span data-count="17" data-suffix="">17</span></dt>
+            <dd class="v">OHADA states covered</dd>
+          </div>
+          <div>
+            <dt class="k">EN / FR</dt>
+            <dd class="v">Bilingual practice</dd>
+          </div>
+          <div>
+            <dt class="k">24h</dt>
+            <dd class="v">Enquiry response</dd>
+          </div>
+        </dl>
+    </figure>
   </div>
 </section>
 
