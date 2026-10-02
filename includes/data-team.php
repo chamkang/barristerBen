@@ -37,7 +37,7 @@ function team_members_all(): array
             'slug'      => 'fonju-bernard',
             'name'      => 'Bar. Fonju Bernard Fuelancha',
             'role'      => 'Founder & Managing Partner',
-            'photo'     => '',                          // e.g. 'fonju-bernard.jpg'
+            'photo'     => 'fonju-bernard-fuelancha.jpg', // assets/img/team/
             'email'     => 'fonjubernard@fonjulawfirm.com',
             'linkedin'  => '',
             'languages' => ['English', 'French'],

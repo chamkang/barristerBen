@@ -50,9 +50,8 @@ require __DIR__ . '/includes/page-hero.php';
     </div>
 
     <div class="reveal" data-delay="2">
-      <div class="figure-panel">
-        <!-- Replace with a real photograph: assets/img/firm.jpg -->
-        <span class="figure-panel__mark"><?= icon('building', 92) ?></span>
+      <div class="figure-panel figure-panel--photo" style="aspect-ratio:1800 / 1120">
+        <img src="<?= e(asset('img/photos/team-robes-1800.jpg')) ?>" srcset="<?= e(asset('img/photos/team-robes-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-1800.jpg')) ?> 1800w" sizes="(max-width: 980px) 100vw, 50vw" width="1800" height="1120" loading="lazy" alt="The advocates of Fonju &amp; Partners Law Firm in court robes" style="object-position:50% 25%">
         <span class="figure-panel__caption">
           <strong>Douala, Littoral Region</strong>
           The economic capital of Cameroon and the gateway to the CEMAC hinterland &mdash; Chad, the Central African Republic and beyond.
@@ -93,11 +92,11 @@ require __DIR__ . '/includes/page-hero.php';
 <section class="section">
   <div class="wrap split">
     <div class="reveal" data-delay="1">
-      <div class="figure-panel">
-        <span class="figure-panel__mark"><?= icon('globe', 92) ?></span>
+      <div class="figure-panel figure-panel--photo">
+        <img src="<?= e(asset('img/photos/founder-seated-720.jpg')) ?>" width="720" height="1080" loading="lazy" alt="Bar. Fonju Bernard Fuelancha, founder of Fonju &amp; Partners Law Firm" style="object-position:50% 18%">
         <span class="figure-panel__caption">
-          <strong>International practice, regional depth</strong>
-          Clients from Europe, Asia, the Middle East and North America establishing or expanding operations within the CEMAC zone.
+          <strong>Bar. Fonju Bernard Fuelancha</strong>
+          Founder &amp; Managing Partner &mdash; Advocate at the Cameroon Bar and former legal assistant at the UN International Criminal Tribunal for Rwanda.
         </span>
       </div>
     </div>

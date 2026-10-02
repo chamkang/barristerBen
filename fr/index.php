@@ -26,6 +26,13 @@ $latest   = array_slice(blog_posts(), 0, 3);
 <section class="hero">
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="hero__grid-lines" aria-hidden="true"></div>
+  <div class="hero__photo">
+    <img src="<?= e(asset('img/photos/team-seated-1800.jpg')) ?>"
+         srcset="<?= e(asset('img/photos/team-seated-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-seated-1800.jpg')) ?> 1800w"
+         sizes="(max-width: 980px) 100vw, 56vw"
+         width="1800" height="1352" fetchpriority="high"
+         alt="Les avocats du cabinet Fonju &amp; Partners en robe, le titulaire assis au premier rang">
+  </div>
 
   <div class="wrap hero__inner">
     <div class="hero__content">
@@ -71,24 +78,28 @@ $latest   = array_slice(blog_posts(), 0, 3);
         </div>
       </dl>
     </div>
+  </div>
+</section>
 
-    <aside class="hero__card" aria-label="Ce que vous apporte une première consultation">
-      <h2>Votre première consultation</h2>
-      <p>Pas de jargon, pas de compteur horaire pendant que nous faisons connaissance. Vous repartez en sachant exactement où vous en êtes.</p>
+<!-- ============================================================ CONSULTATION -->
+<section class="consult-strip" aria-label="Ce que vous apporte une première consultation">
+  <div class="wrap consult-strip__inner">
+      <h2 class="consult-strip__title">Votre première consultation</h2>
+      <p class="consult-strip__text">Pas de jargon, pas de compteur horaire pendant que nous faisons connaissance. Vous repartez en sachant exactement où vous en êtes.</p>
 
-      <ul class="hero__cardlist">
+      <ul class="consult-strip__list">
         <li><?= icon('check', 18) ?><span>Une évaluation honnête de votre situation juridique</span></li>
         <li><?= icon('check', 18) ?><span>Les options réalistes, avec leur coût et leur délai</span></li>
         <li><?= icon('check', 18) ?><span>Une recommandation claire &mdash; y compris &laquo;&nbsp;vous n’avez pas besoin d’un avocat&nbsp;&raquo;</span></li>
         <li><?= icon('check', 18) ?><span>Une convention d’honoraires écrite avant tout commencement</span></li>
       </ul>
 
-      <a class="btn btn--gold btn--block" href="<?= e(url('contact.php')) ?>#consultation">Demander une consultation</a>
+      <a class="btn btn--gold consult-strip__btn" href="<?= e(url('contact.php')) ?>#consultation">Demander une consultation</a>
 
-      <p class="hero__cardnote"><?= icon('shield', 15) ?> Protégé par le secret professionnel dès votre premier message.</p>
-    </aside>
+      <p class="consult-strip__note"><?= icon('shield', 15) ?> Protégé par le secret professionnel dès votre premier message.</p>
   </div>
 </section>
+
 
 <!-- ============================================================= MARQUEE -->
 <div class="marquee" aria-hidden="true">
@@ -158,8 +169,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
     </div>
 
     <div class="reveal" data-delay="2">
-      <div class="figure-panel">
-        <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
+      <div class="figure-panel figure-panel--photo" style="aspect-ratio:1400 / 1144">
+        <img src="<?= e(asset('img/photos/team-suits-1400.jpg')) ?>" srcset="<?= e(asset('img/photos/team-suits-800.jpg')) ?> 800w, <?= e(asset('img/photos/team-suits-1400.jpg')) ?> 1400w" sizes="(max-width: 980px) 100vw, 50vw" width="1400" height="1144" loading="lazy" alt="L’équipe du cabinet Fonju &amp; Partners au cabinet, à Akwa, Douala" style="object-position:50% 30%">
         <span class="figure-panel__caption">
           <strong>Immeuble Froid-Cam, rue Pau, Akwa</strong>
           Douala, région du Littoral &mdash; au service du Cameroun, du Tchad, de la République centrafricaine et de l’ensemble du marché CEMAC.

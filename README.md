@@ -212,10 +212,11 @@ broken image icon. Add real images whenever they are ready:
   inside the relevant `.figure-panel` in `index.php` or `about.php`.
 - **Social share card** — `assets/img/og-default.png` (1200×630) is generated from
   `assets/img/og-default.svg`. Edit the SVG and re-export if the branding changes.
-- **Home page hero photo** — a law-library photograph from Unsplash (free licence, no attribution
-  required), stored as `assets/img/hero-law-library.jpg` (2200 px, desktop) and
-  `hero-law-library-1100.jpg` (phones). To use a photograph of the firm's own office or library,
-  replace both files and keep the names; nothing else changes.
+- **Firm photographs** — in `assets/img/photos/` (group photographs, each in a large and a phone size,
+  and portraits of the principal) and `assets/img/team/` (team cards; set `photo` in
+  `includes/data-team.php`). The home page hero uses `team-seated-1800.jpg` / `-1000.jpg`. Originals
+  straight from the camera are 10–13 MB: resize to about 1800 px wide (and 1000 px for phones) and
+  compress before adding new ones, or the site slows down.
 
 ### The logo (the Key F)
 

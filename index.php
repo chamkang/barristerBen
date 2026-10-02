@@ -25,6 +25,13 @@ $latest   = array_slice(blog_posts(), 0, 3);
 <section class="hero">
   <div class="hero__bg" aria-hidden="true"></div>
   <div class="hero__grid-lines" aria-hidden="true"></div>
+  <div class="hero__photo">
+    <img src="<?= e(asset('img/photos/team-seated-1800.jpg')) ?>"
+         srcset="<?= e(asset('img/photos/team-seated-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-seated-1800.jpg')) ?> 1800w"
+         sizes="(max-width: 980px) 100vw, 56vw"
+         width="1800" height="1352" fetchpriority="high"
+         alt="The lawyers of Fonju &amp; Partners Law Firm in court robes, the principal seated in front">
+  </div>
 
   <div class="wrap hero__inner">
     <div class="hero__content">
@@ -69,24 +76,28 @@ $latest   = array_slice(blog_posts(), 0, 3);
         </div>
       </dl>
     </div>
+  </div>
+</section>
 
-    <aside class="hero__card" aria-label="What a first consultation gives you">
-      <h2>Your first consultation</h2>
-      <p>No jargon, no hourly meter running while we get to know each other. You leave the meeting knowing exactly where you stand.</p>
+<!-- ============================================================ CONSULTATION -->
+<section class="consult-strip" aria-label="What a first consultation gives you">
+  <div class="wrap consult-strip__inner">
+      <h2 class="consult-strip__title">Your first consultation</h2>
+      <p class="consult-strip__text">No jargon, no hourly meter running while we get to know each other. You leave the meeting knowing exactly where you stand.</p>
 
-      <ul class="hero__cardlist">
+      <ul class="consult-strip__list">
         <li><?= icon('check', 18) ?><span>An honest assessment of your legal position</span></li>
         <li><?= icon('check', 18) ?><span>The realistic options, with cost and timeline attached</span></li>
         <li><?= icon('check', 18) ?><span>A clear recommendation &mdash; including &ldquo;you don&rsquo;t need a lawyer&rdquo;</span></li>
         <li><?= icon('check', 18) ?><span>A written engagement letter before any work begins</span></li>
       </ul>
 
-      <a class="btn btn--gold btn--block" href="<?= e(url('contact.php')) ?>#consultation">Request a consultation</a>
+      <a class="btn btn--gold consult-strip__btn" href="<?= e(url('contact.php')) ?>#consultation">Request a consultation</a>
 
-      <p class="hero__cardnote"><?= icon('shield', 15) ?> Protected by professional secrecy from your first message.</p>
-    </aside>
+      <p class="consult-strip__note"><?= icon('shield', 15) ?> Protected by professional secrecy from your first message.</p>
   </div>
 </section>
+
 
 <!-- ============================================================= MARQUEE -->
 <div class="marquee" aria-hidden="true">
@@ -156,10 +167,8 @@ $latest   = array_slice(blog_posts(), 0, 3);
     </div>
 
     <div class="reveal" data-delay="2">
-      <div class="figure-panel">
-        <!-- Drop a real photograph at assets/img/office-douala.jpg and uncomment:
-             <img src="<?= e(asset('img/office-douala.jpg')) ?>" alt="Fonju & Partners Law Firm office in Akwa, Douala"> -->
-        <span class="figure-panel__mark"><?= brand_mark(170) ?></span>
+      <div class="figure-panel figure-panel--photo" style="aspect-ratio:1400 / 1144">
+        <img src="<?= e(asset('img/photos/team-suits-1400.jpg')) ?>" srcset="<?= e(asset('img/photos/team-suits-800.jpg')) ?> 800w, <?= e(asset('img/photos/team-suits-1400.jpg')) ?> 1400w" sizes="(max-width: 980px) 100vw, 50vw" width="1400" height="1144" loading="lazy" alt="The team of Fonju &amp; Partners Law Firm at the office in Akwa, Douala" style="object-position:50% 30%">
         <span class="figure-panel__caption">
           <strong>Immeuble Froid-Cam, Rue Pau, Akwa</strong>
           Douala, Littoral Region &mdash; serving Cameroon, Chad, the Central African Republic and the wider CEMAC market.

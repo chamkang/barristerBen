@@ -52,8 +52,8 @@ require dirname(__DIR__) . '/includes/page-hero.php';
     </div>
 
     <div class="reveal" data-delay="2">
-      <div class="figure-panel">
-        <span class="figure-panel__mark"><?= icon('building', 92) ?></span>
+      <div class="figure-panel figure-panel--photo" style="aspect-ratio:1800 / 1120">
+        <img src="<?= e(asset('img/photos/team-robes-1800.jpg')) ?>" srcset="<?= e(asset('img/photos/team-robes-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-1800.jpg')) ?> 1800w" sizes="(max-width: 980px) 100vw, 50vw" width="1800" height="1120" loading="lazy" alt="Les avocats du cabinet Fonju &amp; Partners en robe" style="object-position:50% 25%">
         <span class="figure-panel__caption">
           <strong>Douala, région du Littoral</strong>
           La capitale économique du Cameroun et la porte d’entrée de l’hinterland CEMAC &mdash; le Tchad, la République centrafricaine et au-delà.
@@ -94,11 +94,11 @@ require dirname(__DIR__) . '/includes/page-hero.php';
 <section class="section">
   <div class="wrap split">
     <div class="reveal" data-delay="1">
-      <div class="figure-panel">
-        <span class="figure-panel__mark"><?= icon('globe', 92) ?></span>
+      <div class="figure-panel figure-panel--photo">
+        <img src="<?= e(asset('img/photos/founder-seated-720.jpg')) ?>" width="720" height="1080" loading="lazy" alt="Me Fonju Bernard Fuelancha, fondateur du cabinet Fonju &amp; Partners" style="object-position:50% 18%">
         <span class="figure-panel__caption">
-          <strong>Pratique internationale, profondeur régionale</strong>
-          Des clients d’Europe, d’Asie, du Moyen-Orient et d’Amérique du Nord qui s’implantent ou se développent en zone CEMAC.
+          <strong>Me Fonju Bernard Fuelancha</strong>
+          Fondateur et associé gérant &mdash; avocat au Barreau du Cameroun et ancien assistant juridique au Tribunal pénal international pour le Rwanda (ONU).
         </span>
       </div>
     </div>

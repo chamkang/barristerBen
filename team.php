@@ -54,6 +54,14 @@ $hasPlaceholders = (bool) array_filter($members, static fn(array $m): bool => !e
 
 <section class="section">
   <div class="wrap">
+    <figure class="team-photo reveal">
+      <img src="<?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?>"
+           srcset="<?= e(asset('img/photos/team-robes-wig-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?> 1800w"
+           sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="1034" loading="lazy"
+           alt="The lawyers of Fonju &amp; Partners Law Firm in court robes, the principal in a barrister’s wig">
+      <figcaption>Fonju &amp; Partners Law Firm &mdash; Akwa, Douala</figcaption>
+    </figure>
+
     <div class="grid grid--3">
       <?php foreach ($members as $i => $member): ?>
         <article class="team-card reveal" id="<?= e($member['slug']) ?>" data-delay="<?= $i % 3 + 1 ?>">

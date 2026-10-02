@@ -87,6 +87,14 @@ require __DIR__ . '/page-hero.php';
       <p class="eyebrow"><?= e($c['how_eyebrow']) ?></p>
       <h2><?= e($c['how_h2']) ?></h2>
       <div class="rule"></div>
+      <figure class="intl-portrait">
+        <img src="<?= e(asset('img/photos/founder-suit-720.jpg')) ?>" width="720" height="1080" loading="lazy"
+             alt="<?= e(is_fr() ? 'Me Fonju Bernard Fuelancha, fondateur du cabinet' : 'Bar. Fonju Bernard Fuelancha, founder of the firm') ?>">
+        <figcaption>
+          <strong><?= e(is_fr() ? 'Me Fonju Bernard Fuelancha' : 'Bar. Fonju Bernard Fuelancha') ?></strong>
+          <?= e(is_fr() ? 'Fondateur et associé gérant · ancien assistant juridique au TPIR (ONU)' : 'Founder & Managing Partner · former legal assistant, ICTR (United Nations)') ?>
+        </figcaption>
+      </figure>
       <ul class="pill-row mt-6">
         <li><span class="pill pill--gold"><?= icon('users', 14) ?> English &amp; Français</span></li>
         <li><span class="pill"><?= icon('clock', 14) ?> <?= e(t('We reply to enquiries within one business day.')) ?></span></li>
