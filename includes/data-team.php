@@ -74,6 +74,24 @@ function team_members_all(): array
                 'bio'       => 'Avocat au Barreau du Cameroun, membre de l’équipe juridique du cabinet.',
             ],
         ],
+        [
+            'slug'      => 'adolphe-pepabouo',
+            'name'      => 'Bar. Adolphe Pepabouo',
+            'role'      => 'Advocate',
+            'photo'     => 'adolphe-pepabouo.jpg',
+            'email'     => '',
+            'linkedin'  => '',
+            'languages' => [],
+            'focus'     => [],
+            'bio'       => 'Advocate at the Cameroon Bar and a member of the firm’s legal team.',
+            'bio2'      => '',
+            'placeholder' => false,
+            'fr' => [
+                'name'      => 'Me Adolphe Pepabouo',
+                'role'      => 'Avocat',
+                'bio'       => 'Avocat au Barreau du Cameroun, membre de l’équipe juridique du cabinet.',
+            ],
+        ],
 
         // --------------------------------------------------- TRAINEE ADVOCATES
         [
