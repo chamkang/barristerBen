@@ -97,13 +97,43 @@ jobs:
           fi
 
       - name: Upload changed files over FTPS
+        id: ftp1
         if: steps.secrets.outputs.ready == 'true'
+        continue-on-error: true
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
+          timeout: 120000
+          port: 21
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            .github/**
+            .claude/**
+            .vscode/**
+            dist/**
+            tools/**
+            README.md
+            build.php
+            vercel.json
+            storage/*.log
+            storage/.dev-secret
+            storage/admin-config.php
+
+      - name: Retry the upload once (network hiccup)
+        if: steps.secrets.outputs.ready == 'true' && steps.ftp1.outcome == 'failure'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          timeout: 120000
           port: 21
           server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
           exclude: |
