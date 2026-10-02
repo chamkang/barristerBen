@@ -54,16 +54,42 @@ $hasPlaceholders = (bool) array_filter($members, static fn(array $m): bool => !e
 
 <section class="section">
   <div class="wrap">
-    <figure class="team-photo reveal">
-      <img src="<?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?>"
-           srcset="<?= e(asset('img/photos/team-robes-wig-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?> 1800w"
-           sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="1034" loading="lazy"
-           alt="Les avocats du cabinet Fonju &amp; Partners en robe, le titulaire portant la perruque">
-      <figcaption>Cabinet Fonju &amp; Partners &mdash; Akwa, Douala</figcaption>
-    </figure>
+    <?php $founder = $members[0]; $others = array_slice($members, 1); ?>
+    <article class="founder-feature reveal" id="<?= e($founder['slug']) ?>">
+      <div class="founder-feature__media">
+        <img src="<?= e(asset('img/photos/founder-robe-720.jpg')) ?>" width="720" height="1080" loading="lazy"
+             alt="<?= e($founder['name'] . ', ' . $founder['role']) ?>">
+      </div>
+      <div class="founder-feature__body">
+        <p class="eyebrow">Fondateur</p>
+        <h2 class="founder-feature__name"><?= e($founder['name']) ?></h2>
+        <p class="team-card__role"><?= e($founder['role']) ?></p>
+        <p class="founder-feature__bio"><?= e($founder['bio']) ?></p>
+        <?php if (($founder['bio2'] ?? '') !== ''): ?><p class="founder-feature__bio"><?= e($founder['bio2']) ?></p><?php endif; ?>
+        <ul class="pill-row mt-5">
+          <?php foreach ($founder['focus'] as $focus): ?>
+            <li><span class="pill"><?= e($focus) ?></span></li>
+          <?php endforeach; ?>
+          <?php if ($founder['languages'] !== []): ?>
+            <li><span class="pill pill--gold"><?= icon('globe', 13) ?> <?= e(implode(' / ', $founder['languages'])) ?></span></li>
+          <?php endif; ?>
+        </ul>
+        <div class="founder-feature__actions">
+          <a class="btn btn--gold" href="<?= e(url('contact.php')) ?>#consultation">Prendre rendez-vous <?= icon('arrow', 16) ?></a>
+          <?php if ($founder['email'] !== ''): ?>
+            <a class="btn btn--outline" href="mailto:<?= e($founder['email']) ?>"><?= icon('mail', 16) ?> <?= e($founder['email']) ?></a>
+          <?php endif; ?>
+        </div>
+      </div>
+    </article>
+
+    <div class="section-head mt-7 reveal">
+      <p class="eyebrow">L’équipe</p>
+      <h2>Les avocats à vos côtés</h2>
+    </div>
 
     <div class="grid grid--3">
-      <?php foreach ($members as $i => $member): ?>
+      <?php foreach ($others as $i => $member): ?>
         <article class="team-card reveal" id="<?= e($member['slug']) ?>" data-delay="<?= $i % 3 + 1 ?>">
           <div class="team-card__photo">
             <?php if (!empty($member['placeholder'])): ?>
@@ -108,6 +134,14 @@ $hasPlaceholders = (bool) array_filter($members, static fn(array $m): bool => !e
         </article>
       <?php endforeach; ?>
     </div>
+
+    <figure class="team-photo team-photo--end reveal">
+      <img src="<?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?>"
+           srcset="<?= e(asset('img/photos/team-robes-wig-1000.jpg')) ?> 1000w, <?= e(asset('img/photos/team-robes-wig-1800.jpg')) ?> 1800w"
+           sizes="(max-width: 1240px) 100vw, 1200px" width="1800" height="1034" loading="lazy"
+           alt="Les avocats du cabinet Fonju &amp; Partners en robe, le titulaire portant la perruque">
+      <figcaption>Cabinet Fonju &amp; Partners &mdash; Akwa, Douala</figcaption>
+    </figure>
 
     <?php if ($hasPlaceholders): ?>
       <div class="alert alert--err mt-7" role="note">

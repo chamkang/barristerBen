@@ -1985,3 +1985,60 @@ html[lang="fr"] .nav__list { gap: clamp(.3rem, 1vw, .8rem); }
   background: linear-gradient(0deg, rgba(15,14,16,.82), rgba(15,14,16,0));
   color: #fff; font-family: var(--font-serif); font-size: 1.02rem;
 }
+
+/* -----------------------------------------------------------------------------
+ * Inner-page heroes with a photograph of the firm (includes/page-hero.php).
+ * Desktop: the photo fills the right of the hero and fades into the charcoal
+ * behind the title. Phones: a band above the title.
+ * -------------------------------------------------------------------------- */
+.page-hero--photo::before { z-index: -3; }
+.page-hero--photo::after { display: none; }
+.page-hero__photo {
+  position: absolute; top: 0; right: 0; bottom: 0; z-index: -2;
+  width: min(48%, 820px);
+}
+.page-hero__photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.page-hero__photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, #18171a 0%, rgba(24,23,26,.82) 16%, rgba(24,23,26,.25) 46%, rgba(24,23,26,.05) 70%),
+    linear-gradient(0deg, rgba(21,20,22,.55) 0%, rgba(21,20,22,0) 30%);
+}
+/* a fine gold rule where the photograph meets the page */
+.page-hero__photo::before {
+  content: "";
+  position: absolute; left: 0; top: 18%; bottom: 18%; width: 1px; z-index: 1;
+  background: linear-gradient(180deg, transparent, rgba(195,155,83,.55), transparent);
+}
+.page-hero--photo .page-hero__inner { max-width: min(640px, 54%); }
+@media (max-width: 980px) {
+  .page-hero--photo { padding-top: 0; }
+  .page-hero__photo {
+    position: relative; inset: auto; width: 100%;
+    aspect-ratio: 16 / 9; max-height: 42vh;
+    margin-bottom: clamp(1.5rem, 5vw, 2.25rem);
+  }
+  .page-hero__photo::before { display: none; }
+  .page-hero__photo::after { background: linear-gradient(0deg, #18171a 0%, rgba(24,23,26,.3) 32%, rgba(24,23,26,0) 60%); }
+  .page-hero--photo .page-hero__inner { max-width: 780px; }
+}
+
+/* Team page: the founder as a feature */
+.founder-feature {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  border: 1px solid var(--line); border-radius: var(--r-xl); overflow: hidden; background: #fff;
+  box-shadow: var(--shadow);
+}
+.founder-feature__media { position: relative; min-height: 100%; background: var(--ink); }
+.founder-feature__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 12%; }
+.founder-feature__media::after { content: ""; position: absolute; inset: auto 0 0 0; height: 4px; background: linear-gradient(90deg, var(--gold), var(--gold-deep)); }
+.founder-feature__body { padding: clamp(1.75rem, 4vw, 3.25rem); }
+.founder-feature__name { font-size: var(--fs-h2); margin-bottom: .35rem; }
+.founder-feature__bio { color: var(--muted); font-size: 1.02rem; line-height: 1.75; max-width: 62ch; }
+.founder-feature__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: var(--sp-6); }
+.team-photo--end { margin: clamp(2.5rem, 5vw, 3.5rem) 0 0; }
+@media (max-width: 860px) {
+  .founder-feature { grid-template-columns: 1fr; }
+  .founder-feature__media { aspect-ratio: 4 / 4.2; min-height: 0; }
+}
