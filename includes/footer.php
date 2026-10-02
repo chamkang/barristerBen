@@ -160,6 +160,6 @@
   </div>
 </section>
 
-<script src="<?= e(asset('js/main.js')) ?>?v=2.4.0" defer></script>
+<script src="<?= e(asset('js/main.js')) ?>?v=2.5.0" defer></script>
 </body>
 </html>

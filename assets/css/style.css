@@ -1967,3 +1967,21 @@ html[lang="fr"] .nav__list { gap: clamp(.3rem, 1vw, .8rem); }
   .hero__title { font-size: clamp(2.1rem, 3.5vw, 3.15rem); }
   .hero__content { max-width: 600px; }
 }
+
+/* Team photograph at the top of the dark sidebar box (practice areas, articles) */
+.sidebar__box--photo { overflow: hidden; }
+.sidebar__photo {
+  display: block; width: calc(100% + 2 * clamp(1.35rem, 2.2vw, 1.85rem)); max-width: none; height: auto;
+  margin: calc(-1 * clamp(1.35rem, 2.2vw, 1.85rem)) calc(-1 * clamp(1.35rem, 2.2vw, 1.85rem)) 1.2rem;
+  aspect-ratio: 800 / 526; object-fit: cover; object-position: 50% 20%;
+}
+
+/* Contact page team photograph */
+.contact-photo { margin-left: 0; margin-right: 0; margin-bottom: 0; position: relative; border-radius: var(--r-lg); overflow: hidden; }
+.contact-photo img { display: block; width: 100%; height: auto; }
+.contact-photo figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 2.5rem 1.25rem 1rem;
+  background: linear-gradient(0deg, rgba(15,14,16,.82), rgba(15,14,16,0));
+  color: #fff; font-family: var(--font-serif); font-size: 1.02rem;
+}

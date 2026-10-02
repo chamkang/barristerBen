@@ -116,7 +116,7 @@ function team_members_all(): array
             'slug'      => 'lontsi-douanla-nina',
             'name'      => 'Lontsi Douanla Nina, épse Mely',
             'role'      => 'Trainee Advocate',
-            'photo'     => '',
+            'photo'     => 'lontsi-douanla-nina.jpg',
             'email'     => '',
             'linkedin'  => '',
             'languages' => [],

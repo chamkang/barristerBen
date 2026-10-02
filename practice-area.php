@@ -102,7 +102,9 @@ $related = array_values(array_filter(
     </div>
 
     <aside class="sidebar">
-      <div class="sidebar__box sidebar__box--dark">
+      <div class="sidebar__box sidebar__box--dark sidebar__box--photo">
+        <img class="sidebar__photo" src="<?= e(asset('img/photos/team-portrait-top-800.jpg')) ?>" width="800" height="526" loading="lazy"
+             alt="The lawyers of Fonju &amp; Partners Law Firm">
         <h3>Speak to this team</h3>
         <p style="font-size:.98rem;">Urgent matters &mdash; a vessel arrest, an imminent deadline, a detained client &mdash; are handled the same day.</p>
         <ul class="contact-list" style="margin-top:1.1rem;">

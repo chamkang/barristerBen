@@ -213,6 +213,12 @@ require __DIR__ . '/includes/page-hero.php';
           <li><?= icon('check', 15) ?><span>Know what outcome you actually want, not only what has gone wrong.</span></li>
         </ul>
       </div>
+
+      <figure class="contact-photo mt-5">
+        <img src="<?= e(asset('img/photos/team-portrait-900.jpg')) ?>" width="900" height="1182" loading="lazy"
+             alt="The lawyers of Fonju &amp; Partners Law Firm in court robes, the principal seated">
+        <figcaption>The lawyers you will be speaking to</figcaption>
+      </figure>
     </div>
 
   </div>

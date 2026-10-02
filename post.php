@@ -119,7 +119,9 @@ $related = related_posts($post, 3);
     </article>
 
     <aside class="sidebar">
-      <div class="sidebar__box sidebar__box--dark">
+      <div class="sidebar__box sidebar__box--dark sidebar__box--photo">
+        <img class="sidebar__photo" src="<?= e(asset('img/photos/team-portrait-top-800.jpg')) ?>" width="800" height="526" loading="lazy"
+             alt="The lawyers of Fonju &amp; Partners Law Firm">
         <h3>Have a question on this?</h3>
         <p style="font-size:.98rem;">If this article touches something you are dealing with, tell us what has happened. The first assessment costs you nothing but the conversation.</p>
         <a class="btn btn--gold btn--block mt-5" href="<?= e(url('contact.php')) ?>#consultation">Book a consultation</a>

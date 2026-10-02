@@ -120,7 +120,9 @@ $related = related_posts($post, 3);
     </article>
 
     <aside class="sidebar">
-      <div class="sidebar__box sidebar__box--dark">
+      <div class="sidebar__box sidebar__box--dark sidebar__box--photo">
+        <img class="sidebar__photo" src="<?= e(asset('img/photos/team-portrait-top-800.jpg')) ?>" width="800" height="526" loading="lazy"
+             alt="Les avocats du cabinet Fonju &amp; Partners">
         <h3>Une question sur ce sujet ?</h3>
         <p style="font-size:.98rem;">Si cet article touche à une situation que vous vivez, dites-nous ce qui s’est passé. La première évaluation ne vous coûte que la conversation.</p>
         <a class="btn btn--gold btn--block mt-5" href="<?= e(url('contact.php')) ?>#consultation">Prendre rendez-vous</a>

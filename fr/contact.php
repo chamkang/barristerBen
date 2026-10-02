@@ -212,6 +212,12 @@ require dirname(__DIR__) . '/includes/page-hero.php';
           <li><?= icon('check', 15) ?><span>Sachez quel résultat vous voulez réellement, pas seulement ce qui n’a pas fonctionné.</span></li>
         </ul>
       </div>
+
+      <figure class="contact-photo mt-5">
+        <img src="<?= e(asset('img/photos/team-portrait-900.jpg')) ?>" width="900" height="1182" loading="lazy"
+             alt="Les avocats du cabinet Fonju &amp; Partners en robe, le titulaire assis">
+        <figcaption>Les avocats qui vous répondront</figcaption>
+      </figure>
     </div>
 
   </div>
